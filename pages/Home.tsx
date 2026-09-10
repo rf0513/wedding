@@ -5,6 +5,7 @@ import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, S
 import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav } from '../components/DecoUI';
 import Curtain from '../components/Curtain';
 import HeroSequence from '../components/HeroSequence';
+import StoryJourney from '../components/StoryJourney';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
@@ -178,25 +179,8 @@ const Home: React.FC = () => {
               <img src={STORY_MAIN_IMAGE} alt="Pavitra and Ramon" className="block w-full aspect-[3/2] object-cover" />
             </StepFrame>
           </Reveal>
-          <div className="flex flex-col gap-14">
-            {storyEvents.map((ev, i) => (
-              <Reveal key={ev.id} as="article" className="grid grid-cols-1 gap-[22px]">
-                <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 items-start">
-                  <div className="font-serif text-[44px] leading-[.9] text-wedding-gold min-w-[56px]">{ROMAN[i]}</div>
-                  <div>
-                    <p className="mt-0.5 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{ev.date}</p>
-                    <h3 className="m-0 mb-[10px] font-serif font-normal text-[clamp(24px,6vw,32px)] leading-[1.1]">{ev.title}</h3>
-                    <p className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/78">{ev.desc}</p>
-                  </div>
-                </div>
-                <div style={{ marginLeft: i % 2 ? 0 : 56, marginRight: i % 2 ? 56 : 0 }}>
-                  <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={10}>
-                    <img src={ev.img} alt={ev.title} className="block w-full aspect-[4/3] object-cover" style={{ filter: 'saturate(.85) contrast(1.05)' }} />
-                  </StepFrame>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          {/* Milestones on an animated route: Albuquerque → Bay Area → Mumbai */}
+          <StoryJourney events={storyEvents} />
         </div>
       </section>
 

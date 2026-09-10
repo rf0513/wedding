@@ -37,6 +37,17 @@ const translations = {
     // Story
     story_kicker: "How We Met",
     story_title: "Our Journey",
+    journey_from: "Where it began",
+    journey_home: "Home base",
+    journey_next_stop: "Next stop",
+    journey_abq: "Albuquerque, New Mexico",
+    journey_bay: "Bay Area, California",
+    journey_mumbai: "Mumbai, India",
+    journey_wedding: "The Wedding · 2 – 5 February 2027",
+    journey_place_1: "Albuquerque, NM",
+    journey_place_2: "Rocky Mountains, CO",
+    journey_place_3: "Bay Area, CA",
+    journey_place_4: "San Francisco, CA",
 
     // Events / Programme
     events_subtitle: "The Schedule",
@@ -167,6 +178,17 @@ const translations = {
     // Story
     story_kicker: "Cómo Nos Conocimos",
     story_title: "Nuestro Viaje",
+    journey_from: "Donde empezó",
+    journey_home: "Nuestro hogar",
+    journey_next_stop: "Próxima parada",
+    journey_abq: "Albuquerque, Nuevo México",
+    journey_bay: "Área de la Bahía, California",
+    journey_mumbai: "Mumbai, India",
+    journey_wedding: "La Boda · 2 – 5 de febrero de 2027",
+    journey_place_1: "Albuquerque, NM",
+    journey_place_2: "Montañas Rocosas, CO",
+    journey_place_3: "Área de la Bahía, CA",
+    journey_place_4: "San Francisco, CA",
 
     // Events / Programme
     events_subtitle: "El Itinerario",
