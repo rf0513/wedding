@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, buildCalendarUrl } from '../constants';
 import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav } from '../components/DecoUI';
+import Curtain from '../components/Curtain';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
@@ -59,6 +60,9 @@ const Home: React.FC = () => {
 
   return (
     <main>
+      {/* ═══ OPENING CURTAIN (once per session) ═══ */}
+      <Curtain />
+
       {/* ═══ HERO ═══ */}
       <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-wedding-ink">
         <div className="absolute inset-0 overflow-hidden">

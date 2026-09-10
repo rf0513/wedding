@@ -14,6 +14,7 @@ const translations = {
     menu_label: "Contents",
     the_wedding_of: "The wedding of",
     hero_dates: "2 – 5 February 2027",
+    curtain_skip: "Tap anywhere to skip",
 
     // Nav
     nav_home: "Home",
@@ -143,6 +144,7 @@ const translations = {
     menu_label: "Contenido",
     the_wedding_of: "La boda de",
     hero_dates: "2 – 5 de febrero de 2027",
+    curtain_skip: "Toca en cualquier lugar para saltar",
 
     // Nav
     nav_home: "Inicio",
