@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
-    base: "/wedding-site/",
+    base: "/wedding/",
     define: {
       // Defines process.env.API_KEY so it can be replaced during build
       'process.env.API_KEY': JSON.stringify(env.API_KEY),
