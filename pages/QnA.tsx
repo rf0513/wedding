@@ -1,50 +1,61 @@
-import React from 'react';
-import { FAQ_EN, FAQ_ES } from '../constants';
-import { HelpCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { FAQ_EN, FAQ_ES } from '../constants';
+import { Sunburst, ChevronBand } from '../components/DecoUI';
 
 const QnA: React.FC = () => {
   const { language, t } = useLanguage();
-  
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(0);
   const faqs = language === 'en' ? FAQ_EN : FAQ_ES;
+  const pad = (n: number) => String(n).padStart(2, '0');
+
+  const goHome = () => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-wedding-pattern relative overflow-hidden">
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-wedding-marigold/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-wedding-rani/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
-
-      <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <div className="text-center mb-16 animate-fade-in-up">
-           <div className="inline-block p-4 rounded-full bg-wedding-gold/20 mb-4 backdrop-blur-sm">
-             <HelpCircle className="text-wedding-rani" size={40} />
-           </div>
-          <h1 className="font-serif text-5xl md:text-6xl text-wedding-charcoal mb-6">{t('qna_title')}</h1>
-          <p className="text-gray-600 font-light max-w-lg mx-auto leading-relaxed">
-            {t('qna_subtitle')}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:gap-8">
-          {faqs.map((faq, index) => (
-            <div 
-              key={faq.id}
-              className="bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-md border-l-4 border-wedding-rani hover:shadow-lg transition-shadow duration-300 animate-fade-in-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <h3 className="font-serif text-2xl text-wedding-charcoal mb-4 flex items-start gap-3">
-                 <span className="text-wedding-rani font-sans font-bold text-sm mt-2">Q.</span>
-                 {faq.question}
-              </h3>
-              <div className="pl-7">
-                 <p className="text-gray-600 leading-relaxed font-light" dangerouslySetInnerHTML={{ __html: faq.answer }}>
-                 </p>
-              </div>
-            </div>
-          ))}
+    <main className="bg-wedding-cream text-wedding-ink pb-20">
+      <div className="relative overflow-hidden bg-wedding-ink text-wedding-cream pt-28 px-6 pb-14 text-center">
+        <Sunburst variant="header" />
+        <div className="relative max-w-[640px] mx-auto">
+          <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">{t('guide_no')} 3</p>
+          <h1 className="m-0 font-serif font-normal text-[clamp(36px,9vw,64px)] leading-[1.02]" style={{ textWrap: 'balance' as any }}>{t('qna_title')}</h1>
+          <p className="mt-5 mx-auto mb-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-cream/75">{t('qna_subtitle')}</p>
         </div>
       </div>
-    </div>
+      <ChevronBand />
+
+      <div className="max-w-[760px] mt-10 mx-auto px-6">
+        <div className="border-t border-wedding-ink">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={f.id} className="border-b border-wedding-ink/35">
+                <button
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  className="w-full grid grid-cols-[auto_minmax(0,1fr)_auto] gap-4 items-start py-[22px] bg-transparent border-0 text-left cursor-pointer text-wedding-ink"
+                >
+                  <span className="font-sans font-semibold text-[10px] leading-[1.9] tracking-[.3em] text-wedding-bronze min-w-[24px]">{pad(i + 1)}</span>
+                  <span className="font-serif text-[clamp(19px,5vw,24px)] leading-[1.25]">{f.question}</span>
+                  <span className="font-serif text-[22px] leading-none text-wedding-bronze transition-transform" style={{ transform: isOpen ? 'rotate(45deg)' : 'none' }}>+</span>
+                </button>
+                {isOpen && (
+                  <p
+                    className="mb-6 ml-10 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/85 animate-heroIn"
+                    dangerouslySetInnerHTML={{ __html: f.answer }}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
+        <div className="mt-14 text-center">
+          <a onClick={goHome} className="inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-ink hover:text-wedding-goldLight">
+            ← {t('rsvp_back_home')}
+          </a>
+        </div>
+      </div>
+    </main>
   );
 };
 

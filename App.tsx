@@ -26,7 +26,7 @@ const App: React.FC = () => {
     <LanguageProvider>
       <HashRouter>
         <ScrollToTop />
-        <div className="font-sans text-wedding-charcoal antialiased selection:bg-wedding-gold selection:text-white">
+        <div className="font-sans text-wedding-cream bg-wedding-ink antialiased selection:bg-wedding-gold selection:text-wedding-ink">
           <Navbar />
           <main className="flex-grow">
             <Routes>

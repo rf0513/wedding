@@ -7,37 +7,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              serif: ['"Cormorant Garamond"', 'serif'],
-              sans: ['"Lato"', 'sans-serif'],
+              serif: ['Marcellus', 'serif'],
+              sans: ['"Josefin Sans"', 'sans-serif'],
             },
             colors: {
               wedding: {
-                cream: '#FFFBF0',      // Warm buttery cream
-                rani: '#D81B60',       // Deep Rani Pink
-                marigold: '#FF9800',   // Vibrant Marigold Orange
-                green: '#2E7D32',      // Traditional Green
-                charcoal: '#263238',   // Dark blue-grey for text
-                gold: '#FFC107',       // Bright Gold
+                ink: '#0E1512',       // Near-black deco ground
+                cream: '#F3EEE1',     // Ivory
+                gold: '#C8A951',      // Old gold
+                goldLight: '#E3C77A', // Hover gold
+                bronze: '#7A6428',    // Muted gold-brown (labels on cream)
+                pine: '#16221D',      // Secondary dark surface
               }
             },
             animation: {
-              'fade-in-up': 'fadeInUp 1s ease-out forwards',
               'fade-in-down': 'fadeInDown 0.5s ease-out forwards',
+              marquee: 'marquee 34s linear infinite',
+              heroIn: 'heroIn 1.2s cubic-bezier(.2,.7,.2,1) both',
+              frameIn: 'frameIn 1.4s cubic-bezier(.2,.7,.2,1) both',
+              spinSlow: 'spin 240s linear infinite',
             },
             keyframes: {
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
               fadeInDown: {
                 '0%': { opacity: '0', transform: 'translateY(-10px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              marquee: {
+                from: { transform: 'translateX(0)' },
+                to: { transform: 'translateX(-50%)' },
+              },
+              heroIn: {
+                from: { opacity: '0', transform: 'translateY(30px)' },
+                to: { opacity: '1', transform: 'none' },
+              },
+              frameIn: {
+                from: { opacity: '0', transform: 'scale(.97)' },
+                to: { opacity: '1', transform: 'none' },
+              },
+              spin: {
+                to: { transform: 'rotate(360deg)' },
               }
             }
           }
@@ -45,19 +59,16 @@
       }
     </script>
     <style>
+      html { scroll-behavior: auto; }
       body {
-        background-color: #FFFBF0;
-        color: #263238;
+        background-color: #0E1512;
+        color: #F3EEE1;
       }
-      .scroll-smooth {
-        scroll-behavior: smooth;
-      }
-      /* Elegant dot pattern for background */
-      .bg-wedding-pattern {
-        background-color: #FFFBF0;
-        background-image: radial-gradient(#D1C4A9 1px, transparent 1px);
-        background-size: 32px 32px;
-      }
+      a { color: #C8A951; }
+      a:hover { color: #E3C77A; }
+      ::selection { background: #C8A951; color: #0E1512; }
+      input::placeholder, textarea::placeholder { color: rgba(243,238,225,.35); }
+      select option { background: #16221D; color: #F3EEE1; }
       /* Hide scrollbar for Chrome, Safari and Opera */
       .hide-scrollbar::-webkit-scrollbar {
         display: none;
@@ -67,6 +78,17 @@
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
       }
+      /* Stepped Art Deco ziggurat frames */
+      .deco-chamfer-8 { clip-path: polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px)); }
+      .deco-step-12 { clip-path: polygon(0 12px,6px 12px,6px 6px,12px 6px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 6px,calc(100% - 6px) 6px,calc(100% - 6px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 6px) calc(100% - 12px),calc(100% - 6px) calc(100% - 6px),calc(100% - 12px) calc(100% - 6px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 6px),6px calc(100% - 6px),6px calc(100% - 12px),0 calc(100% - 12px)); }
+      .deco-step-14 { clip-path: polygon(0 14px,7px 14px,7px 7px,14px 7px,14px 0,calc(100% - 14px) 0,calc(100% - 14px) 7px,calc(100% - 7px) 7px,calc(100% - 7px) 14px,100% 14px,100% calc(100% - 14px),calc(100% - 7px) calc(100% - 14px),calc(100% - 7px) calc(100% - 7px),calc(100% - 14px) calc(100% - 7px),calc(100% - 14px) 100%,14px 100%,14px calc(100% - 7px),7px calc(100% - 7px),7px calc(100% - 14px),0 calc(100% - 14px)); }
+      .deco-step-16 { clip-path: polygon(0 16px,8px 16px,8px 8px,16px 8px,16px 0,calc(100% - 16px) 0,calc(100% - 16px) 8px,calc(100% - 8px) 8px,calc(100% - 8px) 16px,100% 16px,100% calc(100% - 16px),calc(100% - 8px) calc(100% - 16px),calc(100% - 8px) calc(100% - 8px),calc(100% - 16px) calc(100% - 8px),calc(100% - 16px) 100%,16px 100%,16px calc(100% - 8px),8px calc(100% - 8px),8px calc(100% - 16px),0 calc(100% - 16px)); }
+      .deco-step-20 { clip-path: polygon(0 20px,10px 20px,10px 10px,20px 10px,20px 0,calc(100% - 20px) 0,calc(100% - 20px) 10px,calc(100% - 10px) 10px,calc(100% - 10px) 20px,100% 20px,100% calc(100% - 20px),calc(100% - 10px) calc(100% - 20px),calc(100% - 10px) calc(100% - 10px),calc(100% - 20px) calc(100% - 10px),calc(100% - 20px) 100%,20px 100%,20px calc(100% - 10px),10px calc(100% - 10px),10px calc(100% - 20px),0 calc(100% - 20px)); }
+      .deco-chevron { background-image: repeating-linear-gradient(45deg,#C8A951 0 1.5px,transparent 1.5px 9px),repeating-linear-gradient(-45deg,#C8A951 0 1.5px,transparent 1.5px 9px); }
+      .deco-sunburst { background-image: repeating-conic-gradient(from 0deg,rgba(200,169,81,.22) 0 1.2deg,transparent 1.2deg 7.5deg); border-radius: 50%; -webkit-mask-image: radial-gradient(circle,#000 0%,transparent 62%); mask-image: radial-gradient(circle,#000 0%,transparent 62%); }
+      .deco-sunburst-header { background-image: repeating-conic-gradient(from 0deg,rgba(200,169,81,.2) 0 1.2deg,transparent 1.2deg 7.5deg); border-radius: 50%; -webkit-mask-image: radial-gradient(circle,#000 0%,transparent 60%); mask-image: radial-gradient(circle,#000 0%,transparent 60%); }
+      [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+      [data-reveal].is-visible { opacity: 1; transform: none; }
     </style>
   <script type="importmap">
 {
