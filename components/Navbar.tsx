@@ -1,163 +1,96 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { LogoMark, useSectionNav } from './DecoUI';
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const navigate = useNavigate();
+  const goSection = useSectionNav();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'es' : 'en');
+  const goHome = () => {
+    navigate('/');
+    setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const navLinks = [
-    { name: t('nav_home'), path: '/' },
-    { name: t('nav_story'), path: '/story' },
-    { name: t('nav_events'), path: '/schedule' },
-    { name: t('nav_travel'), path: '/travel' },
-    { name: t('nav_traditions'), path: '/traditions' },
-    { name: t('nav_qna'), path: '/qna' },
-    { name: t('nav_registry'), path: '/registry' },
-  ];
+  const goView = (path: string) => {
+    navigate(path);
+    setMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
 
-  // Logic: Navbar should have background if scrolled OR if menu is open on mobile
-  const showBackground = scrolled || isOpen;
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const menuItems = [
+    { name: t('nav_home'), go: goHome },
+    { name: t('nav_events'), go: () => { goSection('programme'); setMenuOpen(false); } },
+    { name: t('nav_story'), go: () => { goSection('story'); setMenuOpen(false); } },
+    { name: t('nav_traditions'), go: () => goView('/traditions') },
+    { name: t('nav_travel'), go: () => goView('/travel') },
+    { name: t('nav_qna'), go: () => goView('/qna') },
+    { name: t('nav_registry'), go: () => { goSection('registry'); setMenuOpen(false); } },
+    { name: t('nav_rsvp'), go: () => { goSection('rsvp'); setMenuOpen(false); } },
+  ].map((m, i) => ({ ...m, num: pad(i + 1) }));
 
-  const navbarClasses = `fixed w-full z-50 transition-all duration-300 ${
-    showBackground ? 'bg-white/95 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-4 md:py-6'
-  }`;
-
-  const isHome = location.pathname === '/';
-  
-  // Text color logic:
-  // If menu is OPEN, text is always dark (because bg is white).
-  // If NOT open:
-  //   - If scrolled or not home: Dark.
-  //   - If home top: White.
-  const forceDark = isOpen || scrolled || !isHome;
-
-  const textClasses = forceDark
-    ? 'text-wedding-charcoal' 
-    : 'text-wedding-charcoal lg:text-white';
-    
-  const logoColor = forceDark
-    ? 'text-wedding-rani' 
-    : 'text-wedding-rani lg:text-white';
-    
-  const buttonColor = forceDark
-    ? 'text-wedding-rani'
-    : 'text-white'; // On mobile home top, it should be white.
-
-  const langButtonClasses = forceDark
-    ? 'border-wedding-charcoal text-wedding-charcoal hover:bg-wedding-charcoal hover:text-white'
-    : 'border-white text-white hover:bg-white hover:text-wedding-charcoal';
+  const btnClasses = "h-10 px-[14px] border border-wedding-gold/55 bg-wedding-ink/75 backdrop-blur-md text-wedding-goldLight font-sans font-semibold text-[11px] tracking-[.28em] uppercase cursor-pointer pt-[3px] transition-colors hover:border-wedding-gold hover:bg-wedding-pine";
 
   return (
-    <nav className={navbarClasses}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-full">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className={`font-serif text-3xl tracking-widest font-bold ${logoColor} relative z-50`}>
-              P <span className="text-wedding-gold">&</span> R
-            </Link>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 items-center">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm uppercase tracking-widest hover:text-wedding-rani transition-colors font-semibold ${
-                  location.pathname === link.path 
-                    ? 'text-wedding-rani border-b-2 border-wedding-rani' 
-                    : textClasses
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-
-            {/* RSVP Button (Highlighted) */}
-             <Link
-                to="/rsvp"
-                className="bg-wedding-rani hover:bg-pink-700 text-white text-xs px-5 py-2 rounded-full font-bold uppercase tracking-widest shadow-md transition-all hover:scale-105"
-             >
-                {t('nav_rsvp')}
-             </Link>
-            
-            {/* Language Toggle Desktop */}
-            <button 
-                onClick={toggleLanguage}
-                className={`flex items-center gap-1 px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-widest transition-all ${langButtonClasses}`}
-            >
-                <Globe size={14} />
-                <span>{language === 'en' ? 'ES' : 'EN'}</span>
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4 relative z-50">
-            <button 
-                onClick={toggleLanguage}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-widest transition-all ${langButtonClasses}`}
-            >
-                <span>{language === 'en' ? 'ES' : 'EN'}</span>
-            </button>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 focus:outline-none transition-colors ${buttonColor}`}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-[60] flex justify-between items-center px-[18px] py-[14px] pointer-events-none">
+        <a onClick={goHome} className="pointer-events-auto cursor-pointer no-underline flex items-center gap-[10px]">
+          <LogoMark />
+        </a>
+        <div className="pointer-events-auto flex items-center gap-2">
+          <button
+            onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+            className={btnClasses}
+          >
+            {language === 'en' ? 'ES' : 'EN'}
+          </button>
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Menu"
+            className={`${btnClasses} flex items-center gap-[10px]`}
+          >
+            {menuOpen ? (language === 'en' ? 'Close' : 'Cerrar') : (language === 'en' ? 'Menu' : 'Menú')}
+            <span className="inline-flex flex-col gap-1 -mt-[3px]">
+              <span className="block w-4 h-[1.5px] bg-wedding-goldLight" />
+              <span className="block w-4 h-[1.5px] bg-wedding-goldLight" />
+            </span>
+          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg animate-fade-in-down border-t-2 border-gray-100 h-[calc(100vh-70px)] overflow-y-auto">
-          <div className="px-4 py-8 space-y-4 flex flex-col items-center justify-center min-h-full">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="block px-3 py-2 text-xl font-serif font-bold text-wedding-charcoal hover:text-wedding-rani transition-colors"
+      {menuOpen && (
+        <div className="fixed inset-0 z-[55] bg-wedding-ink/96 backdrop-blur-2xl flex flex-col justify-start overflow-y-auto px-7 pt-20 pb-8 animate-heroIn">
+          <p className="mb-[22px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">
+            {t('menu_label')}
+          </p>
+          <nav className="flex flex-col my-auto">
+            {menuItems.map((m) => (
+              <a
+                key={m.num}
+                onClick={m.go}
+                className="flex items-baseline gap-[18px] py-[clamp(8px,1.6vh,13px)] border-t border-wedding-gold/[.18] cursor-pointer no-underline text-wedding-cream hover:text-wedding-goldLight hover:pl-2 transition-all"
               >
-                {link.name}
-              </Link>
+                <span className="font-sans font-light text-xs tracking-[.2em] text-wedding-gold min-w-[28px]">{m.num}</span>
+                <span className="font-serif text-[clamp(26px,6.5vw,38px)] leading-[1.05] tracking-[.02em]">{m.name}</span>
+              </a>
             ))}
-            <Link
-                to="/rsvp"
-                className="block px-10 py-4 mt-6 bg-wedding-rani text-white rounded-full text-sm font-bold uppercase tracking-widest shadow-lg transform hover:scale-105 transition-transform"
-             >
-                {t('nav_rsvp')}
-             </Link>
-            <div className="pt-8 pb-4">
-              <Heart className="text-wedding-rani" size={24} />
-            </div>
+          </nav>
+          <div className="mt-6 flex-none flex justify-between items-center pt-6 border-t border-wedding-gold/[.18]">
+            <span className="font-sans font-light text-[11px] tracking-[.3em] uppercase text-wedding-cream/55">Mumbai · 2027</span>
+            <span className="font-sans font-semibold text-[11px] tracking-[.3em] text-wedding-gold">#PR27</span>
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 

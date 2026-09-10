@@ -2,14 +2,24 @@
 export interface WeddingEvent {
   id: string;
   title: string;
-  date: string;
+  day: string;
+  month: string;
   time: string;
   location: string;
   address: string;
   description: string;
-  iconName: 'ring' | 'dance' | 'art';
-  shuttleTime?: string;
-  dressCode?: string;
+  dressCode: string;
+  shuttleTime: string;
+  /** Google Calendar UTC range, e.g. "20270202T053000Z/20270202T090000Z" */
+  calRange: string;
+}
+
+export interface StoryEvent {
+  id: string;
+  date: string;
+  title: string;
+  desc: string;
+  img: string;
 }
 
 export interface RegistryItem {
@@ -17,7 +27,6 @@ export interface RegistryItem {
   store: string;
   link: string;
   description: string;
-  imageUrl: string;
 }
 
 export interface WeddingCustom {
@@ -56,21 +65,28 @@ export interface RSVPFormData {
   firstName: string;
   lastName: string;
   email: string;
-  attending: string;
+  attending: 'yes' | 'no';
   guests: number | string;
   dietaryRestrictions: string;
-}
-
-export interface Guest {
-  id: string;
-  firstName: string;
-  lastName: string;
-  hasPlusOne: boolean;
-  hasRSVPd: boolean;
 }
 
 export interface FAQItem {
   id: string;
   question: string;
   answer: string;
+}
+
+export interface TravelSpot {
+  id: string;
+  title: string;
+  desc: string;
+  img?: string;
+  query: string;
+  link: string;
+}
+
+export interface SurvivalTip {
+  id: string;
+  title: string;
+  html: string;
 }

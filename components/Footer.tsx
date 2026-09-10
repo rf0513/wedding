@@ -1,27 +1,24 @@
 import React from 'react';
 import { WEDDING_DATA } from '../constants';
 import { useLanguage } from '../contexts/LanguageContext';
+import { ChevronBand } from './DecoUI';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-wedding-charcoal text-wedding-cream py-6 border-t-4 border-wedding-rani">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="font-serif text-xl mb-2 text-wedding-gold">
-          {WEDDING_DATA.couple.partner1} & {WEDDING_DATA.couple.partner2}
-        </h2>
-        <p className="font-sans text-[10px] tracking-[0.2em] uppercase mb-3 text-wedding-marigold font-bold">
-          {WEDDING_DATA.date} • {WEDDING_DATA.location.city}
-        </p>
-        <div className="flex justify-center items-center gap-2 mb-2 opacity-50">
-           <div className="w-8 h-px bg-wedding-gold"></div>
-           <div className="text-wedding-rani text-xs">❤</div>
-           <div className="w-8 h-px bg-wedding-gold"></div>
-        </div>
-        <p className="text-[10px] text-gray-500">
-          {t('footer_msg')}
-        </p>
+    <footer className="relative bg-wedding-ink text-wedding-cream text-center px-6 pt-14 pb-10 border-t border-wedding-gold/35">
+      <ChevronBand className="absolute top-0 left-0 right-0" />
+      <p className="m-0 mb-[14px] font-serif text-[clamp(28px,7vw,40px)] leading-[1.1]">{t('footer_msg')}</p>
+      <p className="m-0 mb-[22px] font-sans font-semibold text-[10px] tracking-[.34em] uppercase text-wedding-gold">
+        {WEDDING_DATA.couple.partner1} &amp; {WEDDING_DATA.couple.partner2}
+      </p>
+      <div className="flex items-center justify-center gap-3 text-wedding-cream/55 font-sans font-light text-[11px] tracking-[.28em] uppercase">
+        <span>2 – 5 · II · 2027</span>
+        <span className="w-1 h-1 bg-wedding-gold rotate-45" />
+        <span>Mumbai</span>
+        <span className="w-1 h-1 bg-wedding-gold rotate-45" />
+        <span>{WEDDING_DATA.couple.hashtag}</span>
       </div>
     </footer>
   );

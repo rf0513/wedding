@@ -10,6 +10,11 @@ interface LanguageContextType {
 
 const translations = {
   en: {
+    // Chrome
+    menu_label: "Contents",
+    the_wedding_of: "The wedding of",
+    hero_dates: "2 – 5 February 2027",
+
     // Nav
     nav_home: "Home",
     nav_story: "Our Story",
@@ -19,41 +24,62 @@ const translations = {
     nav_registry: "Registry",
     nav_rsvp: "RSVP",
     nav_qna: "Q&A",
-    
+
     // Home
-    home_hero_subtitle: "Celebrate with us",
     home_view_events: "View Schedule",
-    home_scroll: "Scroll",
-    home_quote: "\"As soon as I saw you, I knew an adventure was going to happen.\"",
-    home_read_story: "Read Our Story",
-    home_guide_ceremonies: "Guide to Ceremonies",
-    home_guide_travel: "Mumbai Travel Guide",
-    
-    // Events (Now Schedule)
+    home_quote: "“As soon as I saw you, I knew an adventure was going to happen.”",
+    countdown_label: "Until the Mehendi",
+    cd_days: "Days",
+    cd_hours: "Hours",
+    cd_minutes: "Minutes",
+
+    // Story
+    story_kicker: "How We Met",
+    story_title: "Our Journey",
+
+    // Events / Programme
     events_subtitle: "The Schedule",
     events_title: "Wedding Schedule",
     events_desc: "Join us for a vibrant celebration of love across Mumbai's most beautiful venues.",
-    events_shuttle: "Shuttle departs Taj The Trees at",
-    events_map_title: "Event Map & Locations",
-    events_map_subtitle: "Select a location to view details",
-    events_viewing: "Currently Viewing",
-    events_driving: "Driving Route From Hotel",
-    event_dress_code_label: "Dress Code",
+    events_shuttle: "Departs Taj The Trees at",
+    lbl_time: "Time",
+    lbl_venue: "Venue",
+    lbl_shuttle: "Shuttle",
+    lbl_dress: "Dress",
+    add_to_calendar: "Add to calendar",
+    see_map: "Venues on the map",
+
+    // Guides
+    guides_title: "Everything you need for the trip",
+    guide_no: "Guide Nº",
 
     // Travel
     travel_welcome: "Welcome to India",
     travel_title: "Mumbai Travel Guide",
     travel_desc: "Mumbai is a city of dreams, chaos, and incredible energy. For our international guests, we've curated a list of high-end spots to ensure your visit is comfortable, delicious, and memorable.",
+    travel_airport: "Airport",
+    travel_stay: "Where to Stay",
+    recommended: "Recommended",
     travel_sights: "Must-See Sights",
+    travel_tour_title: "Want to see it all in one day?",
+    travel_tour_desc: "We recommend booking a private full-day tour. It includes private air-conditioned transport and a tour guide.",
+    travel_tour_btn: "View Tour on TripAdvisor",
     travel_shopping: "Retail Therapy",
     travel_shopping_desc: "From upscale boutiques to the safest street market in town.",
     travel_food: "Culinary Gems",
     travel_food_desc: "Hygiene and flavor are our top priorities. These are world-class establishments perfect for a nice dinner out.",
+    travel_res_title: "Reservation Required",
+    travel_res_desc: "We highly recommend making reservations in advance for these restaurants.",
+    travel_zomato: "Find more restaurants on Zomato",
     travel_visit_website: "Visit Website",
+    view_on_map: "View on map",
     travel_map_title: "Explore the Guide",
+    travel_map_subtitle: "Select a location to see driving directions from Taj The Trees",
+    map_hotel: "Showing Taj The Trees",
+    map_route: "Driving route from Taj The Trees to",
     travel_survival_title: "Mumbai Survival Guide",
     travel_survival_subtitle: "Essential tips for our friends from Panama & the US",
-    
+
     // Traditions
     traditions_subtitle: "For Our Guests",
     traditions_title: "Ceremonies & Attire",
@@ -63,12 +89,14 @@ const translations = {
     traditions_significance: "Significance",
     traditions_wear: "What to Wear",
     traditions_expect: "What to Expect",
-    traditions_see_examples: "See Examples",
-    traditions_perfect_for: "Perfect For",
+    traditions_see_examples: "See examples",
+    traditions_perfect_for: "Perfect for",
     traditions_shop_title: "Where to Shop",
     traditions_shop_desc: "Whether you prefer to order online before your trip or experience the vibrant fashion of Mumbai in person, here are our curated recommendations.",
-    
-    // Attire specific
+    traditions_q_title: "Still have questions?",
+    traditions_q_desc: "Don't worry about getting everything perfect. The most important thing is your presence!",
+
+    // Attire
     attire_by_event_title: "Dress Code by Event",
     attire_by_event_desc: "A quick guide on what to wear for each specific function.",
     attire_glossary_title: "Clothing Style Guide",
@@ -77,13 +105,17 @@ const translations = {
     attire_men: "Men",
 
     // Registry
+    registry_kicker: "Gifts",
     registry_title: "Registry",
     registry_desc: "Your attendance and love is all we need, but here are some suggestions if the plane ticket to Mumbai was not expensive enough:",
+    registry_charity: "If you are attending this wedding, it is likely you have been blessed with opportunities. Others are not as fortunate. Consider supporting Educate Girls Globally, one of the most rigorously measured and impactful education charities in India.",
     registry_donate: "Donate Now",
+    registry_btc: "If you insist of quantifying your love to us, you can send Bitcoin to the wallet below.",
     registry_copy: "Copy Address",
     registry_copied: "Copied",
-    
+
     // RSVP
+    rsvp_deadline: "December 15, 2026",
     rsvp_respond_by: "Kindly Respond By",
     rsvp_first_name: "First Name",
     rsvp_last_name: "Last Name",
@@ -97,14 +129,6 @@ const translations = {
     rsvp_thanks: "Dhanyavad!",
     rsvp_thanks_msg: "Your response has been recorded. We are counting down the days to see you in Mumbai!",
     rsvp_another: "Submit another response",
-    rsvp_lookup_title: "Find Your Invitation",
-    rsvp_lookup_btn: "Find Invitation",
-    rsvp_error_not_found: "We couldn't find your name. Please check the spelling or contact Pavitra & Ramon.",
-    rsvp_welcome: "Welcome,",
-    rsvp_party_of: "Seat Reserved",
-    rsvp_party_of_2: "Plus One Available",
-    rsvp_already_registered: "You have already responded!",
-    rsvp_already_registered_msg: "If you need to change your response, please contact the couple directly.",
     rsvp_back_home: "Back to Home",
 
     // Q&A
@@ -115,6 +139,11 @@ const translations = {
     footer_msg: "See you in Mumbai!"
   },
   es: {
+    // Chrome
+    menu_label: "Contenido",
+    the_wedding_of: "La boda de",
+    hero_dates: "2 – 5 de febrero de 2027",
+
     // Nav
     nav_home: "Inicio",
     nav_story: "Nuestra Historia",
@@ -126,36 +155,57 @@ const translations = {
     nav_qna: "Preguntas",
 
     // Home
-    home_hero_subtitle: "Celebra con nosotros",
     home_view_events: "Ver Itinerario",
-    home_scroll: "Desplazar",
-    home_quote: "\"Tan pronto como te vi, supe que una aventura estaba por suceder.\"",
-    home_read_story: "Nuestra Historia",
-    home_guide_ceremonies: "Guía de Ceremonias",
-    home_guide_travel: "Guía de Mumbai",
+    home_quote: "“Tan pronto como te vi, supe que una aventura estaba por suceder.”",
+    countdown_label: "Para el Mehendi",
+    cd_days: "Días",
+    cd_hours: "Horas",
+    cd_minutes: "Minutos",
 
-    // Events (Now Schedule)
+    // Story
+    story_kicker: "Cómo Nos Conocimos",
+    story_title: "Nuestro Viaje",
+
+    // Events / Programme
     events_subtitle: "El Itinerario",
     events_title: "Itinerario de la Boda",
     events_desc: "Únase a nosotros para una vibrante celebración del amor en los lugares más hermosos de Mumbai.",
-    events_shuttle: "El transporte sale de Taj The Trees a las",
-    events_map_title: "Mapa de Eventos",
-    events_map_subtitle: "Selecciona una ubicación para ver detalles",
-    events_viewing: "Viendo Actualmente",
-    events_driving: "Ruta desde el Hotel",
-    event_dress_code_label: "Código de Vestimenta",
+    events_shuttle: "Sale de Taj The Trees a las",
+    lbl_time: "Hora",
+    lbl_venue: "Lugar",
+    lbl_shuttle: "Transporte",
+    lbl_dress: "Vestimenta",
+    add_to_calendar: "Añadir al calendario",
+    see_map: "Lugares en el mapa",
+
+    // Guides
+    guides_title: "Todo lo que necesitas para el viaje",
+    guide_no: "Guía Nº",
 
     // Travel
     travel_welcome: "Bienvenidos a la India",
     travel_title: "Guía de Viaje a Mumbai",
     travel_desc: "Mumbai es una ciudad de sueños, caos y energía increíble. Para nuestros invitados internacionales, hemos seleccionado una lista de lugares exclusivos para asegurar que su visita sea cómoda, deliciosa y memorable.",
+    travel_airport: "Aeropuerto",
+    travel_stay: "Dónde Alojarse",
+    recommended: "Recomendado",
     travel_sights: "Lugares Imperdibles",
+    travel_tour_title: "¿Quieres ver todo en un día?",
+    travel_tour_desc: "Recomendamos reservar un tour privado de día completo. Incluye transporte privado con aire acondicionado y guía.",
+    travel_tour_btn: "Ver Tour en TripAdvisor",
     travel_shopping: "Terapia de Compras",
     travel_shopping_desc: "Desde boutiques exclusivas hasta el mercado callejero más seguro de la ciudad.",
     travel_food: "Joyas Culinarias",
     travel_food_desc: "La higiene y el sabor son nuestras prioridades. Estos son establecimientos de clase mundial perfectos para una cena agradable.",
+    travel_res_title: "Reserva Requerida",
+    travel_res_desc: "Recomendamos encarecidamente hacer reservas con antelación para estos restaurantes.",
+    travel_zomato: "Encuentra más restaurantes en Zomato",
     travel_visit_website: "Visitar Sitio",
+    view_on_map: "Ver en el mapa",
     travel_map_title: "Explorar la Guía",
+    travel_map_subtitle: "Selecciona una ubicación para ver indicaciones desde Taj The Trees",
+    map_hotel: "Mostrando Taj The Trees",
+    map_route: "Ruta en coche desde Taj The Trees a",
     travel_survival_title: "Guía de Supervivencia",
     travel_survival_subtitle: "Consejos esenciales para nuestros amigos de Panamá y EE. UU.",
 
@@ -168,12 +218,14 @@ const translations = {
     traditions_significance: "Significado",
     traditions_wear: "Qué Usar",
     traditions_expect: "Qué Esperar",
-    traditions_see_examples: "Ver Ejemplos",
-    traditions_perfect_for: "Perfecto Para",
+    traditions_see_examples: "Ver ejemplos",
+    traditions_perfect_for: "Perfecto para",
     traditions_shop_title: "Dónde Comprar",
     traditions_shop_desc: "Ya sea que prefieras ordenar en línea antes de tu viaje o experimentar la vibrante moda de Mumbai en persona, aquí están nuestras recomendaciones.",
+    traditions_q_title: "¿Tienes preguntas?",
+    traditions_q_desc: "No te preocupes por que todo sea perfecto. ¡Lo más importante es tu presencia!",
 
-    // Attire specific
+    // Attire
     attire_by_event_title: "Código de Vestimenta",
     attire_by_event_desc: "Una guía rápida sobre qué usar para cada función específica.",
     attire_glossary_title: "Guía de Estilos de Ropa",
@@ -182,13 +234,17 @@ const translations = {
     attire_men: "Hombres",
 
     // Registry
+    registry_kicker: "Regalos",
     registry_title: "Regalos",
     registry_desc: "Su asistencia y amor es todo lo que necesitamos, pero aquí hay algunas sugerencias si el boleto de avión a Mumbai no fue lo suficientemente caro:",
+    registry_charity: "Si asistes a esta boda, es probable que hayas sido bendecido con oportunidades. Otros no son tan afortunados. Considere apoyar a Educate Girls Globally, una de las organizaciones benéficas educativas de mayor impacto en la India.",
     registry_donate: "Donar Ahora",
+    registry_btc: "Si insistes en cuantificar tu amor por nosotros, puedes enviar Bitcoin a la siguiente billetera.",
     registry_copy: "Copiar Dirección",
     registry_copied: "Copiado",
 
     // RSVP
+    rsvp_deadline: "15 de diciembre de 2026",
     rsvp_respond_by: "Responder antes de",
     rsvp_first_name: "Nombre",
     rsvp_last_name: "Apellido",
@@ -202,14 +258,6 @@ const translations = {
     rsvp_thanks: "¡Dhanyavad!",
     rsvp_thanks_msg: "Tu respuesta ha sido registrada. ¡Estamos contando los días para verte en Mumbai!",
     rsvp_another: "Enviar otra respuesta",
-    rsvp_lookup_title: "Encuentra tu Invitación",
-    rsvp_lookup_btn: "Buscar Invitación",
-    rsvp_error_not_found: "No pudimos encontrar tu nombre. Por favor verifica la ortografía o contacta a Pavitra y Ramón.",
-    rsvp_welcome: "Bienvenido,",
-    rsvp_party_of: "Asiento Reservado",
-    rsvp_party_of_2: "Acompañante Disponible",
-    rsvp_already_registered: "¡Ya has respondido!",
-    rsvp_already_registered_msg: "Si necesitas cambiar tu respuesta, por favor contacta a la pareja directamente.",
     rsvp_back_home: "Volver al Inicio",
 
     // Q&A

@@ -1,364 +1,188 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { WEDDING_CUSTOMS_EN, WEDDING_CUSTOMS_ES, ATTIRE_GUIDE_EN, ATTIRE_GUIDE_ES, EVENT_DRESS_CODES_EN, EVENT_DRESS_CODES_ES } from '../constants';
-import { Info, Sparkles, Shirt, Globe, MapPin } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { AttireItem } from '../types';
+import { WEDDING_CUSTOMS_EN, WEDDING_CUSTOMS_ES, ATTIRE_GUIDE_EN, ATTIRE_GUIDE_ES, EVENT_DRESS_CODES_EN, EVENT_DRESS_CODES_ES } from '../constants';
+import { Reveal, StepFrame, Sunburst, ChevronBand } from '../components/DecoUI';
+
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
 const Traditions: React.FC = () => {
-  const { search } = useLocation();
   const { language, t } = useLanguage();
+  const en = language === 'en';
+  const [tab, setTab] = useState<'ceremonies' | 'attire'>('ceremonies');
+  const navigate = useNavigate();
+  const goHome = () => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
-  const [activeTab, setActiveTab] = useState<'ceremonies' | 'attire'>(() => {
-    const params = new URLSearchParams(search);
-    return params.get('tab') === 'attire' ? 'attire' : 'ceremonies';
-  });
+  const customs = en ? WEDDING_CUSTOMS_EN : WEDDING_CUSTOMS_ES;
+  const dressCodes = en ? EVENT_DRESS_CODES_EN : EVENT_DRESS_CODES_ES;
+  const attire = en ? ATTIRE_GUIDE_EN : ATTIRE_GUIDE_ES;
+  const womenAttire = attire.filter((a) => a.gender === 'Women');
+  const menAttire = attire.filter((a) => a.gender === 'Men');
 
-  const customs = language === 'en' ? WEDDING_CUSTOMS_EN : WEDDING_CUSTOMS_ES;
-  const attire = language === 'en' ? ATTIRE_GUIDE_EN : ATTIRE_GUIDE_ES;
-  const dressCodes = language === 'en' ? EVENT_DRESS_CODES_EN : EVENT_DRESS_CODES_ES;
-
-  const womenAttire = attire.filter(item => item.gender === 'Women');
-  const menAttire = attire.filter(item => item.gender === 'Men');
-
-  const getEventEmojis = (eventId: string) => {
-    switch (eventId) {
-      case 'sangeet':
-        return { women: '💃', men: '🕺' };
-      case 'wedding':
-        return { women: '🥻', men: '🤵' };
-      default:
-        return { women: '👩', men: '👨' };
-    }
+  const selectAttireTab = () => {
+    setTab('attire');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const renderAttireList = (items: AttireItem[]) => (
-    <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scroll-smooth hide-scrollbar">
-      {items.map((item) => (
-        <div key={item.id} className="min-w-[280px] md:min-w-0 snap-center bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg border border-gray-100 group hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-          <div className="relative aspect-[3/4] overflow-hidden flex-shrink-0">
-              <img 
-              src={item.imageUrl} 
-              alt={item.name} 
-              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-          </div>
-          <div className="p-6 md:p-8 flex flex-col flex-grow">
-              <div className="mb-4">
-                <h3 className="font-serif text-2xl md:text-3xl text-wedding-charcoal mb-1 leading-none">{item.name}</h3>
-                {item.pronunciation && (
-                  <span className="text-wedding-marigold text-sm font-light italic">({item.pronunciation})</span>
-                )}
-              </div>
-              
-              <p className="text-gray-600 font-light leading-relaxed mb-6 flex-grow">
-                {item.description}
-              </p>
-              
-              <div className="border-t border-gray-100 pt-4 mt-auto">
-                <span className="text-xs font-bold uppercase tracking-widest text-wedding-rani block mb-2">{t('traditions_perfect_for')}</span>
-                <div className="flex flex-wrap gap-2">
-                    {item.bestFor.map(event => (
-                      <span key={event} className="bg-wedding-cream text-wedding-charcoal text-xs px-2 py-1 rounded border border-wedding-gold/30">
-                        {event}
-                      </span>
-                    ))}
-                </div>
-              </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-wedding-pattern relative overflow-hidden">
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-wedding-marigold/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-wedding-rani/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
+    <main className="bg-wedding-cream text-wedding-ink pb-20">
+      <div className="relative overflow-hidden bg-wedding-ink text-wedding-cream pt-28 px-6 pb-14 text-center">
+        <Sunburst variant="header" />
+        <div className="relative max-w-[640px] mx-auto">
+          <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">{t('guide_no')} 1 · {t('traditions_subtitle')}</p>
+          <h1 className="m-0 font-serif font-normal text-[clamp(36px,9vw,64px)] leading-[1.02]" style={{ textWrap: 'balance' as any }}>{t('traditions_title')}</h1>
+          <p className="mt-5 mx-auto mb-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-cream/75">{t('traditions_desc')}</p>
+        </div>
+      </div>
+      <ChevronBand />
 
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-10 animate-fade-in-up">
-          <p className="text-wedding-rani text-sm tracking-widest uppercase mb-2 font-bold">{t('traditions_subtitle')}</p>
-          <h1 className="font-serif text-5xl md:text-6xl text-wedding-charcoal mb-6">{t('traditions_title')}</h1>
-          <p className="text-gray-600 font-light max-w-2xl mx-auto leading-relaxed text-lg">
-            {t('traditions_desc')}
-          </p>
+      <div className="max-w-[760px] mx-auto px-6">
+        <div className="grid grid-cols-2 border border-wedding-ink my-10 mb-14">
+          <button onClick={() => setTab('ceremonies')} className="py-4 px-2 border-0 font-sans font-semibold text-[10px] tracking-[.28em] uppercase cursor-pointer transition-all" style={{ background: tab === 'ceremonies' ? '#0E1512' : 'transparent', color: tab === 'ceremonies' ? '#E3C77A' : '#0E1512' }}>
+            {t('traditions_tab_ceremonies')}
+          </button>
+          <button onClick={selectAttireTab} className="py-4 px-2 border-0 border-l border-wedding-ink font-sans font-semibold text-[10px] tracking-[.28em] uppercase cursor-pointer transition-all" style={{ background: tab === 'attire' ? '#0E1512' : 'transparent', color: tab === 'attire' ? '#E3C77A' : '#0E1512' }}>
+            {t('traditions_tab_attire')}
+          </button>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex justify-center mb-16 animate-fade-in-up">
-           <div className="bg-white/80 backdrop-blur rounded-full p-1 shadow-md inline-flex border border-wedding-gold/30">
-              <button 
-                onClick={() => setActiveTab('ceremonies')}
-                className={`px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all ${
-                  activeTab === 'ceremonies' 
-                    ? 'bg-wedding-rani text-white shadow-md' 
-                    : 'text-gray-500 hover:text-wedding-charcoal'
-                }`}
-              >
-                {t('traditions_tab_ceremonies')}
-              </button>
-              <button 
-                onClick={() => setActiveTab('attire')}
-                className={`px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all ${
-                  activeTab === 'attire' 
-                    ? 'bg-wedding-rani text-white shadow-md' 
-                    : 'text-gray-500 hover:text-wedding-charcoal'
-                }`}
-              >
-                {t('traditions_tab_attire')}
-              </button>
-           </div>
-        </div>
-
-        {/* Ceremonies Content */}
-        {activeTab === 'ceremonies' && (
-          <div className="space-y-16 animate-fade-in-up">
-            {customs.map((custom, index) => (
-              <div 
-                key={custom.id} 
-                className={`flex flex-col md:flex-row gap-8 md:gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
-              >
-                {/* Image Section */}
-                <div className="w-full md:w-1/2 relative group">
-                  <div className="absolute inset-0 bg-wedding-gold/20 transform rotate-3 rounded-2xl transition-transform group-hover:rotate-6"></div>
-                  <div className="relative overflow-hidden rounded-2xl shadow-xl aspect-video">
-                    <img 
-                      src={custom.imageUrl} 
-                      alt={custom.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent md:hidden flex flex-col justify-end p-6">
-                      <span className="text-wedding-gold font-bold text-xs uppercase tracking-widest mb-1">
-                        {custom.marathiTitle}
-                      </span>
-                      <h3 className="text-white font-serif text-3xl leading-none">{custom.title}</h3>
-                    </div>
+        {tab === 'ceremonies' && (
+          <div className="flex flex-col gap-[72px]">
+            {customs.map((c, i) => (
+              <Reveal key={c.id} as="article">
+                <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={8}>
+                  <img src={c.imageUrl} alt={c.title} className="block w-full aspect-[16/10] object-cover" style={{ filter: 'saturate(.85)' }} />
+                </StepFrame>
+                <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 mt-[22px] items-start">
+                  <div className="font-serif text-[44px] leading-[.9] text-wedding-gold min-w-[56px]">{ROMAN[i]}</div>
+                  <div>
+                    <p className="mt-0.5 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{c.marathiTitle}</p>
+                    <h2 className="m-0 font-serif font-normal text-[clamp(26px,6.5vw,36px)] leading-[1.1]">{c.title}</h2>
                   </div>
                 </div>
-
-                {/* Text Content */}
-                <div className="w-full md:w-1/2 space-y-6">
-                  <div className="hidden md:block">
-                    <span className="text-wedding-marigold font-bold text-xs uppercase tracking-widest mb-1 block">
-                      {custom.marathiTitle}
-                    </span>
-                    <h2 className="text-4xl font-serif text-wedding-charcoal mb-4">{custom.title}</h2>
-                    <div className="w-16 h-1 bg-wedding-rani mb-6"></div>
+                <dl className="mt-[22px] mb-0 flex flex-col border-t border-wedding-ink/35">
+                  <div className="py-4 border-b border-wedding-ink/20">
+                    <dt className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze mb-2">{t('traditions_significance')}</dt>
+                    <dd className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/85">{c.significance}</dd>
                   </div>
-
-                  <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl border-l-4 border-wedding-gold shadow-sm">
-                    <div className="flex items-start gap-3 mb-2">
-                        <Info className="text-wedding-gold mt-1 flex-shrink-0" size={20} />
-                        <div>
-                          <h4 className="font-bold text-wedding-charcoal text-sm uppercase tracking-wide mb-1">{t('traditions_significance')}</h4>
-                          <p className="text-gray-600 font-light leading-relaxed">{custom.significance}</p>
-                        </div>
-                    </div>
+                  <div className="py-4 border-b border-wedding-ink/20">
+                    <dt className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze mb-2">{t('traditions_wear')}</dt>
+                    <dd className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/85">
+                      {c.whatToWear} <a onClick={selectAttireTab} className="text-wedding-bronze cursor-pointer no-underline border-b border-wedding-gold font-normal">{t('traditions_see_examples')}</a>
+                    </dd>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="bg-white/90 backdrop-blur-sm p-5 rounded-xl border border-wedding-gold/30 shadow-sm hover:shadow-md transition-shadow">
-                          <div className="flex items-center gap-2 mb-3">
-                              <div className="bg-wedding-gold/20 p-2 rounded-full">
-                                  <Shirt className="text-wedding-marigold" size={18} />
-                              </div>
-                              <h4 className="font-bold text-wedding-charcoal text-sm uppercase">{t('traditions_wear')}</h4>
-                          </div>
-                          <p className="text-gray-600 text-sm font-light leading-relaxed">{custom.whatToWear}</p>
-                          <button onClick={() => setActiveTab('attire')} className="text-xs text-wedding-rani underline mt-2 font-bold uppercase tracking-wider">{t('traditions_see_examples')}</button>
-                      </div>
-
-                      <div className="bg-white/90 backdrop-blur-sm p-5 rounded-xl border border-wedding-gold/30 shadow-sm hover:shadow-md transition-shadow">
-                          <div className="flex items-center gap-2 mb-3">
-                              <div className="bg-wedding-gold/20 p-2 rounded-full">
-                                  <Sparkles className="text-wedding-marigold" size={18} />
-                              </div>
-                              <h4 className="font-bold text-wedding-charcoal text-sm uppercase">{t('traditions_expect')}</h4>
-                          </div>
-                          <p className="text-gray-600 text-sm font-light leading-relaxed">{custom.whatToExpect}</p>
-                      </div>
+                  <div className="py-4 border-b border-wedding-ink/35">
+                    <dt className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze mb-2">{t('traditions_expect')}</dt>
+                    <dd className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/85">{c.whatToExpect}</dd>
                   </div>
-                </div>
-              </div>
+                </dl>
+              </Reveal>
             ))}
           </div>
         )}
 
-        {/* Attire Guide Content */}
-        {activeTab === 'attire' && (
-          <div className="animate-fade-in-up space-y-24">
-            
-            {/* 1. Dress Code by Event */}
+        {tab === 'attire' && (
+          <div className="flex flex-col gap-20">
             <section>
-                <div className="text-center mb-12">
-                    <h2 className="font-serif text-4xl text-wedding-charcoal mb-4">{t('attire_by_event_title')}</h2>
-                    <p className="text-gray-600 font-light max-w-2xl mx-auto">{t('attire_by_event_desc')}</p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {dressCodes.map((event) => {
-                      const emojis = getEventEmojis(event.id);
-                      return (
-                        <div key={event.id} className="bg-white/90 backdrop-blur p-8 rounded-2xl border border-wedding-gold/20 shadow-lg relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-wedding-gold/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
-                            
-                            <div className="relative z-10">
-                                <div className="flex justify-between items-start mb-4">
-                                    <div>
-                                        <h3 className="font-serif text-2xl text-wedding-charcoal font-bold">{event.title}</h3>
-                                        <p className="text-wedding-rani text-xs font-bold uppercase tracking-widest">{event.theme}</p>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        {event.colorPalette.map(color => (
-                                            <div key={color} className="w-6 h-6 rounded-full border border-gray-100 shadow-sm ring-1 ring-white" style={{backgroundColor: color}} title={color}></div>
-                                        ))}
-                                    </div>
-                                </div>
-                                
-                                <p className="text-gray-600 text-sm mb-6 font-light italic border-b border-gray-100 pb-4">
-                                    {event.description}
-                                </p>
-                                
-                                <div className={event.options.men ? "grid grid-cols-1 sm:grid-cols-2 gap-6" : "grid grid-cols-1 gap-6"}>
-                                    <div>
-                                        <h4 className="font-bold text-wedding-charcoal text-sm uppercase tracking-wide mb-2 flex items-center gap-2">
-                                            <span className="text-xl">{emojis.women}</span> {t('attire_women')}
-                                        </h4>
-                                        <p className="text-sm text-gray-600 font-light leading-relaxed">{event.options.women}</p>
-                                    </div>
-                                    {event.options.men && (
-                                    <div>
-                                        <h4 className="font-bold text-wedding-charcoal text-sm uppercase tracking-wide mb-2 flex items-center gap-2">
-                                            <span className="text-xl">{emojis.men}</span> {t('attire_men')}
-                                        </h4>
-                                        <p className="text-sm text-gray-600 font-light leading-relaxed">{event.options.men}</p>
-                                    </div>
-                                    )}
-                                </div>
-                            </div>
+              <h2 className="m-0 mb-2 font-serif font-normal text-[clamp(30px,7vw,44px)] leading-[1.05]">{t('attire_by_event_title')}</h2>
+              <p className="m-0 mb-7 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/75">{t('attire_by_event_desc')}</p>
+              <div className="flex flex-col">
+                {dressCodes.map((d) => (
+                  <div key={d.id} className="py-[26px] border-t border-wedding-ink/35">
+                    <div className="flex justify-between items-start gap-4 flex-wrap">
+                      <div>
+                        <h3 className="m-0 mb-1.5 font-serif font-normal text-2xl leading-[1.1]">{d.title}</h3>
+                        <p className="m-0 font-sans font-semibold text-[10px] leading-[1.4] tracking-[.28em] uppercase text-wedding-bronze">{d.theme}</p>
+                      </div>
+                      <div className="flex">
+                        {d.colorPalette.map((hex, idx) => (
+                          <span key={idx} className="block w-[22px] h-[22px] border border-wedding-ink/30 -ml-px" style={{ background: hex }} />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="mt-[14px] mb-[18px] font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/80 italic">{d.description}</p>
+                    <div className="grid gap-[18px]" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
+                      <div>
+                        <p className="m-0 mb-1.5 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{t('attire_women')}</p>
+                        <p className="m-0 font-sans font-light text-sm leading-[1.6] text-wedding-ink/85">{d.options.women}</p>
+                      </div>
+                      {d.options.men && (
+                        <div>
+                          <p className="m-0 mb-1.5 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{t('attire_men')}</p>
+                          <p className="m-0 font-sans font-light text-sm leading-[1.6] text-wedding-ink/85">{d.options.men}</p>
                         </div>
-                    );
-                  })}
-                </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </section>
 
-            {/* 2. Glossary */}
             <section>
-                 <div className="text-center mb-12">
-                    <h2 className="font-serif text-4xl text-wedding-charcoal mb-4">{t('attire_glossary_title')}</h2>
-                    <p className="text-gray-600 font-light max-w-2xl mx-auto">{t('attire_glossary_desc')}</p>
-                </div>
-                
-                {/* Women's Attire */}
-                <div className="mb-16">
-                    <h3 className="font-serif text-2xl text-wedding-charcoal mb-6 flex items-center gap-2 px-4 md:px-0">
-                        <span className="text-3xl">👩</span> {t('attire_women')}
-                    </h3>
-                    {renderAttireList(womenAttire)}
-                </div>
-
-                {/* Men's Attire */}
-                <div>
-                     <h3 className="font-serif text-2xl text-wedding-charcoal mb-6 flex items-center gap-2 px-4 md:px-0">
-                        <span className="text-3xl">👨</span> {t('attire_men')}
-                    </h3>
-                    {renderAttireList(menAttire)}
-                </div>
+              <h2 className="m-0 mb-2 font-serif font-normal text-[clamp(30px,7vw,44px)] leading-[1.05]">{t('attire_glossary_title')}</h2>
+              <p className="m-0 mb-7 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/75">{t('attire_glossary_desc')}</p>
+              {[[t('attire_women'), womenAttire], [t('attire_men'), menAttire]].map(([label, items]: any) => (
+                <React.Fragment key={label}>
+                  <p className="mt-9 mb-[14px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze first:mt-0">{label}</p>
+                  <div className="hide-scrollbar flex gap-[18px] overflow-x-auto -mx-6 px-6 pb-3" style={{ scrollSnapType: 'x mandatory' }}>
+                    {items.map((a: any) => (
+                      <div key={a.id} className="flex-none w-[240px]" style={{ scrollSnapAlign: 'start' }}>
+                        <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={8}>
+                          <img src={a.imageUrl} alt={a.name} className="block w-full aspect-[3/4] object-cover object-top" style={{ filter: 'saturate(.9)' }} />
+                        </StepFrame>
+                        <h3 className="mt-[14px] mb-0.5 font-serif font-normal text-[22px] leading-[1.1]">{a.name}</h3>
+                        <p className="m-0 mb-2 font-sans font-light text-xs italic leading-[1.4] text-wedding-bronze">{a.pronunciation}</p>
+                        <p className="m-0 mb-[10px] font-sans font-light text-[13px] leading-[1.55] text-wedding-ink/80">{a.description}</p>
+                        <p className="m-0 font-sans font-semibold text-[9px] leading-[1.6] tracking-[.25em] uppercase text-wedding-bronze">{t('traditions_perfect_for')}: {a.bestFor.join(' · ')}</p>
+                      </div>
+                    ))}
+                  </div>
+                </React.Fragment>
+              ))}
             </section>
 
-            {/* 3. Shopping Section */}
-            <div className="mt-20">
-               <div className="text-center mb-12">
-                  <h3 className="font-serif text-4xl text-wedding-charcoal mb-4">{t('traditions_shop_title')}</h3>
-                  <p className="text-gray-600 max-w-2xl mx-auto font-light">
-                    {t('traditions_shop_desc')}
-                  </p>
-               </div>
-
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                  {/* Online Section */}
-                  <div className="bg-white/80 backdrop-blur p-8 rounded-2xl border border-wedding-gold/30 shadow-lg relative overflow-hidden group">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-wedding-rani/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
-                      
-                      <div className="flex items-center gap-4 mb-8 relative z-10">
-                          <div className="bg-white p-3 rounded-full shadow-md">
-                             <Globe className="text-wedding-rani" size={24} />
-                          </div>
-                          <div>
-                            <h4 className="font-serif text-2xl text-wedding-charcoal">Order Online</h4>
-                            <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Ship to Home</p>
-                          </div>
-                      </div>
-                      
-                      <div className="space-y-8 relative z-10">
-                          <div className="flex flex-col">
-                             <a href="https://www.lashkaraa.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-wedding-charcoal text-lg hover:text-wedding-rani transition-colors inline-flex items-center gap-2">
-                                Lashkaraa
-                             </a>
-                             <p className="text-sm text-gray-600 font-light mt-1">Trendy, high-quality, and approachable Indian wear designed specifically for international customers. Reliable shipping and great prices.</p>
-                          </div>
-                          <div className="w-full h-px bg-wedding-gold/20"></div>
-                          <div className="flex flex-col">
-                             <a href="https://www.manyavar.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-wedding-charcoal text-lg hover:text-wedding-rani transition-colors inline-flex items-center gap-2">
-                                Manyavar & Mohey
-                             </a>
-                             <p className="text-sm text-gray-600 font-light mt-1">The most trusted brand for men's traditional wear (Kurtas & Sherwanis). Their sizing is standard and fits well.</p>
-                          </div>
-                      </div>
+            <section>
+              <h2 className="m-0 mb-2 font-serif font-normal text-[clamp(30px,7vw,44px)] leading-[1.05]">{t('traditions_shop_title')}</h2>
+              <p className="m-0 mb-7 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/75">{t('traditions_shop_desc')}</p>
+              <div className="grid gap-px bg-wedding-ink border border-wedding-ink" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))' }}>
+                <div className="bg-wedding-cream py-6 px-5">
+                  <p className="m-0 mb-1 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">Ship to Home</p>
+                  <h3 className="m-0 mb-5 font-serif font-normal text-2xl leading-[1.1]">Order Online</h3>
+                  <a href="https://www.lashkaraa.com/" target="_blank" rel="noopener noreferrer" className="block font-serif text-[19px] text-wedding-ink no-underline hover:text-wedding-bronze">Lashkaraa ↗</a>
+                  <p className="mt-1 mb-4 font-sans font-light text-sm leading-[1.55] text-wedding-ink/75">Trendy, high-quality, and approachable Indian wear designed specifically for international customers. Reliable shipping and great prices.</p>
+                  <a href="https://www.manyavar.com/" target="_blank" rel="noopener noreferrer" className="block font-serif text-[19px] text-wedding-ink no-underline hover:text-wedding-bronze">Manyavar &amp; Mohey ↗</a>
+                  <p className="mt-1 mb-0 font-sans font-light text-sm leading-[1.55] text-wedding-ink/75">The most trusted brand for men's traditional wear (Kurtas &amp; Sherwanis). Their sizing is standard and fits well.</p>
+                </div>
+                <div className="bg-wedding-cream py-6 px-5">
+                  <p className="m-0 mb-1 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">Try &amp; Buy / Rent</p>
+                  <h3 className="m-0 mb-5 font-serif font-normal text-2xl leading-[1.1]">Visit in Mumbai</h3>
+                  <div className="flex justify-between items-baseline gap-[10px]">
+                    <span className="font-serif text-[19px]">Kalki Fashion</span>
+                    <span className="font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze">Buy · Santacruz West</span>
                   </div>
-
-                  {/* Mumbai Section */}
-                  <div className="bg-white/80 backdrop-blur p-8 rounded-2xl border border-wedding-gold/30 shadow-lg relative overflow-hidden group">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-wedding-marigold/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
-
-                      <div className="flex items-center gap-4 mb-8 relative z-10">
-                          <div className="bg-white p-3 rounded-full shadow-md">
-                             <MapPin className="text-wedding-marigold" size={24} />
-                          </div>
-                          <div>
-                            <h4 className="font-serif text-2xl text-wedding-charcoal">Visit in Mumbai</h4>
-                            <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Try & Buy / Rent</p>
-                          </div>
-                      </div>
-                      
-                      <div className="space-y-8 relative z-10">
-                          <div className="flex flex-col">
-                             <div className="flex justify-between items-start">
-                                <span className="font-bold text-wedding-charcoal text-lg">Kalki Fashion</span>
-                                <span className="bg-wedding-green text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Buy</span>
-                             </div>
-                             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">Santacruz West</span>
-                             <p className="text-sm text-gray-600 font-light">A massive multi-story boutique. The best place to try on different styles of Lehengas and Sarees at mid-to-high price points.</p>
-                          </div>
-                          <div className="w-full h-px bg-wedding-gold/20"></div>
-                          <div className="flex flex-col">
-                             <div className="flex justify-between items-start">
-                                <span className="font-bold text-wedding-charcoal text-lg">Flyrobe</span>
-                                <span className="bg-wedding-rani text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Rent</span>
-                             </div>
-                             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">Santacruz West</span>
-                             <p className="text-sm text-gray-600 font-light">Why buy an outfit you'll wear once? Visit their store to try on premium designer outfits and rent them for a fraction of the cost.</p>
-                          </div>
-                      </div>
+                  <p className="mt-1 mb-4 font-sans font-light text-sm leading-[1.55] text-wedding-ink/75">A massive multi-story boutique. The best place to try on different styles of Lehengas and Sarees at mid-to-high price points.</p>
+                  <div className="flex justify-between items-baseline gap-[10px]">
+                    <span className="font-serif text-[19px]">Flyrobe</span>
+                    <span className="font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze">Rent · Santacruz West</span>
                   </div>
-               </div>
-            </div>
+                  <p className="mt-1 mb-0 font-sans font-light text-sm leading-[1.55] text-wedding-ink/75">Why buy an outfit you'll wear once? Visit their store to try on premium designer outfits and rent them for a fraction of the cost.</p>
+                </div>
+              </div>
+            </section>
           </div>
         )}
-        
-        {/* Footer Note */}
-        <div className="mt-20 text-center bg-white/50 backdrop-blur-md p-8 rounded-2xl border border-wedding-rani/20">
-           <h3 className="font-serif text-2xl text-wedding-charcoal mb-2">{language === 'en' ? 'Still have questions?' : '¿Tienes preguntas?'}</h3>
-           <p className="text-gray-600 font-light mb-0">
-             {language === 'en' ? "Don't worry about getting everything perfect. The most important thing is your presence!" : "No te preocupes por que todo sea perfecto. ¡Lo más importante es tu presencia!"}
-           </p>
-        </div>
 
+        <div className="mt-[72px] border border-wedding-gold py-7 px-[22px] text-center">
+          <h3 className="m-0 mb-2 font-serif font-normal text-2xl leading-[1.15]">{t('traditions_q_title')}</h3>
+          <p className="m-0 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/80">{t('traditions_q_desc')}</p>
+        </div>
+        <div className="mt-12 text-center">
+          <a onClick={goHome} className="inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-ink hover:text-wedding-goldLight">
+            ← {t('rsvp_back_home')}
+          </a>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 
