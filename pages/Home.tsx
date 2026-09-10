@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, buildCalendarUrl } from '../constants';
 import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav } from '../components/DecoUI';
 import Curtain from '../components/Curtain';
+import HeroSequence from '../components/HeroSequence';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
@@ -12,22 +13,11 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const goSection = useSectionNav();
   const en = language === 'en';
-  const heroRef = useRef<HTMLImageElement>(null);
   const cd = useCountdown('2027-02-02T11:00:00+05:30');
 
   const events = en ? EVENTS_EN : EVENTS_ES;
   const storyEvents = en ? STORY_EVENTS_EN : STORY_EVENTS_ES;
   const registryItems = en ? REGISTRY_ITEMS_EN : REGISTRY_ITEMS_ES;
-
-  // Hero parallax
-  useEffect(() => {
-    const onScroll = () => {
-      const el = heroRef.current;
-      if (el) el.style.transform = `translateY(${Math.min(window.scrollY, 900) * 0.28}px)`;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // RSVP form
   const [rsvpDone, setRsvpDone] = useState(false);
@@ -66,13 +56,8 @@ const Home: React.FC = () => {
       {/* ═══ HERO ═══ */}
       <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-wedding-ink">
         <div className="absolute inset-0 overflow-hidden">
-          <img
-            ref={heroRef}
-            src={WEDDING_DATA.hero.image}
-            alt="Pavitra and Ramon"
-            className="absolute left-0 -top-[6%] w-full h-[82%] object-cover will-change-transform"
-            style={{ objectPosition: 'center 30%', filter: 'grayscale(1) sepia(.35) hue-rotate(95deg) saturate(1.6) brightness(.82) contrast(1.12)' }}
-          />
+          {/* Auto-advancing photo sequence (duotone + parallax live inside) — edit HERO_IMAGES in constants.ts */}
+          <HeroSequence />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(14,21,18,.45) 0%,rgba(14,21,18,0) 22%,rgba(14,21,18,.15) 48%,#0E1512 84%)' }} />
         </div>
         <HeroFrame />

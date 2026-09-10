@@ -2,6 +2,25 @@ import { WeddingEvent, StoryEvent, RegistryItem, WeddingCustom, AttireItem, FAQI
 
 const GH_RAW = 'https://github.com/rf0513/pavitra-and-ramon-wedding/blob/main/';
 
+// ─── HERO PHOTO SEQUENCE ───
+// The Home hero slowly crossfades through these photos (in order, looping), with the
+// same duotone filter and parallax as before. Portrait or landscape both work; the
+// image is cropped to `objectPosition` (where the faces are) — tweak per photo if a
+// crop lands badly on phones.
+//
+// ➜ TO ADD MORE PHOTOS: upload the file to the rf0513/pavitra-and-ramon-wedding repo
+//   and add one line below, e.g.
+//   { src: `${GH_RAW}our-new-photo.jpg?raw=true`, objectPosition: 'center 40%' },
+//   Keep the files reasonably sized (≤ 2–3 MB, ~2000px on the long edge) — guests
+//   will be on hotel wifi and mobile data.
+export const HERO_IMAGES: { src: string; objectPosition?: string }[] = [
+  { src: `${GH_RAW}engagement-hug.jpg?raw=true`, objectPosition: 'center 30%' },
+  { src: `${GH_RAW}engagement-hands.jpg?raw=true`, objectPosition: 'center 45%' },
+  { src: `${GH_RAW}proposal.jpg?raw=true`, objectPosition: 'center 60%' },
+  { src: `${GH_RAW}boat.jpeg?raw=true`, objectPosition: 'center 35%' },
+  // ➜ drop additional hero photos here
+];
+
 export const WEDDING_DATA = {
   couple: {
     partner1: "Pavitra Kanse",
@@ -10,7 +29,8 @@ export const WEDDING_DATA = {
   },
   date: "2 – 5 February 2027",
   hero: {
-    image: `${GH_RAW}engagement-hug.jpg?raw=true`,
+    // First frame of the sequence (kept for anything that wants a single still).
+    image: HERO_IMAGES[0].src,
   },
   location: {
     city: "Mumbai, India",
