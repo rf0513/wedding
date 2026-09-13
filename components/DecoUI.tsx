@@ -147,3 +147,20 @@ export function useSectionNav() {
     }
   };
 }
+
+// ─── prefers-reduced-motion (every new animation checks this) ───
+export function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(() =>
+    typeof window !== 'undefined' && 'matchMedia' in window
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+  );
+  useEffect(() => {
+    if (!('matchMedia' in window)) return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setReduced(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return reduced;
+}

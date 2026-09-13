@@ -10,6 +10,7 @@ import {
   HOTEL_QUERY,
 } from '../constants';
 import { Reveal, StepFrame, Sunburst, ChevronBand, scrollToId } from '../components/DecoUI';
+import MumbaiMap from '../components/MumbaiMap';
 
 const Travel: React.FC = () => {
   const { language, t } = useLanguage();
@@ -33,9 +34,10 @@ const Travel: React.FC = () => {
     ...food.map((f) => ({ id: f.id, title: f.title, query: f.query })),
   ];
   const active = locs.find((l) => l.id === activeLocId) || locs[0];
-  const mapSrc = active.id === 'hotel'
-    ? `https://maps.google.com/maps?q=${encodeURIComponent(HOTEL_QUERY)}&t=m&z=15&ie=UTF8&iwloc=near&output=embed`
-    : `https://maps.google.com/maps?saddr=${encodeURIComponent(HOTEL_QUERY)}&daddr=${encodeURIComponent(active.query)}&dirflg=d&t=m&ie=UTF8&iwloc=near&output=embed`;
+  // Real directions live in Google Maps; the illustration is for orientation only.
+  const gmapsHref = active.id === 'hotel'
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(HOTEL_QUERY)}`
+    : `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(HOTEL_QUERY)}&destination=${encodeURIComponent(active.query)}`;
   const mapCaption = active.id === 'hotel' ? t('map_hotel') : `${t('map_route')} ${active.title}`;
 
   const selectMapLoc = (id: string) => {
@@ -162,10 +164,16 @@ const Travel: React.FC = () => {
                 );
               })}
             </div>
-            <div className="h-[380px] bg-wedding-pine">
-              <iframe src={mapSrc} width="100%" height="100%" style={{ border: 0, display: 'block', filter: 'grayscale(.35) sepia(.25) contrast(1.05)' }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Map" />
+            <div className="px-[10px] sm:px-[22px]">
+              <MumbaiMap pins={locs} activeId={active.id} onSelect={setActiveLocId} />
             </div>
-            <div className="py-[14px] px-[22px] font-sans font-light text-xs leading-[1.5] text-wedding-cream/60 text-center">{mapCaption}</div>
+            <div className="pt-4 px-[22px] pb-[18px] text-center">
+              <p className="m-0 font-sans font-light text-xs leading-[1.5] text-wedding-cream/60">{mapCaption}</p>
+              <p className="mt-1 mb-0 font-sans font-light text-[10px] leading-[1.5] tracking-[.08em] uppercase text-wedding-cream/40">{t('map_not_to_scale')}</p>
+              <a href={gmapsHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] mt-3 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold no-underline pt-[2px] hover:text-wedding-goldLight">
+                {t('map_open_gmaps')} ↗
+              </a>
+            </div>
           </StepFrame>
         </section>
 

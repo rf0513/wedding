@@ -14,6 +14,7 @@ const translations = {
     menu_label: "Contents",
     the_wedding_of: "The wedding of",
     hero_dates: "2 – 5 February 2027",
+    curtain_skip: "Tap anywhere to skip",
 
     // Nav
     nav_home: "Home",
@@ -36,6 +37,17 @@ const translations = {
     // Story
     story_kicker: "How We Met",
     story_title: "Our Journey",
+    journey_from: "Where it began",
+    journey_home: "Home base",
+    journey_next_stop: "Next stop",
+    journey_abq: "Albuquerque, New Mexico",
+    journey_bay: "Bay Area, California",
+    journey_mumbai: "Mumbai, India",
+    journey_wedding: "The Wedding · 2 – 5 February 2027",
+    journey_place_1: "Albuquerque, NM",
+    journey_place_2: "Rocky Mountains, CO",
+    journey_place_3: "Bay Area, CA",
+    journey_place_4: "San Francisco, CA",
 
     // Events / Programme
     events_subtitle: "The Schedule",
@@ -74,9 +86,13 @@ const translations = {
     travel_visit_website: "Visit Website",
     view_on_map: "View on map",
     travel_map_title: "Explore the Guide",
-    travel_map_subtitle: "Select a location to see driving directions from Taj The Trees",
-    map_hotel: "Showing Taj The Trees",
-    map_route: "Driving route from Taj The Trees to",
+    travel_map_subtitle: "Select a place to find it on the map",
+    map_hotel: "Your hotel · Taj The Trees, Vikhroli",
+    map_route: "From Taj The Trees to",
+    map_open_gmaps: "Open in Google Maps",
+    map_not_to_scale: "Not to scale · an illustrated guide, not a navigation map",
+    map_sea: "Arabian Sea",
+    map_harbour: "Mumbai Harbour",
     travel_survival_title: "Mumbai Survival Guide",
     travel_survival_subtitle: "Essential tips for our friends from Panama & the US",
 
@@ -143,6 +159,7 @@ const translations = {
     menu_label: "Contenido",
     the_wedding_of: "La boda de",
     hero_dates: "2 – 5 de febrero de 2027",
+    curtain_skip: "Toca en cualquier lugar para saltar",
 
     // Nav
     nav_home: "Inicio",
@@ -165,6 +182,17 @@ const translations = {
     // Story
     story_kicker: "Cómo Nos Conocimos",
     story_title: "Nuestro Viaje",
+    journey_from: "Donde empezó",
+    journey_home: "Nuestro hogar",
+    journey_next_stop: "Próxima parada",
+    journey_abq: "Albuquerque, Nuevo México",
+    journey_bay: "Área de la Bahía, California",
+    journey_mumbai: "Mumbai, India",
+    journey_wedding: "La Boda · 2 – 5 de febrero de 2027",
+    journey_place_1: "Albuquerque, NM",
+    journey_place_2: "Montañas Rocosas, CO",
+    journey_place_3: "Área de la Bahía, CA",
+    journey_place_4: "San Francisco, CA",
 
     // Events / Programme
     events_subtitle: "El Itinerario",
@@ -203,9 +231,13 @@ const translations = {
     travel_visit_website: "Visitar Sitio",
     view_on_map: "Ver en el mapa",
     travel_map_title: "Explorar la Guía",
-    travel_map_subtitle: "Selecciona una ubicación para ver indicaciones desde Taj The Trees",
-    map_hotel: "Mostrando Taj The Trees",
-    map_route: "Ruta en coche desde Taj The Trees a",
+    travel_map_subtitle: "Selecciona un lugar para ubicarlo en el mapa",
+    map_hotel: "Tu hotel · Taj The Trees, Vikhroli",
+    map_route: "De Taj The Trees a",
+    map_open_gmaps: "Abrir en Google Maps",
+    map_not_to_scale: "Sin escala · una guía ilustrada, no un mapa de navegación",
+    map_sea: "Mar Arábigo",
+    map_harbour: "Puerto de Mumbai",
     travel_survival_title: "Guía de Supervivencia",
     travel_survival_subtitle: "Consejos esenciales para nuestros amigos de Panamá y EE. UU.",
 
