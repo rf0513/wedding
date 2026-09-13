@@ -1,50 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Story from './pages/Story';
-import Events from './pages/Events';
-import Registry from './pages/Registry';
-import Traditions from './pages/Traditions';
-import Travel from './pages/Travel';
-import RSVP from './pages/RSVP';
-import QnA from './pages/QnA';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { Footer, TabBar, TopBar } from './components/Shell';
+import Home from './pages/Home';
+import Days from './pages/Days';
+import Day from './pages/Day';
+import Wear from './pages/Wear';
+import Travel from './pages/Travel';
+import Story from './pages/Story';
+import RSVP from './pages/RSVP';
+import Gifts from './pages/Gifts';
 
-// Scroll to top wrapper
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  React.useEffect(() => {
+/** Scroll to the top on route change, or to an in-page anchor when the location carries one. */
+const ScrollManager: React.FC = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) { el.scrollIntoView({ block: 'start' }); return; }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 };
 
-const App: React.FC = () => {
-  return (
-    <LanguageProvider>
-      <HashRouter>
-        <ScrollToTop />
-        <div className="font-sans text-wedding-cream bg-wedding-ink antialiased selection:bg-wedding-gold selection:text-wedding-ink">
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/story" element={<Story />} />
-              <Route path="/traditions" element={<Traditions />} />
-              <Route path="/schedule" element={<Events />} />
-              <Route path="/registry" element={<Registry />} />
-              <Route path="/travel" element={<Travel />} />
-              <Route path="/qna" element={<QnA />} />
-              <Route path="/rsvp" element={<RSVP />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </HashRouter>
-    </LanguageProvider>
-  );
-};
+const App: React.FC = () => (
+  <LanguageProvider>
+    <HashRouter>
+      <ScrollManager />
+      <TopBar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/days" element={<Days />} />
+          <Route path="/days/:id" element={<Day />} />
+          <Route path="/wear" element={<Wear />} />
+          <Route path="/travel" element={<Travel />} />
+          <Route path="/story" element={<Story />} />
+          <Route path="/rsvp" element={<RSVP />} />
+          <Route path="/gifts" element={<Gifts />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </main>
+      <Footer />
+      <TabBar />
+    </HashRouter>
+  </LanguageProvider>
+);
 
 export default App;

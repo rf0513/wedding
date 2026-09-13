@@ -1,92 +1,105 @@
+export type Lang = 'en' | 'es';
+export type Localized<T> = Record<Lang, T>;
 
-export interface WeddingEvent {
-  id: string;
-  title: string;
-  day: string;
-  month: string;
-  time: string;
-  location: string;
-  address: string;
-  description: string;
-  dressCode: string;
-  shuttleTime: string;
-  /** Google Calendar UTC range, e.g. "20270202T053000Z/20270202T090000Z" */
-  calRange: string;
+export interface DayPlan {
+  id: 'd0' | 'd1' | 'd2' | 'd3' | 'd4' | 'd5';
+  /** ISO date in Mumbai time */
+  date: string;
+  dayNum: string;
+  monthShort: string;
+  /** Whether the plan is still being arranged (renders a "plan in progress" pill) */
+  tentative?: boolean;
+  /** Google Calendar UTC range for the headline event, if any */
+  calRange?: string;
+  venue?: { name: string; area: string; query: string };
+  time?: string;
+  shuttle?: string;
+  palette: string[];
+  name: string;
+  hook: string;
+  trailer: string;
+  what: string;
+  timeline: { t: string; title: string; desc: string }[];
+  role: { title: string; desc: string };
+  wear: string;
+  eat: string;
+  phrase: { say: string; means: string };
+  strip: string;
 }
 
-export interface StoryEvent {
+export interface Milestone {
   id: string;
-  date: string;
+  /** Inclusive start date (YYYY-MM-DD, Mumbai time) */
+  from: string;
+  /** Inclusive end date */
+  to: string;
+  kicker: string;
+  line: string;
+  to_path: string;
+  /** Deadline the countdown counts to, if any */
+  deadline?: string;
+}
+
+export interface Promise_ {
+  what: string;
+  why: string;
+}
+
+export interface Handled {
   title: string;
   desc: string;
+}
+
+export interface DressCode {
+  dayId: DayPlan['id'];
+  title: string;
+  theme: string;
+  desc: string;
+  women: string;
+  men: string;
+}
+
+export interface Garment {
+  id: string;
+  name: string;
+  say: string;
+  who: 'women' | 'men';
+  desc: string;
+  bestFor: string[];
   img: string;
 }
 
-export interface RegistryItem {
-  id: string;
-  store: string;
-  link: string;
-  description: string;
-}
-
-export interface WeddingCustom {
+export interface BriefSection {
   id: string;
   title: string;
-  marathiTitle?: string;
-  significance: string;
-  whatToWear: string;
-  whatToExpect: string;
-  imageUrl: string;
+  did: string;
+  points: string[];
 }
 
-export interface AttireItem {
-  id: string;
-  name: string;
-  pronunciation?: string;
-  description: string;
-  gender: 'Women' | 'Men' | 'Unisex';
-  bestFor: string[];
-  imageUrl: string;
-}
-
-export interface EventDressCode {
-  id: string;
-  title: string;
-  theme: string;
-  description: string;
-  options: {
-    women: string;
-    men: string;
-  };
-  colorPalette: string[];
-}
-
-export interface RSVPFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  attending: 'yes' | 'no';
-  guests: number | string;
-  dietaryRestrictions: string;
-}
-
-export interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-}
-
-export interface TravelSpot {
+export interface Spot {
   id: string;
   title: string;
   desc: string;
-  img?: string;
   query: string;
-  link: string;
+  link?: string;
 }
 
-export interface SurvivalTip {
+export interface Faq {
+  q: string;
+  a: string;
+}
+
+export interface Trip {
   id: string;
+  when: string;
+  where: string;
+  flag: string;
   title: string;
-  html: string;
+  desc: string;
+  img?: string;
+}
+
+export interface ConfirmedGuest {
+  name: string;
+  city: string;
 }
