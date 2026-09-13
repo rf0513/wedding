@@ -6,16 +6,15 @@ import { useLanguage } from '../contexts/LanguageContext';
 const DayCard: React.FC<{ day: DayPlan }> = ({ day }) => {
   const { t } = useLanguage();
   return (
-    <Link to={`/days/${day.id}`} className={`daycard ${day.id}`} style={{ ['--c' as string]: `var(--${day.id})` }}>
+    <Link to={`/days/${day.id}`} className="dayrow" style={{ ['--a' as string]: `var(--${day.id}a)` }}>
       <div className="date"><b>{day.dayNum}</b><span>{day.monthShort}</span></div>
       <div>
         <div className="name">{day.name}</div>
         <div className="hook">{day.hook}</div>
-        {day.tentative && <div style={{ marginTop: 6 }}><span className="pill tent">{t('tentative')}</span></div>}
+        {day.tentative && <div className="note">{t('tentative')}</div>}
       </div>
-      <div className="arrow" aria-hidden="true">→</div>
+      <span className="go" aria-hidden="true">→</span>
     </Link>
   );
 };
-
 export default DayCard;

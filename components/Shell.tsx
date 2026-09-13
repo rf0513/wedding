@@ -10,7 +10,7 @@ export const TopBar: React.FC = () => {
   return (
     <header className="topbar">
       <div className="wrap">
-        <Link to="/" className="brand">P <span className="serif" style={{ color: 'var(--marigold-deep)' }}>&amp;</span> R <span className="tag">{SITE.hashtag}</span></Link>
+        <Link to="/" className="brand">P<span className="amp">&amp;</span>R<span className="tag">{SITE.hashtag}</span></Link>
         <nav className="topnav" aria-label="Main">
           <NavLink to="/days" className={cls}>{t('nav_days')}</NavLink>
           <NavLink to="/wear" className={cls}>{t('nav_wear')}</NavLink>
@@ -49,14 +49,14 @@ export const Footer: React.FC = () => {
   return (
     <footer>
       <div className="big">{t('footer_big')}</div>
-      <div className="row">
+      <div className="row caps">
         <span>{SITE.brideFull} &amp; {SITE.groomFull}</span>
         <span>·</span>
         <span>{SITE.dates[lang]}</span>
         <span>·</span>
         <span>{SITE.hashtag}</span>
       </div>
-      <div className="row" style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500 }}>
+      <div className="row caps">
         <Link to="/story">{t('nav_story')}</Link>
         <Link to="/gifts">{t('nav_gifts')}</Link>
       </div>

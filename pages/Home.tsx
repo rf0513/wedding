@@ -1,56 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { CONFIRMED, DAYS, HERO_PHOTOS, SITE } from '../data/site';
+import { CONFIRMED, DAYS, HERO_PHOTO, SITE } from '../data/site';
 import { HANDLED, PROMISES } from '../data/copy';
 import NowStrip from '../components/NowStrip';
 import DayCard from '../components/DayCard';
-
-const useCycle = (n: number, ms: number) => {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    if (n < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const id = setInterval(() => setI((x) => (x + 1) % n), ms);
-    return () => clearInterval(id);
-  }, [n, ms]);
-  return i;
-};
+import Ornament from '../components/Ornament';
 
 const Home: React.FC = () => {
   const { t, lang } = useLanguage();
-  const i = useCycle(HERO_PHOTOS.length, 5000);
-
   return (
     <div className="wrap page">
-      <NowStrip />
-
-      <section className="hero">
-        <div className="hero-photo">
-          {HERO_PHOTOS.map((p, k) => (
-            <img key={p.src} src={p.src} alt="" loading={k === 0 ? 'eager' : 'lazy'}
-              style={{ position: 'absolute', inset: 0, objectPosition: p.pos, opacity: k === i ? 1 : 0, transition: 'opacity 1.2s ease' }} />
-          ))}
-          <span className="badge">{SITE.dates[lang]}</span>
-        </div>
-        <div className="hero-text">
-          <div className="eyebrow">{t('hero_kicker')}</div>
-          <h1>{SITE.bride} <span className="amp">&amp;</span> {SITE.groom}</h1>
-          <p className="lede">{t('hero_sub')}</p>
-          <div className="hero-meta"><span>{SITE.city}</span><span>{SITE.dates[lang]}</span><span>{SITE.hashtag}</span></div>
-          <div className="hero-cta">
-            <Link to="/rsvp" className="btn gold">{t('cta_rsvp')}</Link>
-            <Link to="/days" className="btn ghost">{t('cta_days')}</Link>
+      <section className="stack">
+        <div className="hero rise">
+          <img src={HERO_PHOTO.src} alt="" style={{ objectPosition: HERO_PHOTO.pos }} fetchPriority="high" />
+          <div className="hero-text">
+            <span className="caps">{t('the_wedding_of')}</span>
+            <h1>{SITE.bride} <span className="amp">&amp;</span> {SITE.groom}</h1>
+            <span className="date">{SITE.dates[lang]} · {SITE.city}</span>
+            <div className="hero-cta">
+              <Link to="/rsvp" className="btn light">{t('cta_rsvp')}</Link>
+            </div>
           </div>
         </div>
+        <NowStrip />
+      </section>
+
+      <section className="section narrow" style={{ textAlign: 'center' }}>
+        <Ornament short />
+        <p className="lede i" style={{ marginInline: 'auto' }}>{t('hero_sub')}</p>
       </section>
 
       <section className="section">
-        <h2>{t('promises_title')}</h2>
+        <h2><span className="it" style={{ color: 'var(--gold)' }}>{t('promises_title')}</span></h2>
         <ul className="promises">
           {PROMISES[lang].map((p) => (
             <li key={p.what}>
-              <span className="yw">{lang === 'en' ? 'you will' : 'vas a'}</span>
-              <div className="what">{p.what}<span className="why">{p.why}</span></div>
+              <div className="what"><span className="yw">{lang === 'en' ? 'you will ' : 'vas a '}</span>{p.what}</div>
+              <p className="why">{p.why}</p>
             </li>
           ))}
         </ul>
@@ -58,12 +45,11 @@ const Home: React.FC = () => {
 
       <section className="section">
         <div className="section-head">
+          <span className="caps gold">{SITE.dates[lang]}</span>
           <h2>{t('days_title')}</h2>
           <p className="muted">{t('days_sub')}</p>
         </div>
-        <div className="days">
-          {DAYS[lang].map((d) => <DayCard key={d.id} day={d} />)}
-        </div>
+        <div className="days">{DAYS[lang].map((d) => <DayCard key={d.id} day={d} />)}</div>
       </section>
 
       <section className="section">
@@ -77,9 +63,10 @@ const Home: React.FC = () => {
           ))}
         </ul>
         <div className="yourjob">
-          <span className="eyebrow" style={{ color: 'var(--marigold)' }}>{t('yourjob_title')}</span>
+          <span className="caps gold">{t('yourjob_title')}</span>
           <b>{t('yourjob_line')}</b>
-          <span className="serif">{t('yourjob_sub')}</span>
+          <span className="it">{t('yourjob_sub')}</span>
+          <Ornament short />
         </div>
       </section>
 
@@ -89,12 +76,11 @@ const Home: React.FC = () => {
           <p className="muted">{t('wall_sub')}</p>
         </div>
         <div className="wall">
-          {CONFIRMED.map((g) => <span key={g.name + g.city}>{g.name} <em>· {g.city}</em></span>)}
-          <Link to="/rsvp" className="you" style={{ textDecoration: 'none' }}>+ {t('wall_you')}</Link>
+          {CONFIRMED.map((g) => <span key={g.name + g.city}>{g.name} <em>{g.city}</em></span>)}
+          <span><Link to="/rsvp">{t('wall_you')}</Link></span>
         </div>
       </section>
     </div>
   );
 };
-
 export default Home;

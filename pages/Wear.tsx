@@ -20,16 +20,16 @@ const Wear: React.FC = () => {
   const { t, lang } = useLanguage();
   const c = COPY[lang];
   return (
-    <div className="wrap page">
+    <div className="wrap page" style={{ paddingTop: 40 }}>
       <section className="section">
         <div className="section-head">
-          <h1 style={{ fontSize: 'clamp(38px, 9vw, 72px)' }}>{t('wear_title')}</h1>
+          <h1 style={{ fontSize: 'clamp(44px, 10vw, 84px)' }}>{t('wear_title')}</h1>
           <p className="lede muted">{t('wear_sub')}</p>
         </div>
-        <p className="serif" style={{ fontSize: 22, maxWidth: '40ch' }}>{c.tailorNote}</p>
+        <p className="lede i">{c.tailorNote}</p>
         <div className="split">
-          <div className="box a"><h3>{t('wear_before')}</h3><ul>{c.before.map((x) => <li key={x}>{x}</li>)}</ul></div>
-          <div className="box b"><h3>{t('wear_with')}</h3><ul>{c.with.map((x) => <li key={x}>{x}</li>)}</ul></div>
+          <div className="box"><h3>{t('wear_before')}</h3><ul>{c.before.map((x) => <li key={x}>{x}</li>)}</ul></div>
+          <div className="box"><h3>{t('wear_with')}</h3><ul>{c.with.map((x) => <li key={x}>{x}</li>)}</ul></div>
         </div>
       </section>
 
@@ -37,12 +37,12 @@ const Wear: React.FC = () => {
         <h2>{t('by_event')}</h2>
         <div className="stack">
           {DRESS[lang].map((d) => (
-            <div key={d.dayId} className="dress" style={{ ['--c' as string]: `var(--${d.dayId})` }}>
-              <h3><Link to={`/days/${d.dayId}`} style={{ textDecoration: 'none' }}>{d.title}</Link><span className="pill">{d.theme}</span></h3>
+            <div key={d.dayId} className="dress" style={{ ['--t' as string]: `var(--${d.dayId})` }}>
+              <h3><Link to={`/days/${d.dayId}`}>{d.title}</Link><span className="theme">{d.theme}</span></h3>
               <p className="muted">{d.desc}</p>
               <div className="cols">
-                <div className="col"><b>{t('women')}</b><span>{d.women}</span></div>
-                <div className="col"><b>{t('men')}</b><span>{d.men}</span></div>
+                <div className="col"><span className="caps">{t('women')}</span><span>{d.women}</span></div>
+                <div className="col"><span className="caps">{t('men')}</span><span>{d.men}</span></div>
               </div>
             </div>
           ))}
@@ -62,7 +62,7 @@ const Wear: React.FC = () => {
                 <b>{g.name}</b>
                 <span className="say">{g.say} · {g.who === 'women' ? t('women') : t('men')}</span>
                 <p>{g.desc}</p>
-                <div className="for">{g.bestFor.map((b) => <span key={b} className="pill">{b}</span>)}</div>
+                <span className="for">{t('best_for')}: {g.bestFor.join(', ')}</span>
               </div>
             </div>
           ))}

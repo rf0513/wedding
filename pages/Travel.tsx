@@ -6,10 +6,10 @@ import { MAPS, SPOTS } from '../data/site';
 const Travel: React.FC = () => {
   const { t, lang } = useLanguage();
   return (
-    <div className="wrap page">
+    <div className="wrap page" style={{ paddingTop: 40 }}>
       <section className="section">
         <div className="section-head">
-          <h1 style={{ fontSize: 'clamp(38px, 9vw, 72px)' }}>{t('travel_title')}</h1>
+          <h1 style={{ fontSize: 'clamp(44px, 10vw, 84px)' }}>{t('travel_title')}</h1>
           <p className="lede muted">{t('travel_sub')}</p>
         </div>
         <nav className="jump" aria-label="Sections">
@@ -36,8 +36,8 @@ const Travel: React.FC = () => {
               <b>{s.title}</b>
               <p>{s.desc}</p>
               <div className="links">
-                <a href={MAPS(s.query)} target="_blank" rel="noopener">{t('open_map')} ↗</a>
-                {s.link && <a href={s.link} target="_blank" rel="noopener">Web ↗</a>}
+                <a className="link" href={MAPS(s.query)} target="_blank" rel="noopener">{t('open_map')}</a>
+                {s.link && <a className="link" href={s.link} target="_blank" rel="noopener">Web</a>}
               </div>
             </div>
           ))}

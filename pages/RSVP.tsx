@@ -50,11 +50,11 @@ const RSVP: React.FC = () => {
       <div className="wrap page">
         <div className="done rise">
           <h2>{coming ? t('done_title') : t('done_no_title')}</h2>
-          <p style={{ fontSize: 18 }}>{coming ? t('done_sub') : t('done_no_sub')}</p>
-          {!SITE.formEndpoint && <p className="small" style={{ opacity: .75 }}>{t('f_mail_note')}</p>}
-          <div className="hero-cta">
-            {coming && <Link to="/wear" className="btn gold">{t('nav_wear')} →</Link>}
-            <Link to="/" className="btn ghost" style={{ color: 'var(--paper)', borderColor: 'var(--paper)' }}>{t('nav_home')}</Link>
+          <p className="lede i">{coming ? t('done_sub') : t('done_no_sub')}</p>
+          {!SITE.formEndpoint && <p className="small muted">{t('f_mail_note')}</p>}
+          <div className="hero-cta" style={{ justifyContent: 'center' }}>
+            {coming && <Link to="/wear" className="btn">{t('nav_wear')}</Link>}
+            <Link to="/" className="btn ghost">{t('nav_home')}</Link>
           </div>
         </div>
       </div>
@@ -62,12 +62,12 @@ const RSVP: React.FC = () => {
   }
 
   return (
-    <div className="wrap page">
-      <section className="section">
+    <div className="wrap page" style={{ paddingTop: 40 }}>
+      <section className="section narrow" style={{ width: '100%' }}>
         <div className="section-head">
-          <h1 style={{ fontSize: 'clamp(38px, 9vw, 72px)' }}>{t('rsvp_title')}</h1>
+          <span className="caps gold">{t('rsvp_by')} {t('rsvp_by_date')}</span>
+          <h1 style={{ fontSize: 'clamp(44px, 10vw, 84px)' }}>{t('rsvp_title')}</h1>
           <p className="lede muted">{t('rsvp_sub')}</p>
-          <p className="eyebrow">{t('rsvp_by')} {t('rsvp_by_date')}</p>
         </div>
 
         <form className="form" onSubmit={submit}>
@@ -118,7 +118,7 @@ const RSVP: React.FC = () => {
           <div className="field"><label htmlFor="note">{t('f_note')}</label><textarea id="note" rows={3} value={f.note} onChange={(e) => set('note', e.target.value)} /></div>
 
           {state === 'error' && <p className="err">{t('err_generic')}</p>}
-          <button type="submit" className="btn gold block" disabled={!f.coming || state === 'sending'}>{state === 'sending' ? t('f_sending') : t('f_send')}</button>
+          <button type="submit" className="btn block" disabled={!f.coming || state === 'sending'}>{state === 'sending' ? t('f_sending') : t('f_send')}</button>
           {!SITE.formEndpoint && <p className="hint small muted">{t('f_mail_note')}</p>}
         </form>
       </section>

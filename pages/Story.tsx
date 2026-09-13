@@ -1,14 +1,15 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { TRIPS } from '../data/site';
+import { STORY_PHOTO, TRIPS } from '../data/site';
 
 const Story: React.FC = () => {
   const { t, lang } = useLanguage();
   return (
     <div className="wrap page">
-      <section className="section">
-        <div className="section-head">
-          <h1 style={{ fontSize: 'clamp(38px, 9vw, 72px)' }}>{t('story_title')}</h1>
+      <section className="stack">
+        <div className="storyhero rise"><img src={STORY_PHOTO.src} alt="" style={{ objectPosition: STORY_PHOTO.pos }} /></div>
+        <div className="section-head" style={{ paddingTop: 16 }}>
+          <h1 style={{ fontSize: 'clamp(44px, 10vw, 84px)' }}>{t('story_title')}</h1>
           <p className="lede muted">{t('story_sub')}</p>
         </div>
       </section>
@@ -18,10 +19,10 @@ const Story: React.FC = () => {
             {tr.img ? (
               <div className="img"><img src={tr.img} alt={tr.title} loading="lazy" /></div>
             ) : (
-              <div className="img empty">{tr.flag} {tr.where}</div>
+              <div className="img empty">{tr.where}</div>
             )}
             <div className="txt">
-              <div className="where"><span className="flag" aria-hidden="true">{tr.flag}</span><span className="eyebrow">{tr.when} · {tr.where}</span></div>
+              <span className="caps gold">{tr.when} · {tr.where}</span>
               <h3>{tr.title}</h3>
               <p>{tr.desc}</p>
             </div>

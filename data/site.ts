@@ -1,7 +1,7 @@
 import type { ConfirmedGuest, DayPlan, DressCode, Garment, Localized, Milestone, Spot, Trip } from '../types';
 
 // Photos live in the public photo repo. Add a file there and reference it here.
-export const PHOTO = (file: string) => `https://raw.githubusercontent.com/rf0513/pavitra-and-ramon-wedding/main/${file}`;
+export const PHOTO = (file: string) => `${import.meta.env.BASE_URL}photos/${file}`;
 
 export const SITE = {
   bride: 'Pavitra',
@@ -30,11 +30,8 @@ export const SITE = {
   esimUrl: 'https://www.airalo.com/india-esim',
 };
 
-export const HERO_PHOTOS = [
-  { src: PHOTO('engagement-hug.jpg'), pos: 'center 30%' },
-  { src: PHOTO('engagement-hands.jpg'), pos: 'center 45%' },
-  { src: PHOTO('proposal.jpg'), pos: 'center 60%' },
-];
+export const HERO_PHOTO = { src: PHOTO('engagement-hug.jpg'), pos: 'center 38%' };
+export const STORY_PHOTO = { src: PHOTO('engagement-hands.jpg'), pos: 'center 40%' };
 
 // People who have said yes and are happy to be shown. First name + city only. Update by hand as confirmations come in.
 export const CONFIRMED: ConfirmedGuest[] = [
@@ -386,9 +383,9 @@ export const SPOTS: Localized<Spot[]> = {
 // Add an `img` to any trip once you've dropped the photo in the photo repo. Trips without one render a labeled tile.
 export const TRIPS: Localized<Trip[]> = {
   en: [
-    { id: 'abq', when: 'February 2022', where: 'Albuquerque, New Mexico', flag: '🇺🇸', title: 'Coworkers, briefly', desc: 'We met at work in Albuquerque. Colleagues for about a week, inseparable after that.', img: PHOTO('tram.jpeg') },
-    { id: 'rockies', when: 'May 2022', where: 'Rocky Mountain National Park, Colorado', flag: '🇺🇸', title: 'The first trip', desc: 'A spontaneous Memorial Day drive to the Rockies. We left as friends and came back as something else.', img: PHOTO('rockies.jpeg') },
-    { id: 'bay', when: 'December 2023', where: 'Bay Area, California', flag: '🇺🇸', title: 'California', desc: 'Pavitra moved for a new job. Ramon followed not long after. Home base, since then.', img: PHOTO('mackinac.jpeg') },
+    { id: 'abq', when: 'February 2022', where: 'Albuquerque, New Mexico', flag: '🇺🇸', title: 'Coworkers, briefly', desc: 'We met at work in Albuquerque. Colleagues for about a week, inseparable after that.', img: PHOTO('tram.jpg') },
+    { id: 'rockies', when: 'May 2022', where: 'Rocky Mountain National Park, Colorado', flag: '🇺🇸', title: 'The first trip', desc: 'A spontaneous Memorial Day drive to the Rockies. We left as friends and came back as something else.', img: PHOTO('rockies.jpg') },
+    { id: 'bay', when: 'December 2023', where: 'Bay Area, California', flag: '🇺🇸', title: 'California', desc: 'Pavitra moved for a new job. Ramon followed not long after. Home base, since then.', img: PHOTO('mackinac.jpg') },
     { id: 'panama', when: 'Three trips', where: 'Panama', flag: '🇵🇦', title: 'Pavitra learns the farm', desc: 'Three trips to Panama so far: the beach, the family farm in the countryside, and a lot of Ramon\'s relatives making sure she was fed. She now has opinions about patacones.' },
     { id: 'mumbai', when: 'Three trips', where: 'Mumbai', flag: '🇮🇳', title: 'Ramon learns Mumbai', desc: 'Three trips to Mumbai so far. On the first he was nervous about the water, the traffic, and the spice. By the third he was ordering for the table. Everything in the travel guide is what he learned.' },
     { id: 'proposal', when: 'October 12, 2025', where: 'Slacker\'s Hill, San Francisco', flag: '🇺🇸', title: 'The proposal', desc: 'Sunset above the Golden Gate, the city behind us, and a photographer hiding in the bushes. She said yes.', img: PHOTO('proposal.jpg') },
@@ -396,9 +393,9 @@ export const TRIPS: Localized<Trip[]> = {
     { id: 'engagement', when: 'September 2026', where: 'Mumbai', flag: '🇮🇳', title: 'The engagement ceremony', desc: 'A traditional engagement in Mumbai with Pavitra\'s family. Ramon in a kurta, rings, blessings, and the first taste of what February will be. Photos coming to this page soon.' },
   ],
   es: [
-    { id: 'abq', when: 'Febrero 2022', where: 'Albuquerque, Nuevo México', flag: '🇺🇸', title: 'Compañeros de trabajo, por poco tiempo', desc: 'Nos conocimos en el trabajo en Albuquerque. Colegas por una semana, inseparables después.', img: PHOTO('tram.jpeg') },
-    { id: 'rockies', when: 'Mayo 2022', where: 'Parque Nacional de las Montañas Rocosas, Colorado', flag: '🇺🇸', title: 'El primer viaje', desc: 'Un viaje espontáneo a las Rocosas por el Memorial Day. Salimos como amigos y volvimos como otra cosa.', img: PHOTO('rockies.jpeg') },
-    { id: 'bay', when: 'Diciembre 2023', where: 'Área de la Bahía, California', flag: '🇺🇸', title: 'California', desc: 'Pavitra se mudó por un nuevo trabajo. Ramon la siguió poco después. Nuestra base desde entonces.', img: PHOTO('mackinac.jpeg') },
+    { id: 'abq', when: 'Febrero 2022', where: 'Albuquerque, Nuevo México', flag: '🇺🇸', title: 'Compañeros de trabajo, por poco tiempo', desc: 'Nos conocimos en el trabajo en Albuquerque. Colegas por una semana, inseparables después.', img: PHOTO('tram.jpg') },
+    { id: 'rockies', when: 'Mayo 2022', where: 'Parque Nacional de las Montañas Rocosas, Colorado', flag: '🇺🇸', title: 'El primer viaje', desc: 'Un viaje espontáneo a las Rocosas por el Memorial Day. Salimos como amigos y volvimos como otra cosa.', img: PHOTO('rockies.jpg') },
+    { id: 'bay', when: 'Diciembre 2023', where: 'Área de la Bahía, California', flag: '🇺🇸', title: 'California', desc: 'Pavitra se mudó por un nuevo trabajo. Ramon la siguió poco después. Nuestra base desde entonces.', img: PHOTO('mackinac.jpg') },
     { id: 'panama', when: 'Tres viajes', where: 'Panamá', flag: '🇵🇦', title: 'Pavitra aprende la finca', desc: 'Tres viajes a Panamá hasta ahora: la playa, la finca de la familia en el interior y muchos parientes de Ramon asegurándose de que comiera. Ahora tiene opiniones sobre los patacones.' },
     { id: 'mumbai', when: 'Tres viajes', where: 'Mumbai', flag: '🇮🇳', title: 'Ramon aprende Mumbai', desc: 'Tres viajes a Mumbai hasta ahora. En el primero le preocupaban el agua, el tráfico y el picante. Para el tercero ya pedía por toda la mesa. Todo lo que dice la guía de viaje es lo que él aprendió.' },
     { id: 'proposal', when: '12 de octubre de 2025', where: 'Slacker\'s Hill, San Francisco', flag: '🇺🇸', title: 'La propuesta', desc: 'Atardecer sobre el Golden Gate, la ciudad detrás y un fotógrafo escondido entre los arbustos. Dijo que sí.', img: PHOTO('proposal.jpg') },
