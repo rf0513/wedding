@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <script>
+      // NOTE: colour opacity modifiers must be a multiple of 5 (e.g. bg-wedding-ink/95).
+      // Tailwind's opacity scale runs in steps of 5, so a class like `/96` or `/72` is
+      // silently dropped: the element then gets no colour at all (a border falls back
+      // to Preflight's grey). Use an arbitrary value — `/[.96]` — if you need finer.
       tailwind.config = {
         theme: {
           extend: {
@@ -89,6 +93,13 @@
       .deco-chevron { background-image: repeating-linear-gradient(45deg,#C8A951 0 1.5px,transparent 1.5px 9px),repeating-linear-gradient(-45deg,#C8A951 0 1.5px,transparent 1.5px 9px); }
       .deco-sunburst { background-image: repeating-conic-gradient(from 0deg,rgba(200,169,81,.22) 0 1.2deg,transparent 1.2deg 7.5deg); border-radius: 50%; -webkit-mask-image: radial-gradient(circle,#000 0%,transparent 62%); mask-image: radial-gradient(circle,#000 0%,transparent 62%); }
       .deco-sunburst-header { background-image: repeating-conic-gradient(from 0deg,rgba(200,169,81,.2) 0 1.2deg,transparent 1.2deg 7.5deg); border-radius: 50%; -webkit-mask-image: radial-gradient(circle,#000 0%,transparent 60%); mask-image: radial-gradient(circle,#000 0%,transparent 60%); }
+      /* Menu: the ink panel is solid from frame one; only its contents animate. */
+      @keyframes menuIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes menuRow { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        @keyframes menuIn { from { opacity: 1; } to { opacity: 1; } }
+        @keyframes menuRow { from { opacity: 1; transform: none; } to { opacity: 1; transform: none; } }
+      }
       [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
       [data-reveal].is-visible { opacity: 1; transform: none; }
     </style>

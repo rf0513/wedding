@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { LogoMark, useSectionNav } from './DecoUI';
+import { LogoMark, useSectionNav, usePrefersReducedMotion } from './DecoUI';
 import { CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
 
 const Navbar: React.FC = () => {
@@ -9,6 +9,7 @@ const Navbar: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
   const navigate = useNavigate();
   const goSection = useSectionNav();
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -77,7 +78,16 @@ const Navbar: React.FC = () => {
       </header>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-[55] bg-wedding-ink/96 backdrop-blur-2xl flex flex-col justify-start overflow-y-auto px-7 pt-20 pb-8 animate-heroIn">
+        <div className="fixed inset-0 z-[55] bg-wedding-ink overflow-y-auto">
+          {/* Opaque ink ground — never rely on backdrop-filter for legibility. */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-[280px] w-[720px] h-[720px] deco-sunburst-header"
+          />
+          <div
+            className="relative min-h-full flex flex-col justify-start px-7 pt-20 pb-8"
+            style={{ animation: reduced ? 'none' : 'menuIn .34s cubic-bezier(.2,.7,.2,1) both' }}
+          >
           <p className="mb-[22px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">
             {t('menu_label')}
           </p>
@@ -87,13 +97,17 @@ const Navbar: React.FC = () => {
                 <a
                   href={m.href}
                   onClick={(e) => { e.preventDefault(); m.go(); }}
+                  style={{ animation: reduced ? 'none' : `menuRow .4s cubic-bezier(.2,.7,.2,1) ${80 + Number(m.num) * 26}ms both` }}
                   className="flex items-baseline gap-[18px] py-[clamp(8px,1.6vh,13px)] border-t border-wedding-gold/[.18] cursor-pointer no-underline text-wedding-cream hover:text-wedding-goldLight hover:pl-2 transition-all"
                 >
                   <span className="font-sans font-light text-xs tracking-[.2em] text-wedding-gold min-w-[28px]">{m.num}</span>
                   <span className="font-serif text-[clamp(26px,6.5vw,38px)] leading-[1.05] tracking-[.02em]">{m.name}</span>
                 </a>
                 {m.children && (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1 pl-[46px] pb-[clamp(8px,1.6vh,14px)]">
+                  <div
+                    style={{ animation: reduced ? 'none' : `menuRow .4s cubic-bezier(.2,.7,.2,1) ${110 + Number(m.num) * 26}ms both` }}
+                    className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1 pl-[46px] pb-[clamp(8px,1.6vh,14px)]"
+                  >
                     {m.children.map((c) => (
                       <a
                         key={c.name}
@@ -113,6 +127,7 @@ const Navbar: React.FC = () => {
           <div className="mt-6 flex-none flex justify-between items-center pt-6 border-t border-wedding-gold/[.18]">
             <span className="font-sans font-light text-[11px] tracking-[.3em] uppercase text-wedding-cream/55">Mumbai · 2027</span>
             <span className="font-sans font-semibold text-[11px] tracking-[.3em] text-wedding-gold">#PR27</span>
+          </div>
           </div>
         </div>
       )}

@@ -130,11 +130,11 @@ const Home: React.FC = () => {
           <Reveal className="text-center mb-14">
             <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">{t('events_subtitle')}</p>
             <h2 className="m-0 font-serif font-normal text-[clamp(34px,8vw,56px)] leading-[1.05] text-wedding-cream" style={{ textWrap: 'balance' as any }}>{t('events_title')}</h2>
-            <p className="mt-[18px] mx-auto mb-0 max-w-[440px] font-sans font-light text-[15px] leading-[1.65] text-wedding-cream/72">{t('events_desc')}</p>
+            <p className="mt-[18px] mx-auto mb-0 max-w-[440px] font-sans font-light text-[15px] leading-[1.65] text-wedding-cream/70">{t('events_desc')}</p>
           </Reveal>
           <div className="flex flex-col">
             {events.map((ev, i) => (
-              <Reveal key={ev.id} as="article" className="grid grid-cols-[78px_minmax(0,1fr)] gap-[18px] py-[34px] border-t border-wedding-gold/28">
+              <Reveal key={ev.id} as="article" className="grid grid-cols-[78px_minmax(0,1fr)] gap-[18px] py-[34px] border-t border-wedding-gold/30">
                 <div className="text-center">
                   <div className="font-sans font-light text-[56px] leading-none text-wedding-gold tracking-[-.03em]">{ev.day}</div>
                   <div className="mt-[6px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-cream/60">{ev.month}</div>
@@ -170,7 +170,7 @@ const Home: React.FC = () => {
               </Reveal>
             ))}
           </div>
-          <div className="border-t border-wedding-gold/28 pt-7 text-center">
+          <div className="border-t border-wedding-gold/30 pt-7 text-center">
             <a onClick={() => navigate('/travel')} className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold no-underline cursor-pointer pt-[2px] hover:text-wedding-goldLight">
               {t('see_map')}<span className="inline-block w-[22px] h-px bg-current" />
             </a>
@@ -184,7 +184,7 @@ const Home: React.FC = () => {
           <Reveal className="text-center mb-12">
             <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-bronze">{t('home_celebrations_kicker')}</p>
             <h2 className="m-0 font-serif font-normal text-[clamp(34px,8vw,56px)] leading-[1.05]" style={{ textWrap: 'balance' as any }}>{t('home_celebrations_title')}</h2>
-            <p className="mt-[18px] mx-auto mb-0 max-w-[460px] font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/78">{t('home_celebrations_desc')}</p>
+            <p className="mt-[18px] mx-auto mb-0 max-w-[460px] font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/80">{t('home_celebrations_desc')}</p>
           </Reveal>
           <div className="grid grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-8 sm:gap-y-10">
             {celebrations.map((c, i) => (
@@ -253,7 +253,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="pt-6 px-5 pb-[22px]">
                       <h3 className="m-0 mb-2 font-serif font-normal text-[clamp(22px,5.5vw,28px)] leading-[1.1] text-wedding-cream">{g.title}</h3>
-                      <p className="m-0 font-sans font-light text-sm leading-[1.55] text-wedding-cream/68">{g.desc}</p>
+                      <p className="m-0 font-sans font-light text-sm leading-[1.55] text-wedding-cream/70">{g.desc}</p>
                     </div>
                     <div className="grid place-items-center pr-5 pl-[6px]">
                       <span className="font-serif text-[26px] text-wedding-gold">→</span>
@@ -272,14 +272,14 @@ const Home: React.FC = () => {
           <Reveal className="text-center mb-11">
             <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-bronze">{t('registry_kicker')}</p>
             <h2 className="m-0 font-serif font-normal text-[clamp(34px,8vw,56px)] leading-[1.05]">{t('registry_title')}</h2>
-            <p className="mt-[18px] mx-auto mb-0 max-w-[480px] font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/78">{t('registry_desc')}</p>
+            <p className="mt-[18px] mx-auto mb-0 max-w-[480px] font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/80">{t('registry_desc')}</p>
           </Reveal>
           <div className="grid grid-cols-1 gap-[18px]">
             {registryItems.map((item, i) => (
               <Reveal key={item.id} className="border-t border-wedding-ink pt-[26px] pb-1.5 grid grid-cols-1 gap-[14px]">
                 <p className="m-0 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{ROMAN[i]}</p>
                 <h3 className="m-0 font-serif font-normal text-[26px] leading-[1.1]">{item.store}</h3>
-                <p className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/78">{item.description}</p>
+                <p className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/80">{item.description}</p>
                 {item.id === 'btc' ? (
                   <div className="flex flex-wrap gap-[10px] items-stretch mt-1.5">
                     <code className="flex-1 basis-[220px] min-w-0 py-[13px] px-[14px] border border-wedding-ink/35 font-mono text-xs leading-[1.5] break-all text-wedding-ink bg-wedding-ink/[.04]">{item.link}</code>

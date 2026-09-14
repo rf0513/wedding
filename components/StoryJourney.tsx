@@ -222,7 +222,7 @@ const StoryJourney: React.FC<{ events: StoryEvent[] }> = ({ events }) => {
                       {ev.date} · {t('journey_place_' + ev.id)}
                     </p>
                     <h3 className="m-0 mb-[10px] font-serif font-normal text-[clamp(24px,6vw,32px)] leading-[1.1]">{ev.title}</h3>
-                    <p className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/78">{ev.desc}</p>
+                    <p className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/80">{ev.desc}</p>
                   </div>
                 </div>
                 {/* Photo sits beside the rail; alternate the right inset for rhythm */}
