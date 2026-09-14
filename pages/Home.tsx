@@ -158,12 +158,12 @@ const Home: React.FC = () => {
                   </dl>
                   <div className="flex flex-wrap gap-x-7 gap-y-2 mt-5">
                     {celebrationFor(ev.id) && (
-                      <a onClick={() => goDay(celebrationFor(ev.id)!.id)} className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
+                      <a href={`#/celebrations/${celebrationFor(ev.id)!.id}`} onClick={(e) => { e.preventDefault(); goDay(celebrationFor(ev.id)!.id); }} className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
                         {t('home_explore')} {t('day_label')} {pad(i + 1)}<span className="inline-block w-[22px] h-px bg-current" />
                       </a>
                     )}
-                    <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold no-underline pt-[2px] hover:text-wedding-goldLight">
-                      {t('add_to_calendar')}<span className="inline-block w-[22px] h-px bg-current" />
+                    <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-cream/55 no-underline pt-[2px] hover:text-wedding-goldLight">
+                      {t('add_to_calendar')} ↗
                     </a>
                   </div>
                 </div>
@@ -186,24 +186,24 @@ const Home: React.FC = () => {
             <h2 className="m-0 font-serif font-normal text-[clamp(34px,8vw,56px)] leading-[1.05]" style={{ textWrap: 'balance' as any }}>{t('home_celebrations_title')}</h2>
             <p className="mt-[18px] mx-auto mb-0 max-w-[460px] font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/78">{t('home_celebrations_desc')}</p>
           </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10">
+          <div className="grid grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-8 sm:gap-y-10">
             {celebrations.map((c, i) => (
               <Reveal key={c.id} delay={(i % 2) * 0.08}>
-                <a onClick={() => goDay(c.id)} className="group block no-underline cursor-pointer text-wedding-ink">
+                <a href={`#/celebrations/${c.id}`} onClick={(e) => { e.preventDefault(); goDay(c.id); }} className="group block no-underline cursor-pointer text-wedding-ink">
                   <div className="relative">
-                    <StepFrame size={16} borderWidth={2} innerBg="#0E1512" innerPadding={8}>
+                    <StepFrame size={16} borderWidth={2} innerBg="#0E1512" innerPadding={6}>
                       <div className="relative overflow-hidden">
-                        <img src={c.heroImage} alt={c.title} className="block w-full aspect-[4/5] sm:aspect-[4/5] object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]" style={{ filter: 'saturate(.85)' }} />
+                        <img src={c.heroImage} alt={c.title} loading="lazy" className="block w-full aspect-[3/4] sm:aspect-[4/5] object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]" style={{ filter: 'saturate(.85)' }} />
                         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(14,21,18,0) 45%,rgba(14,21,18,.85) 100%)' }} />
-                        <div className="absolute left-0 right-0 bottom-0 p-5 text-wedding-cream">
-                          <p className="m-0 mb-1.5 font-sans font-semibold text-[10px] tracking-[.35em] uppercase text-wedding-gold">{t('day_label')} {pad(c.day)} · {c.weekday}</p>
-                          <h3 className="m-0 font-serif font-normal text-[clamp(26px,6vw,34px)] leading-[1.05]">{c.title}</h3>
+                        <div className="absolute left-0 right-0 bottom-0 p-3 sm:p-5 text-wedding-cream">
+                          <p className="m-0 mb-1.5 font-sans font-semibold text-[9px] sm:text-[10px] tracking-[.35em] uppercase text-wedding-gold">{t('day_label')} {pad(c.day)} <span className="hidden sm:inline">· {c.weekday}</span></p>
+                          <h3 className="m-0 font-serif font-normal text-[clamp(18px,4.6vw,34px)] leading-[1.05]" style={{ textWrap: 'balance' as any }}>{c.title}</h3>
                         </div>
                       </div>
                     </StepFrame>
-                    <span className="absolute -top-3 left-5 px-3 py-[6px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[9px] tracking-[.3em] uppercase deco-chamfer-8">{c.dateLabel}</span>
+                    <span className="absolute -top-3 left-3 sm:left-5 px-[10px] sm:px-3 py-[6px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[8px] sm:text-[9px] tracking-[.24em] sm:tracking-[.3em] uppercase whitespace-nowrap deco-chamfer-8">{c.dateLabel}</span>
                   </div>
-                  <p className="mt-4 mb-2 font-serif text-[17px] leading-[1.35]">{c.tagline}</p>
+                  <p className="mt-4 mb-2 font-serif text-[14px] sm:text-[17px] leading-[1.35]">{c.tagline}</p>
                   <span className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-ink">
                     {t('home_explore')}<span className="inline-block w-[22px] h-px bg-current transition-all group-hover:w-[34px]" />
                   </span>
@@ -243,7 +243,8 @@ const Home: React.FC = () => {
             {guides.map((g) => (
               <Reveal key={g.path}>
                 <a
-                  onClick={() => navigate(g.path)}
+                  href={`#${g.path}`}
+                  onClick={(e) => { e.preventDefault(); navigate(g.path); }}
                   className="block no-underline cursor-pointer p-px bg-wedding-gold/55 deco-step-16 hover:bg-wedding-gold transition-colors"
                 >
                   <div className="grid grid-cols-[44px_minmax(0,1fr)_auto] items-stretch bg-wedding-pine deco-step-16">

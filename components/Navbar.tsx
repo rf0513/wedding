@@ -29,21 +29,22 @@ const Navbar: React.FC = () => {
 
   const pad = (n: number) => String(n).padStart(2, '0');
   const days = language === 'en' ? CELEBRATIONS_EN : CELEBRATIONS_ES;
-  type MenuItem = { name: string; go: () => void; children?: { label: string; name: string; go: () => void }[] };
+  type MenuItem = { name: string; href: string; go: () => void; children?: { label: string; name: string; href: string; go: () => void }[] };
   const menuItems: (MenuItem & { num: string })[] = ([
-    { name: t('nav_home'), go: goHome },
-    { name: t('nav_events'), go: () => { goSection('programme'); setMenuOpen(false); } },
+    { name: t('nav_home'), href: '#/', go: goHome },
+    { name: t('nav_events'), href: '#/schedule', go: () => { goSection('programme'); setMenuOpen(false); } },
     {
       name: t('nav_celebrations'),
+      href: '#/celebrations',
       go: () => { goSection('celebrations'); setMenuOpen(false); },
-      children: days.map((d) => ({ label: `${t('day_label')} ${pad(d.day)}`, name: d.title, go: () => goView(`/celebrations/${d.id}`) })),
+      children: days.map((d) => ({ label: `${t('day_label')} ${pad(d.day)}`, name: d.title, href: `#/celebrations/${d.id}`, go: () => goView(`/celebrations/${d.id}`) })),
     },
-    { name: t('nav_story'), go: () => { goSection('story'); setMenuOpen(false); } },
-    { name: t('nav_attire'), go: () => goView('/attire') },
-    { name: t('nav_travel'), go: () => goView('/travel') },
-    { name: t('nav_qna'), go: () => goView('/qna') },
-    { name: t('nav_registry'), go: () => { goSection('registry'); setMenuOpen(false); } },
-    { name: t('nav_rsvp'), go: () => { goSection('rsvp'); setMenuOpen(false); } },
+    { name: t('nav_story'), href: '#/story', go: () => { goSection('story'); setMenuOpen(false); } },
+    { name: t('nav_attire'), href: '#/attire', go: () => goView('/attire') },
+    { name: t('nav_travel'), href: '#/travel', go: () => goView('/travel') },
+    { name: t('nav_qna'), href: '#/qna', go: () => goView('/qna') },
+    { name: t('nav_registry'), href: '#/registry', go: () => { goSection('registry'); setMenuOpen(false); } },
+    { name: t('nav_rsvp'), href: '#/rsvp', go: () => { goSection('rsvp'); setMenuOpen(false); } },
   ] as MenuItem[]).map((m, i) => ({ ...m, num: pad(i + 1) }));
 
   const btnClasses = "h-10 px-[14px] border border-wedding-gold/55 bg-wedding-ink/75 backdrop-blur-md text-wedding-goldLight font-sans font-semibold text-[11px] tracking-[.28em] uppercase cursor-pointer pt-[3px] transition-colors hover:border-wedding-gold hover:bg-wedding-pine";
@@ -51,7 +52,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[60] flex justify-between items-center px-[18px] py-[14px] pointer-events-none">
-        <a onClick={goHome} className="pointer-events-auto cursor-pointer no-underline flex items-center gap-[10px]">
+        <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} aria-label="Pavitra & Ramon — home" className="pointer-events-auto cursor-pointer no-underline flex items-center gap-[10px]">
           <LogoMark />
         </a>
         <div className="pointer-events-auto flex items-center gap-2">
@@ -84,7 +85,8 @@ const Navbar: React.FC = () => {
             {menuItems.map((m) => (
               <React.Fragment key={m.num}>
                 <a
-                  onClick={m.go}
+                  href={m.href}
+                  onClick={(e) => { e.preventDefault(); m.go(); }}
                   className="flex items-baseline gap-[18px] py-[clamp(8px,1.6vh,13px)] border-t border-wedding-gold/[.18] cursor-pointer no-underline text-wedding-cream hover:text-wedding-goldLight hover:pl-2 transition-all"
                 >
                   <span className="font-sans font-light text-xs tracking-[.2em] text-wedding-gold min-w-[28px]">{m.num}</span>
@@ -95,7 +97,8 @@ const Navbar: React.FC = () => {
                     {m.children.map((c) => (
                       <a
                         key={c.name}
-                        onClick={c.go}
+                        href={c.href}
+                        onClick={(e) => { e.preventDefault(); c.go(); }}
                         className="block py-[6px] cursor-pointer no-underline text-wedding-cream/85 hover:text-wedding-goldLight transition-colors"
                       >
                         <span className="block font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-gold">{c.label}</span>

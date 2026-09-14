@@ -61,12 +61,12 @@ const Travel: React.FC = () => {
 
       <div className="max-w-[760px] mx-auto px-6">
         <div className="grid border border-wedding-ink mt-10" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
-          <div className="pt-[22px] px-5 pb-[18px] border-b border-wedding-ink">
+          <div className="pt-[22px] px-5 pb-[18px] border-b border-wedding-ink -mb-px">
             <p className="m-0 mb-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{t('travel_airport')}</p>
             <div className="font-sans font-light text-[44px] leading-none tracking-[.06em]">BOM</div>
             <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.4] text-wedding-ink/70">Chhatrapati Shivaji Maharaj Int'l</p>
           </div>
-          <div className="pt-[22px] px-5 pb-[18px] border-b border-wedding-ink">
+          <div className="pt-[22px] px-5 pb-[18px] border-b border-wedding-ink -mb-px">
             <p className="m-0 mb-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{t('travel_stay')}</p>
             <a href="https://www.tajhotels.com/en-in/hotels/taj-the-trees" target="_blank" rel="noopener noreferrer" className="block font-serif text-[30px] leading-[1.1] text-wedding-ink no-underline hover:text-wedding-bronze">Taj The Trees ↗</a>
             <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.4] text-wedding-ink/70">Vikhroli, Mumbai · {t('recommended')}</p>

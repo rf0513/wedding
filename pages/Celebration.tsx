@@ -14,12 +14,12 @@ const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 const pad = (n: number) => String(n).padStart(2, '0');
 
 /** Section heading: roman numeral rail + kicker + title. */
-const SectionHead: React.FC<{ n: number; kicker: string; title: string }> = ({ n, kicker, title }) => (
-  <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-5 items-end mb-8">
-    <span className="font-serif text-[44px] leading-[.85] text-wedding-gold">{ROMAN[n - 1]}</span>
+const SectionHead: React.FC<{ n: number; kicker: string; title: string; dark?: boolean }> = ({ n, kicker, title, dark = false }) => (
+  <div className="grid grid-cols-[56px_minmax(0,1fr)] sm:grid-cols-[64px_minmax(0,1fr)] gap-x-3 items-end mb-8">
+    <span className="font-serif text-[40px] sm:text-[44px] leading-[.85] text-wedding-gold" aria-hidden>{ROMAN[n - 1]}</span>
     <div>
-      <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{kicker}</p>
-      <h2 className="m-0 font-serif font-normal text-[clamp(28px,6.5vw,40px)] leading-[1.05] text-wedding-ink" style={{ textWrap: 'balance' as any }}>{title}</h2>
+      <p className={`m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase ${dark ? 'text-wedding-gold' : 'text-wedding-bronze'}`}>{kicker}</p>
+      <h2 className={`m-0 font-serif font-normal text-[clamp(28px,6.5vw,40px)] leading-[1.05] ${dark ? 'text-wedding-cream' : 'text-wedding-ink'}`} style={{ textWrap: 'balance' as any }}>{title}</h2>
     </div>
   </div>
 );
@@ -53,7 +53,8 @@ const Celebration: React.FC = () => {
   const goHome = () => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   const label = 'font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze';
-  const body = 'font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/85';
+  const body = 'font-sans font-light text-[16px] leading-[1.65] text-wedding-ink/85';
+  const prose = `${body} max-w-[600px]`;
 
   return (
     <main className="bg-wedding-cream text-wedding-ink pb-20">
@@ -89,22 +90,22 @@ const Celebration: React.FC = () => {
         {/* ═══ AT A GLANCE ═══ */}
         <Reveal className="mt-10">
           <div className="grid border border-wedding-ink" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(170px,1fr))' }}>
-            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35">
+            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35 -mb-px">
               <p className={`m-0 mb-2 ${label}`}>{t('lbl_when')}</p>
               <div className="font-serif text-[26px] leading-[1.1]">{ev.time}</div>
               <p className="mt-1 mb-0 font-sans font-light text-[13px] leading-[1.4] text-wedding-ink/70">{endTime ? `${t('lbl_until')} ${endTime}` : cel.dateLabel}</p>
             </div>
-            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35">
+            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35 -mb-px">
               <p className={`m-0 mb-2 ${label}`}>{t('lbl_venue')}</p>
               <div className="font-serif text-[22px] leading-[1.15]">{ev.location}</div>
               <p className="mt-1 mb-0 font-sans font-light text-[13px] leading-[1.4] text-wedding-ink/70">{ev.address}</p>
             </div>
-            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35">
+            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35 -mb-px">
               <p className={`m-0 mb-2 ${label}`}>{t('lbl_shuttle')}</p>
               <div className="font-serif text-[26px] leading-[1.1]">{ev.shuttleTime}</div>
               <p className="mt-1 mb-0 font-sans font-light text-[13px] leading-[1.4] text-wedding-ink/70">{t('events_shuttle').replace(/ at$| a las$/, '')}</p>
             </div>
-            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35">
+            <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35 -mb-px">
               <p className={`m-0 mb-2 ${label}`}>{t('lbl_dress')}</p>
               <div className="font-serif text-[22px] leading-[1.15]">{cel.dress.theme}</div>
               <div className="flex mt-2">
@@ -126,11 +127,11 @@ const Celebration: React.FC = () => {
 
         {/* ═══ I · THE CELEBRATION ═══ */}
         <Reveal as="section" className="mt-[72px]">
-          <SectionHead n={1} kicker={cel.marathiTitle ? `${t('cel_intro_kicker')} · ${cel.marathiTitle}` : t('cel_intro_kicker')} title={cel.subtitle} />
-          <p className="m-0 font-serif text-[clamp(19px,4.6vw,24px)] leading-[1.45] text-wedding-ink" style={{ textWrap: 'pretty' as any }}>{cel.intro}</p>
+          <SectionHead n={1} kicker={cel.marathiTitle ? `${t('cel_intro_kicker')} · ${cel.marathiTitle}` : t('cel_intro_kicker')} title={t('cel_intro_title')} />
+          <p className="m-0 max-w-[640px] font-serif text-[clamp(19px,4.6vw,23px)] leading-[1.5] text-wedding-ink" style={{ textWrap: 'pretty' as any }}>{cel.intro}</p>
           <div className="mt-8 pt-6 border-t border-wedding-ink/35">
             <p className={`m-0 mb-2 ${label}`}>{t('cel_tradition')}</p>
-            <p className={`m-0 ${body}`}>{cel.significance}</p>
+            <p className={`m-0 ${prose}`}>{cel.significance}</p>
           </div>
         </Reveal>
 
@@ -149,7 +150,7 @@ const Celebration: React.FC = () => {
                     <h3 className="m-0 font-serif font-normal text-[22px] leading-[1.15]">{m.title}</h3>
                     {m.time && <span className="font-sans font-semibold text-[10px] tracking-[.28em] uppercase text-wedding-bronze">{m.time}</span>}
                   </div>
-                  <p className={`mt-2 mb-0 ${body}`}>{m.desc}</p>
+                  <p className={`mt-2 mb-0 ${prose}`}>{m.desc}</p>
                 </div>
               </li>
             ))}
@@ -193,11 +194,11 @@ const Celebration: React.FC = () => {
           <div className="grid gap-px bg-wedding-ink border border-wedding-ink" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))' }}>
             <div className="bg-wedding-cream py-5 px-5">
               <p className={`m-0 mb-2 ${label}`}>{t('attire_women')}</p>
-              <p className={`m-0 ${body}`}>{cel.dress.women}</p>
+              <p className={`m-0 ${body} text-[15px]`}>{cel.dress.women}</p>
             </div>
             <div className="bg-wedding-cream py-5 px-5">
               <p className={`m-0 mb-2 ${label}`}>{t('attire_men')}</p>
-              <p className={`m-0 ${body} ${menNotApplicable ? 'italic text-wedding-ink/65' : ''}`}>{cel.dress.men}</p>
+              <p className={`m-0 ${body} text-[15px] ${menNotApplicable ? 'italic text-wedding-ink/65' : ''}`}>{cel.dress.men}</p>
             </div>
           </div>
           <p className={`mt-8 mb-3 ${label}`}>{t('cel_dress_tips')}</p>
@@ -213,11 +214,11 @@ const Celebration: React.FC = () => {
           {inspo.length > 0 && (
             <>
               <p className={`mt-10 mb-[14px] ${label}`}>{t('cel_inspo_title')}</p>
-              <div className="hide-scrollbar flex gap-[18px] overflow-x-auto -mx-6 px-6 pb-3" style={{ scrollSnapType: 'x mandatory' }}>
+              <div className="hide-scrollbar flex sm:grid gap-[18px] overflow-x-auto sm:overflow-visible -mx-6 px-6 sm:mx-0 sm:px-0 pb-3" style={{ scrollSnapType: 'x mandatory', gridTemplateColumns: `repeat(${Math.min(inspo.length, 4)}, minmax(0,1fr))` }}>
                 {inspo.map((a) => (
-                  <div key={a.id} className="flex-none w-[220px]" style={{ scrollSnapAlign: 'start' }}>
+                  <div key={a.id} className="flex-none w-[220px] sm:w-auto" style={{ scrollSnapAlign: 'start' }}>
                     <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={8}>
-                      <img src={a.imageUrl} alt={a.name} className="block w-full aspect-[3/4] object-cover object-top" style={{ filter: 'saturate(.9)' }} />
+                      <img src={a.imageUrl} alt={a.name} loading="lazy" className="block w-full aspect-[3/4] object-cover object-top" style={{ filter: 'saturate(.9)' }} />
                     </StepFrame>
                     <h4 className="mt-[14px] mb-0.5 font-serif font-normal text-[20px] leading-[1.1]">{a.name}</h4>
                     <p className="m-0 mb-2 font-sans font-light text-xs italic leading-[1.4] text-wedding-bronze">{a.pronunciation}</p>
@@ -227,7 +228,7 @@ const Celebration: React.FC = () => {
               </div>
             </>
           )}
-          <a onClick={() => navigate('/attire')} className="inline-flex items-center gap-[10px] mt-6 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze no-underline cursor-pointer pt-[2px] hover:text-wedding-ink">
+          <a href="#/attire" onClick={(e) => { e.preventDefault(); navigate('/attire'); window.scrollTo(0, 0); }} className="inline-flex items-center gap-[10px] mt-6 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze no-underline cursor-pointer pt-[2px] hover:text-wedding-ink">
             {t('cel_full_wardrobe')}<span className="inline-block w-[22px] h-px bg-current" />
           </a>
         </Reveal>
@@ -249,37 +250,40 @@ const Celebration: React.FC = () => {
         <Reveal as="section" className="mt-[72px]">
           <StepFrame size={20} borderWidth={2} innerBg="#0E1512" innerPadding={0}>
             <div className="pt-8 px-6 sm:px-8 pb-8 text-wedding-cream">
-              <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{ROMAN[5]} · {t('cel_logistics_kicker')}</p>
-              <h2 className="m-0 mb-6 font-serif font-normal text-[clamp(28px,6.5vw,40px)] leading-[1.05]">{t('cel_logistics_title')}</h2>
-              <dl className="m-0 grid grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-[10px] text-[14px] leading-[1.5]">
-                <dt className="font-sans font-semibold text-[10px] leading-[1.5] tracking-[.25em] uppercase text-wedding-gold pt-[3px]">{t('lbl_date')}</dt>
-                <dd className="m-0">{cel.weekday}, {cel.dateLabel}</dd>
-                <dt className="font-sans font-semibold text-[10px] leading-[1.5] tracking-[.25em] uppercase text-wedding-gold pt-[3px]">{t('lbl_time')}</dt>
-                <dd className="m-0">{ev.time}{endTime ? ` – ${endTime}` : ''}</dd>
-                <dt className="font-sans font-semibold text-[10px] leading-[1.5] tracking-[.25em] uppercase text-wedding-gold pt-[3px]">{t('lbl_venue')}</dt>
-                <dd className="m-0">{ev.location}<span className="block text-wedding-cream/60 font-light">{ev.address}</span></dd>
-                <dt className="font-sans font-semibold text-[10px] leading-[1.5] tracking-[.25em] uppercase text-wedding-gold pt-[3px]">{t('lbl_shuttle')}</dt>
-                <dd className="m-0">{t('events_shuttle')} <strong className="font-semibold text-wedding-goldLight">{ev.shuttleTime}</strong></dd>
-              </dl>
+              <SectionHead n={6} kicker={t('cel_logistics_kicker')} title={t('cel_logistics_title')} dark />
+              <div className="grid gap-px bg-wedding-gold/35 border border-wedding-gold/35" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
+                <div className="bg-wedding-ink pt-5 px-5 pb-[18px]">
+                  <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('lbl_shuttle')}</p>
+                  <div className="font-serif text-[34px] leading-none text-wedding-goldLight">{ev.shuttleTime}</div>
+                  <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.45] text-wedding-cream/70">{t('events_shuttle').replace(/ at$| a las$/, '')} · {cel.weekday}</p>
+                </div>
+                <div className="bg-wedding-ink pt-5 px-5 pb-[18px]">
+                  <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('lbl_venue')}</p>
+                  <div className="font-serif text-[22px] leading-[1.15]">{ev.location}</div>
+                  <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.45] text-wedding-cream/70">{ev.address}<span className="block">{ev.time}{endTime ? ` – ${endTime}` : ''}</span></p>
+                </div>
+              </div>
               <p className="mt-7 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('cel_notes_title')}</p>
               <ul className="m-0 p-0 list-none">
                 {cel.notes.map((n, i) => (
                   <li key={i} className="grid grid-cols-[18px_minmax(0,1fr)] gap-x-3 py-[7px] border-t border-wedding-gold/20">
                     <span className="mt-[8px] block w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
-                    <span className="font-sans font-light text-[14px] leading-[1.6] text-wedding-cream/85">{n}</span>
+                    <span className="font-sans font-light text-[15px] leading-[1.6] text-wedding-cream/85">{n}</span>
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-wrap gap-[10px] mt-7">
+              <div className="flex flex-wrap items-center gap-x-7 gap-y-4 mt-7">
                 <a href={directionsHref} target="_blank" rel="noopener noreferrer" className="pt-4 px-[22px] pb-[13px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline deco-chamfer-8 hover:bg-wedding-goldLight">
                   {t('cel_directions')} ↗
                 </a>
-                <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="pt-4 px-[22px] pb-[13px] border border-wedding-gold/70 text-wedding-goldLight font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline hover:bg-wedding-gold/10 hover:border-wedding-gold">
-                  {t('add_to_calendar')}
-                </a>
-                <a onClick={() => navigate('/travel')} className="pt-4 px-[22px] pb-[13px] border border-wedding-gold/70 text-wedding-goldLight font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-gold/10 hover:border-wedding-gold">
-                  {t('see_map')}
-                </a>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline pt-[2px] hover:text-wedding-cream">
+                    {t('add_to_calendar')} ↗
+                  </a>
+                  <a href="#/travel" onClick={(e) => { e.preventDefault(); navigate('/travel'); window.scrollTo(0, 0); }} className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
+                    {t('see_map')}
+                  </a>
+                </div>
               </div>
             </div>
           </StepFrame>
@@ -292,7 +296,7 @@ const Celebration: React.FC = () => {
             {cel.tips.map((tip, i) => (
               <div key={i} className={`grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 py-[18px] px-5 ${i > 0 ? 'border-t border-wedding-gold/50' : ''}`}>
                 <span className="font-serif text-[26px] leading-[1] text-wedding-gold min-w-[30px]">{ROMAN[i]}</span>
-                <p className={`m-0 ${body}`}>{tip}</p>
+                <p className={`m-0 ${body} text-[15px]`}>{tip}</p>
               </div>
             ))}
           </div>
@@ -301,23 +305,23 @@ const Celebration: React.FC = () => {
         {/* ═══ PREV / NEXT ═══ */}
         <div className="mt-[72px] grid grid-cols-2 border border-wedding-ink">
           {prev ? (
-            <a onClick={() => goDay(prev.id)} className="group block py-5 px-5 no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
-              <p className="m-0 mb-1 font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-gold">← {t('cel_prev')} · {t('day_label')} {pad(prev.day)}</p>
+            <a href={`#/celebrations/${prev.id}`} onClick={(e) => { e.preventDefault(); goDay(prev.id); }} className="group block py-5 px-5 no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
+              <p className="m-0 mb-1 font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-gold">← {t('day_label')} {pad(prev.day)}</p>
               <p className="m-0 font-serif text-[clamp(18px,4.5vw,24px)] leading-[1.15]">{prev.title}</p>
             </a>
           ) : (
-            <a onClick={goHome} className="group block py-5 px-5 no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
+            <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} className="group block py-5 px-5 no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
               <p className="m-0 mb-1 font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-gold">← {t('nav_home')}</p>
               <p className="m-0 font-serif text-[clamp(18px,4.5vw,24px)] leading-[1.15]">Pavitra &amp; Ramon</p>
             </a>
           )}
           {next ? (
-            <a onClick={() => goDay(next.id)} className="group block py-5 px-5 text-right border-l border-wedding-ink no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
-              <p className="m-0 mb-1 font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-gold">{t('cel_next')} · {t('day_label')} {pad(next.day)} →</p>
+            <a href={`#/celebrations/${next.id}`} onClick={(e) => { e.preventDefault(); goDay(next.id); }} className="group block py-5 px-5 text-right border-l border-wedding-ink no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
+              <p className="m-0 mb-1 font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-gold">{t('day_label')} {pad(next.day)} →</p>
               <p className="m-0 font-serif text-[clamp(18px,4.5vw,24px)] leading-[1.15]">{next.title}</p>
             </a>
           ) : (
-            <a onClick={() => navigate('/attire')} className="group block py-5 px-5 text-right border-l border-wedding-ink no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
+            <a href="#/attire" onClick={(e) => { e.preventDefault(); navigate('/attire'); window.scrollTo(0, 0); }} className="group block py-5 px-5 text-right border-l border-wedding-ink no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
               <p className="m-0 mb-1 font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-gold">{t('guide_no')} 1 →</p>
               <p className="m-0 font-serif text-[clamp(18px,4.5vw,24px)] leading-[1.15]">{t('nav_attire')}</p>
             </a>
@@ -325,7 +329,7 @@ const Celebration: React.FC = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <a onClick={goHome} className="inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-ink hover:text-wedding-goldLight">
+          <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} className="inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-ink hover:text-wedding-goldLight">
             ← {t('rsvp_back_home')}
           </a>
         </div>

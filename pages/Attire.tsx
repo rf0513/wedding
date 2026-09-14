@@ -41,7 +41,7 @@ const Attire: React.FC = () => {
           <p className="m-0 mb-7 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/75">{t('attire_glance_desc')}</p>
           <div className="flex flex-col border-t border-wedding-ink">
             {days.map((d) => (
-              <a key={d.id} onClick={() => goDay(d.id)} className="group grid grid-cols-[52px_minmax(0,1fr)_auto] gap-x-4 items-center py-[22px] border-b border-wedding-ink/35 no-underline cursor-pointer text-wedding-ink hover:pl-2 transition-all">
+              <a key={d.id} href={`#/celebrations/${d.id}`} onClick={(e) => { e.preventDefault(); goDay(d.id); }} className="group grid grid-cols-[52px_minmax(0,1fr)_auto] gap-x-4 items-center py-[22px] border-b border-wedding-ink/35 no-underline cursor-pointer text-wedding-ink hover:pl-2 transition-all">
                 <span className="font-sans font-light text-[34px] leading-none text-wedding-gold tracking-[-.02em]">{pad(d.day)}</span>
                 <div className="min-w-0">
                   <h3 className="m-0 mb-1 font-serif font-normal text-[22px] leading-[1.1]">{d.title}</h3>
@@ -68,13 +68,13 @@ const Attire: React.FC = () => {
           {[[t('attire_women'), womenAttire], [t('attire_men'), menAttire]].map(([label, items]: any) => (
             <React.Fragment key={label}>
               <p className="mt-9 mb-[14px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze first:mt-0">{label}</p>
-              <div className="hide-scrollbar flex gap-[18px] overflow-x-auto -mx-6 px-6 pb-3" style={{ scrollSnapType: 'x mandatory' }}>
+              <div className="hide-scrollbar flex sm:grid gap-[18px] overflow-x-auto sm:overflow-visible -mx-6 px-6 sm:mx-0 sm:px-0 pb-3" style={{ scrollSnapType: 'x mandatory', gridTemplateColumns: `repeat(${Math.min(items.length, 4)}, minmax(0,1fr))` }}>
                 {items.map((a: any) => (
-                  <div key={a.id} className="flex-none w-[240px]" style={{ scrollSnapAlign: 'start' }}>
+                  <div key={a.id} className="flex-none w-[220px] sm:w-auto" style={{ scrollSnapAlign: 'start' }}>
                     <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={8}>
-                      <img src={a.imageUrl} alt={a.name} className="block w-full aspect-[3/4] object-cover object-top" style={{ filter: 'saturate(.9)' }} />
+                      <img src={a.imageUrl} alt={a.name} loading="lazy" className="block w-full aspect-[3/4] object-cover object-top" style={{ filter: 'saturate(.9)' }} />
                     </StepFrame>
-                    <h3 className="mt-[14px] mb-0.5 font-serif font-normal text-[22px] leading-[1.1]">{a.name}</h3>
+                    <h3 className="mt-[14px] mb-0.5 font-serif font-normal text-[20px] leading-[1.1]">{a.name}</h3>
                     <p className="m-0 mb-2 font-sans font-light text-xs italic leading-[1.4] text-wedding-bronze">{a.pronunciation}</p>
                     <p className="m-0 mb-[10px] font-sans font-light text-[13px] leading-[1.55] text-wedding-ink/80">{a.description}</p>
                     <p className="m-0 font-sans font-semibold text-[9px] leading-[1.6] tracking-[.25em] uppercase text-wedding-bronze">{t('traditions_perfect_for')}: {a.bestFor.join(' · ')}</p>
