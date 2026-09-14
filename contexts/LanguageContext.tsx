@@ -59,7 +59,6 @@ const translations = {
     lbl_venue: "Venue",
     lbl_shuttle: "Shuttle",
     lbl_dress: "Dress",
-    add_to_calendar: "Add to calendar",
     see_map: "Venues on the map",
 
     // Guides
@@ -236,7 +235,6 @@ const translations = {
     lbl_venue: "Lugar",
     lbl_shuttle: "Transporte",
     lbl_dress: "Vestimenta",
-    add_to_calendar: "Añadir al calendario",
     see_map: "Lugares en el mapa",
 
     // Guides

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES, buildCalendarUrl } from '../constants';
+import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
 import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav } from '../components/DecoUI';
 import Curtain from '../components/Curtain';
 import HeroSequence from '../components/HeroSequence';
@@ -162,9 +162,6 @@ const Home: React.FC = () => {
                         {t('home_explore')} {t('day_label')} {pad(i + 1)}<span className="inline-block w-[22px] h-px bg-current" />
                       </a>
                     )}
-                    <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-cream/55 no-underline pt-[2px] hover:text-wedding-goldLight">
-                      {t('add_to_calendar')} ↗
-                    </a>
                   </div>
                 </div>
               </Reveal>

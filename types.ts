@@ -10,8 +10,6 @@ export interface WeddingEvent {
   description: string;
   dressCode: string;
   shuttleTime: string;
-  /** Google Calendar UTC range, e.g. "20270202T053000Z/20270202T090000Z" */
-  calRange: string;
 }
 
 export interface StoryEvent {

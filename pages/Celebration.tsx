@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import {
   CELEBRATIONS_EN, CELEBRATIONS_ES, getCelebration,
-  EVENTS_EN, EVENTS_ES, buildCalendarUrl,
+  EVENTS_EN, EVENTS_ES,
   ATTIRE_GUIDE_EN, ATTIRE_GUIDE_ES,
   HOTEL_QUERY,
 } from '../constants';
@@ -116,9 +116,6 @@ const Celebration: React.FC = () => {
             </div>
           </div>
           <div className="flex flex-wrap gap-x-7 gap-y-3 mt-4">
-            <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze no-underline pt-[2px] hover:text-wedding-ink">
-              {t('add_to_calendar')}<span className="inline-block w-[22px] h-px bg-current" />
-            </a>
             <a href={directionsHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze no-underline pt-[2px] hover:text-wedding-ink">
               {t('cel_directions')} ↗
             </a>
@@ -276,14 +273,9 @@ const Celebration: React.FC = () => {
                 <a href={directionsHref} target="_blank" rel="noopener noreferrer" className="pt-4 px-[22px] pb-[13px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline deco-chamfer-8 hover:bg-wedding-goldLight">
                   {t('cel_directions')} ↗
                 </a>
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-                  <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline pt-[2px] hover:text-wedding-cream">
-                    {t('add_to_calendar')} ↗
-                  </a>
-                  <a href="#/travel" onClick={(e) => { e.preventDefault(); navigate('/travel'); window.scrollTo(0, 0); }} className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
-                    {t('see_map')}
-                  </a>
-                </div>
+                <a href="#/travel" onClick={(e) => { e.preventDefault(); navigate('/travel'); window.scrollTo(0, 0); }} className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
+                  {t('see_map')}
+                </a>
               </div>
             </div>
           </StepFrame>

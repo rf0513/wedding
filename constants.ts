@@ -41,23 +41,18 @@ export const WEDDING_DATA = {
 
 // ─── SCHEDULE ───
 export const EVENTS_EN: WeddingEvent[] = [
-  { id: '1', title: 'Mehendi (Henna)', day: '02', month: 'Feb', time: '11:00 AM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'A relaxed start to the festivities with intricate henna designs, music, and light bites.', dressCode: 'Vibrant & Colorful', shuttleTime: '10:30 AM', calRange: '20270202T053000Z/20270202T090000Z' },
-  { id: '2', title: 'Haldi Ceremony', day: '03', month: 'Feb', time: '1:00 PM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'The traditional turmeric ceremony. Get ready to get messy and glow!', dressCode: 'Bright Yellows and Oranges', shuttleTime: '12:30 PM', calRange: '20270203T073000Z/20270203T110000Z' },
-  { id: '3', title: 'Vows & Sangeet', day: '04', month: 'Feb', time: '5:00 PM', location: 'Turf Lawn and Banquet', address: 'Mahalaxmi Race Course, Mumbai', description: 'We exchange our vows followed by a musical evening of dance and celebration.', dressCode: 'Glamorous Indo-Western Style', shuttleTime: '4:30 PM', calRange: '20270204T113000Z/20270204T173000Z' },
-  { id: '4', title: 'Wedding & Reception', day: '05', month: 'Feb', time: '4:30 PM', location: 'Mumbai Cricket Association Club', address: 'Bandra Kurla Complex (BKC), Mumbai', description: 'The traditional Maharashtrian wedding ceremony followed by a grand reception dinner.', dressCode: 'Traditional Indian or Formal Western', shuttleTime: '4:00 PM', calRange: '20270205T110000Z/20270205T173000Z' },
+  { id: '1', title: 'Mehendi (Henna)', day: '02', month: 'Feb', time: '11:00 AM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'A relaxed start to the festivities with intricate henna designs, music, and light bites.', dressCode: 'Vibrant & Colorful', shuttleTime: '10:30 AM' },
+  { id: '2', title: 'Haldi Ceremony', day: '03', month: 'Feb', time: '1:00 PM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'The traditional turmeric ceremony. Get ready to get messy and glow!', dressCode: 'Bright Yellows and Oranges', shuttleTime: '12:30 PM' },
+  { id: '3', title: 'Vows & Sangeet', day: '04', month: 'Feb', time: '5:00 PM', location: 'Turf Lawn and Banquet', address: 'Mahalaxmi Race Course, Mumbai', description: 'We exchange our vows followed by a musical evening of dance and celebration.', dressCode: 'Glamorous Indo-Western Style', shuttleTime: '4:30 PM' },
+  { id: '4', title: 'Wedding & Reception', day: '05', month: 'Feb', time: '4:30 PM', location: 'Mumbai Cricket Association Club', address: 'Bandra Kurla Complex (BKC), Mumbai', description: 'The traditional Maharashtrian wedding ceremony followed by a grand reception dinner.', dressCode: 'Traditional Indian or Formal Western', shuttleTime: '4:00 PM' },
 ];
 
 export const EVENTS_ES: WeddingEvent[] = [
-  { id: '1', title: 'Mehendi (Henna)', day: '02', month: 'Feb', time: '11:00 AM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'Un comienzo relajado de las festividades con diseños intrincados de henna, música y bocadillos.', dressCode: 'Vibrante y Colorido', shuttleTime: '10:30 AM', calRange: '20270202T053000Z/20270202T090000Z' },
-  { id: '2', title: 'Ceremonia Haldi', day: '03', month: 'Feb', time: '1:00 PM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'La tradicional ceremonia de la cúrcuma. ¡Prepárate para ensuciarte y brillar!', dressCode: 'Amarillos y Naranjas brillantes', shuttleTime: '12:30 PM', calRange: '20270203T073000Z/20270203T110000Z' },
-  { id: '3', title: 'Votos y Sangeet', day: '04', month: 'Feb', time: '5:00 PM', location: 'Turf Lawn and Banquet', address: 'Mahalaxmi Race Course, Mumbai', description: 'Intercambiamos nuestros votos seguidos de una noche musical de baile y celebración.', dressCode: 'Estilo Indo-Occidental glamoroso', shuttleTime: '4:30 PM', calRange: '20270204T113000Z/20270204T173000Z' },
-  { id: '4', title: 'Boda y Recepción', day: '05', month: 'Feb', time: '4:30 PM', location: 'Mumbai Cricket Association Club', address: 'Bandra Kurla Complex (BKC), Mumbai', description: 'La ceremonia de boda tradicional Maharashtriana seguida de una gran cena de recepción.', dressCode: 'Indio Tradicional u Occidental Formal', shuttleTime: '4:00 PM', calRange: '20270205T110000Z/20270205T173000Z' },
+  { id: '1', title: 'Mehendi (Henna)', day: '02', month: 'Feb', time: '11:00 AM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'Un comienzo relajado de las festividades con diseños intrincados de henna, música y bocadillos.', dressCode: 'Vibrante y Colorido', shuttleTime: '10:30 AM' },
+  { id: '2', title: 'Ceremonia Haldi', day: '03', month: 'Feb', time: '1:00 PM', location: 'Thapar Suburbia', address: '4th Floor, Chembur, Mumbai', description: 'La tradicional ceremonia de la cúrcuma. ¡Prepárate para ensuciarte y brillar!', dressCode: 'Amarillos y Naranjas brillantes', shuttleTime: '12:30 PM' },
+  { id: '3', title: 'Votos y Sangeet', day: '04', month: 'Feb', time: '5:00 PM', location: 'Turf Lawn and Banquet', address: 'Mahalaxmi Race Course, Mumbai', description: 'Intercambiamos nuestros votos seguidos de una noche musical de baile y celebración.', dressCode: 'Estilo Indo-Occidental glamoroso', shuttleTime: '4:30 PM' },
+  { id: '4', title: 'Boda y Recepción', day: '05', month: 'Feb', time: '4:30 PM', location: 'Mumbai Cricket Association Club', address: 'Bandra Kurla Complex (BKC), Mumbai', description: 'La ceremonia de boda tradicional Maharashtriana seguida de una gran cena de recepción.', dressCode: 'Indio Tradicional u Occidental Formal', shuttleTime: '4:00 PM' },
 ];
-
-export function buildCalendarUrl(ev: WeddingEvent): string {
-  const [start, end] = ev.calRange.split('/');
-  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Pavitra & Ramon — ' + ev.title)}&dates=${start}/${end}&location=${encodeURIComponent(ev.location + ', ' + ev.address)}&details=${encodeURIComponent(ev.description)}`;
-}
 
 // ─── STORY ───
 export const STORY_EVENTS_EN: StoryEvent[] = [
