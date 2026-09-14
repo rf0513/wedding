@@ -177,7 +177,6 @@ const Celebration: React.FC = () => {
 
         {/* ═══ IV · DRESS GUIDE ═══ */}
         <Reveal as="section" className="mt-[72px]">
-          <span id="dress" aria-hidden className="block -mt-24 pt-24" />
           <SectionHead n={4} kicker={t('cel_dress_kicker')} title={t('cel_dress_title')} />
           <div className="flex justify-between items-start gap-4 flex-wrap">
             <h3 className="m-0 font-serif font-normal text-[clamp(22px,5.5vw,28px)] leading-[1.1]">{cel.dress.theme}</h3>

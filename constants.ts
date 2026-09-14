@@ -272,7 +272,6 @@ export const CELEBRATIONS_EN: Celebration[] = [
     expect: [
       'The ceremony is conducted in Sanskrit by a priest; this page is your guide to the key moments.',
       'A seated ceremony first, then a reception with dinner.',
-      'Modest attire is appreciated during the ceremony.',
       'Rice, flower petals, and a lot of emotion.',
       'A grand reception dinner to close the week.',
     ],
@@ -284,8 +283,8 @@ export const CELEBRATIONS_EN: Celebration[] = [
     ],
     dress: {
       theme: 'Traditional Indian',
-      description: 'Regal and respectful. This is the main religious ceremony, so modest attire is appreciated. Bring out the silks and the jewellery.',
-      women: 'A silk saree (Paithani, the Maharashtrian classic, or Kanjeevaram), a heavy traditional suit, or a formal Lehenga. Cover shoulders for the ceremony.',
+      description: 'The most regal day of the week. This is the main religious ceremony: bring out the silks, the colour, and the jewellery.',
+      women: 'A silk saree (Paithani, the Maharashtrian classic, or Kanjeevaram), a heavy traditional suit, or a formal Lehenga.',
       men: 'Sherwani, Kurta with a Nehru jacket, or a formal suit. A dark suit and tie is perfectly appropriate.',
       palette: ['#B71C1C', '#1B5E20', '#E65100', '#FFD700'],
       tips: [
@@ -494,7 +493,6 @@ export const CELEBRATIONS_ES: Celebration[] = [
     expect: [
       'La ceremonia la conduce un sacerdote en sánscrito; esta página es tu guía de los momentos clave.',
       'Primero una ceremonia sentada, luego una recepción con cena.',
-      'Se agradece vestimenta modesta durante la ceremonia.',
       'Arroz, pétalos de flores y mucha emoción.',
       'Una gran cena de recepción para cerrar la semana.',
     ],
@@ -506,8 +504,8 @@ export const CELEBRATIONS_ES: Celebration[] = [
     ],
     dress: {
       theme: 'Indio Tradicional',
-      description: 'Regio y respetuoso. Esta es la ceremonia religiosa principal, así que se agradece vestimenta modesta. Saca las sedas y la joyería.',
-      women: 'Un sari de seda (Paithani, el clásico maharashtriano, o Kanjeevaram), un traje tradicional elaborado o una Lehenga formal. Cubre los hombros durante la ceremonia.',
+      description: 'El día más regio de la semana. Esta es la ceremonia religiosa principal: saca las sedas, el color y la joyería.',
+      women: 'Un sari de seda (Paithani, el clásico maharashtriano, o Kanjeevaram), un traje tradicional elaborado o una Lehenga formal.',
       men: 'Sherwani, Kurta con chaqueta Nehru o un traje formal. Un traje oscuro con corbata es perfectamente apropiado.',
       palette: ['#B71C1C', '#1B5E20', '#E65100', '#FFD700'],
       tips: [
@@ -632,7 +630,7 @@ export const FAQ_EN: FAQItem[] = [
   { id: 'phone', question: 'How do I get phone data in India?', answer: "We recommend downloading the <a href='https://www.airalo.com/india-esim' target='_blank' rel='noopener noreferrer' class='text-wedding-bronze font-semibold underline'>Airalo</a> app for an e-SIM. It is the easiest way to get 5G data. It costs around $20 for 10GB (valid for 7 days)." },
   { id: 'weather', question: 'What is the weather like in Mumbai in February?', answer: 'It is the best time of year! Expect warm days (around 28°C / 82°F) and pleasant, breezy evenings (around 23°C / 73°F). Sunrise is at 7 AM and Sunset at 6:45 PM. February should be dry without rain.' },
   { id: 'food', question: 'Will the food be too spicy?', answer: "We have curated the menu to cater to international palates. There will be plenty of mild options, and we'll label spicy dishes clearly. Safe, bottled water will be available everywhere." },
-  { id: 'dress', question: 'What should I wear?', answer: 'You should plan on having three different outfits. Each celebration has its own page with a full dress guide, and the Wardrobe &amp; Shopping guide explains the outfits and where to find them. In general, think bright, colorful, and modest. For the Vows &amp; Sangeet, Western formal wear is perfectly fine.' },
+  { id: 'dress', question: 'What should I wear?', answer: 'You should plan on having three different outfits. Each celebration has its own page with a full dress guide, and the Wardrobe &amp; Shopping guide explains the outfits and where to find them. In general, think bright and colorful. For the Vows &amp; Sangeet, Western formal wear is perfectly fine.' },
   { id: 'transport', question: 'How do I get around?', answer: 'Uber is the safest and easiest way to travel within Mumbai. We will also provide shuttles from Taj The Trees to all wedding events.' },
 ];
 
@@ -643,6 +641,6 @@ export const FAQ_ES: FAQItem[] = [
   { id: 'phone', question: '¿Cómo obtengo datos para mi teléfono?', answer: "Recomendamos descargar la aplicación <a href='https://www.airalo.com/india-esim' target='_blank' rel='noopener noreferrer' class='text-wedding-bronze font-semibold underline'>Airalo</a> para obtener una e-SIM. Es la forma más fácil de obtener datos 5G. Cuesta alrededor de $20 por 10GB (válido por 7 días)." },
   { id: 'weather', question: '¿Cómo es el clima en Mumbai en febrero?', answer: '¡Es la mejor época del año! Espere días cálidos (alrededor de 28°C) y noches agradables y ventosas (alrededor de 18°C). Probablemente no necesite una chaqueta pesada, tal vez solo un chal ligero para la noche.' },
   { id: 'food', question: '¿La comida será muy picante?', answer: 'Hemos seleccionado el menú para satisfacer los paladares internacionales. Habrá muchas opciones suaves y etiquetaremos claramente los platos picantes. Habrá agua embotellada segura disponible en todas partes.' },
-  { id: 'dress', question: '¿Qué debo usar?', answer: 'Deberías planificar tres atuendos diferentes. Cada celebración tiene su propia página con una guía de vestimenta completa, y la guía de Vestuario y Compras explica los atuendos y dónde conseguirlos. En general, piense en colores brillantes y modestos. Para la recepción, la vestimenta formal occidental está perfectamente bien.' },
+  { id: 'dress', question: '¿Qué debo usar?', answer: 'Deberías planificar tres atuendos diferentes. Cada celebración tiene su propia página con una guía de vestimenta completa, y la guía de Vestuario y Compras explica los atuendos y dónde conseguirlos. En general, piense en colores brillantes y vivos. Para los Votos y el Sangeet, la vestimenta formal occidental está perfectamente bien.' },
   { id: 'transport', question: '¿Cómo me muevo por la ciudad?', answer: 'Uber es la forma más segura y fácil de viajar dentro de Mumbai. También proporcionaremos transporte desde Taj The Trees a todos los eventos de la boda.' },
 ];

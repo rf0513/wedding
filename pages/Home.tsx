@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
-import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav, scrollToId } from '../components/DecoUI';
+import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav } from '../components/DecoUI';
 import Curtain from '../components/Curtain';
 import HeroSequence from '../components/HeroSequence';
 import StoryJourney from '../components/StoryJourney';
@@ -22,12 +22,7 @@ const Home: React.FC = () => {
   const celebrations = en ? CELEBRATIONS_EN : CELEBRATIONS_ES;
   const celebrationFor = (eventId: string) => celebrations.find((c) => c.eventId === eventId);
   const pad = (n: number) => String(n).padStart(2, '0');
-  /** Open a celebration page, optionally landing on one of its sections. */
-  const goDay = (id: string, section?: string) => {
-    navigate(`/celebrations/${id}`);
-    if (section) setTimeout(() => scrollToId(section), 150);
-    else window.scrollTo(0, 0);
-  };
+  const goDay = (id: string) => { navigate(`/celebrations/${id}`); window.scrollTo(0, 0); };
 
   // RSVP form
   const [rsvpDone, setRsvpDone] = useState(false);
@@ -169,7 +164,7 @@ const Home: React.FC = () => {
                     <dd className="m-0 text-wedding-cream">{t('events_shuttle')} {ev.shuttleTime}</dd>
                     <dt className="font-sans font-semibold text-[10px] leading-[1.45] tracking-[.25em] uppercase text-wedding-gold pt-[2px]">{t('lbl_dress')}</dt>
                     <dd className="m-0">
-                      <a href={`#/celebrations/${celebrationFor(ev.id)?.id ?? ''}`} onClick={(e) => { e.preventDefault(); const c = celebrationFor(ev.id); if (c) goDay(c.id, 'dress'); }} className="text-wedding-cream border-b border-wedding-gold/60 no-underline cursor-pointer pb-px hover:text-wedding-goldLight hover:border-wedding-goldLight">{ev.dressCode}</a>
+                      <span className="text-wedding-cream">{ev.dressCode}</span>
                     </dd>
                   </dl>
                 </div>
