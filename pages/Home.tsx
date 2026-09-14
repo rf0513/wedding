@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, buildCalendarUrl } from '../constants';
+import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES, buildCalendarUrl } from '../constants';
 import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav } from '../components/DecoUI';
 import Curtain from '../components/Curtain';
 import HeroSequence from '../components/HeroSequence';
@@ -19,6 +19,10 @@ const Home: React.FC = () => {
   const events = en ? EVENTS_EN : EVENTS_ES;
   const storyEvents = en ? STORY_EVENTS_EN : STORY_EVENTS_ES;
   const registryItems = en ? REGISTRY_ITEMS_EN : REGISTRY_ITEMS_ES;
+  const celebrations = en ? CELEBRATIONS_EN : CELEBRATIONS_ES;
+  const celebrationFor = (eventId: string) => celebrations.find((c) => c.eventId === eventId);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const goDay = (id: string) => { navigate(`/celebrations/${id}`); window.scrollTo(0, 0); };
 
   // RSVP form
   const [rsvpDone, setRsvpDone] = useState(false);
@@ -44,7 +48,7 @@ const Home: React.FC = () => {
   };
 
   const guides = [
-    { tag: `${t('guide_no')} 1`, title: t('nav_traditions'), desc: en ? 'Four ceremonies explained, what to wear to each, and where to shop.' : 'Cuatro ceremonias explicadas, qué usar en cada una y dónde comprar.', path: '/traditions' },
+    { tag: `${t('guide_no')} 1`, title: t('nav_attire'), desc: en ? 'Lehengas, sarees, and sherwanis explained, plus where to buy or rent them.' : 'Lehengas, saris y sherwanis explicados, y dónde comprarlos o alquilarlos.', path: '/attire' },
     { tag: `${t('guide_no')} 2`, title: t('nav_travel'), desc: en ? 'Where to stay, what to see, where to eat, and how to survive Mumbai.' : 'Dónde alojarse, qué ver, dónde comer y cómo sobrevivir Mumbai.', path: '/travel' },
     { tag: `${t('guide_no')} 3`, title: t('nav_qna'), desc: t('qna_subtitle'), path: '/qna' },
   ];
@@ -149,12 +153,19 @@ const Home: React.FC = () => {
                     <dd className="m-0 text-wedding-cream">{t('events_shuttle')} {ev.shuttleTime}</dd>
                     <dt className="font-sans font-semibold text-[10px] leading-[1.45] tracking-[.25em] uppercase text-wedding-gold pt-[2px]">{t('lbl_dress')}</dt>
                     <dd className="m-0">
-                      <a onClick={() => { navigate('/traditions'); }} className="text-wedding-cream border-b border-wedding-gold/60 no-underline cursor-pointer pb-px hover:text-wedding-goldLight hover:border-wedding-goldLight">{ev.dressCode}</a>
+                      <a onClick={() => { const c = celebrationFor(ev.id); if (c) goDay(c.id); }} className="text-wedding-cream border-b border-wedding-gold/60 no-underline cursor-pointer pb-px hover:text-wedding-goldLight hover:border-wedding-goldLight">{ev.dressCode}</a>
                     </dd>
                   </dl>
-                  <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] mt-5 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold no-underline pt-[2px] hover:text-wedding-goldLight">
-                    {t('add_to_calendar')}<span className="inline-block w-[22px] h-px bg-current" />
-                  </a>
+                  <div className="flex flex-wrap gap-x-7 gap-y-2 mt-5">
+                    {celebrationFor(ev.id) && (
+                      <a href={`#/celebrations/${celebrationFor(ev.id)!.id}`} onClick={(e) => { e.preventDefault(); goDay(celebrationFor(ev.id)!.id); }} className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
+                        {t('home_explore')} {t('day_label')} {pad(i + 1)}<span className="inline-block w-[22px] h-px bg-current" />
+                      </a>
+                    )}
+                    <a href={buildCalendarUrl(ev)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-cream/55 no-underline pt-[2px] hover:text-wedding-goldLight">
+                      {t('add_to_calendar')} ↗
+                    </a>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -163,6 +174,42 @@ const Home: React.FC = () => {
             <a onClick={() => navigate('/travel')} className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold no-underline cursor-pointer pt-[2px] hover:text-wedding-goldLight">
               {t('see_map')}<span className="inline-block w-[22px] h-px bg-current" />
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ THE CELEBRATIONS ═══ */}
+      <section id="celebrations" className="bg-wedding-cream text-wedding-ink pt-20 pb-[72px]">
+        <div className="max-w-[760px] mx-auto px-6">
+          <Reveal className="text-center mb-12">
+            <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-bronze">{t('home_celebrations_kicker')}</p>
+            <h2 className="m-0 font-serif font-normal text-[clamp(34px,8vw,56px)] leading-[1.05]" style={{ textWrap: 'balance' as any }}>{t('home_celebrations_title')}</h2>
+            <p className="mt-[18px] mx-auto mb-0 max-w-[460px] font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/78">{t('home_celebrations_desc')}</p>
+          </Reveal>
+          <div className="grid grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-8 sm:gap-y-10">
+            {celebrations.map((c, i) => (
+              <Reveal key={c.id} delay={(i % 2) * 0.08}>
+                <a href={`#/celebrations/${c.id}`} onClick={(e) => { e.preventDefault(); goDay(c.id); }} className="group block no-underline cursor-pointer text-wedding-ink">
+                  <div className="relative">
+                    <StepFrame size={16} borderWidth={2} innerBg="#0E1512" innerPadding={6}>
+                      <div className="relative overflow-hidden">
+                        <img src={c.heroImage} alt={c.title} loading="lazy" className="block w-full aspect-[3/4] sm:aspect-[4/5] object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]" style={{ filter: 'saturate(.85)' }} />
+                        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(14,21,18,0) 45%,rgba(14,21,18,.85) 100%)' }} />
+                        <div className="absolute left-0 right-0 bottom-0 p-3 sm:p-5 text-wedding-cream">
+                          <p className="m-0 mb-1.5 font-sans font-semibold text-[9px] sm:text-[10px] tracking-[.35em] uppercase text-wedding-gold">{t('day_label')} {pad(c.day)} <span className="hidden sm:inline">· {c.weekday}</span></p>
+                          <h3 className="m-0 font-serif font-normal text-[clamp(18px,4.6vw,34px)] leading-[1.05]" style={{ textWrap: 'balance' as any }}>{c.title}</h3>
+                        </div>
+                      </div>
+                    </StepFrame>
+                    <span className="absolute -top-3 left-3 sm:left-5 px-[10px] sm:px-3 py-[6px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[8px] sm:text-[9px] tracking-[.24em] sm:tracking-[.3em] uppercase whitespace-nowrap deco-chamfer-8">{c.dateLabel}</span>
+                  </div>
+                  <p className="mt-4 mb-2 font-serif text-[14px] sm:text-[17px] leading-[1.35]">{c.tagline}</p>
+                  <span className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-ink">
+                    {t('home_explore')}<span className="inline-block w-[22px] h-px bg-current transition-all group-hover:w-[34px]" />
+                  </span>
+                </a>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -189,14 +236,15 @@ const Home: React.FC = () => {
         <div className="deco-chevron h-[10px] absolute top-0 left-0 right-0 opacity-50" />
         <div className="max-w-[760px] mx-auto px-6">
           <Reveal className="text-center mb-11">
-            <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">{t('traditions_subtitle')}</p>
+            <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">{t('guides_list_title')}</p>
             <h2 className="m-0 font-serif font-normal text-[clamp(34px,8vw,56px)] leading-[1.05] text-wedding-cream" style={{ textWrap: 'balance' as any }}>{t('guides_title')}</h2>
           </Reveal>
           <div className="grid grid-cols-1 gap-4">
             {guides.map((g) => (
               <Reveal key={g.path}>
                 <a
-                  onClick={() => navigate(g.path)}
+                  href={`#${g.path}`}
+                  onClick={(e) => { e.preventDefault(); navigate(g.path); }}
                   className="block no-underline cursor-pointer p-px bg-wedding-gold/55 deco-step-16 hover:bg-wedding-gold transition-colors"
                 >
                   <div className="grid grid-cols-[44px_minmax(0,1fr)_auto] items-stretch bg-wedding-pine deco-step-16">

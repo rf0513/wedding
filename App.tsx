@@ -6,7 +6,9 @@ import Home from './pages/Home';
 import Story from './pages/Story';
 import Events from './pages/Events';
 import Registry from './pages/Registry';
-import Traditions from './pages/Traditions';
+import Attire from './pages/Attire';
+import Celebration from './pages/Celebration';
+import SectionRedirect from './components/SectionRedirect';
 import Travel from './pages/Travel';
 import RSVP from './pages/RSVP';
 import QnA from './pages/QnA';
@@ -32,7 +34,11 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/story" element={<Story />} />
-              <Route path="/traditions" element={<Traditions />} />
+              <Route path="/celebrations/:id" element={<Celebration />} />
+              <Route path="/celebrations" element={<SectionRedirect sectionId="celebrations" />} />
+              <Route path="/attire" element={<Attire />} />
+              {/* Old "Ceremonies & Attire" deep links */}
+              <Route path="/traditions" element={<SectionRedirect sectionId="celebrations" />} />
               <Route path="/schedule" element={<Events />} />
               <Route path="/registry" element={<Registry />} />
               <Route path="/travel" element={<Travel />} />
