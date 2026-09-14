@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { LogoMark, useSectionNav } from './DecoUI';
+import { CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,16 +28,23 @@ const Navbar: React.FC = () => {
   };
 
   const pad = (n: number) => String(n).padStart(2, '0');
-  const menuItems = [
+  const days = language === 'en' ? CELEBRATIONS_EN : CELEBRATIONS_ES;
+  type MenuItem = { name: string; go: () => void; children?: { label: string; name: string; go: () => void }[] };
+  const menuItems: (MenuItem & { num: string })[] = ([
     { name: t('nav_home'), go: goHome },
     { name: t('nav_events'), go: () => { goSection('programme'); setMenuOpen(false); } },
+    {
+      name: t('nav_celebrations'),
+      go: () => { goSection('celebrations'); setMenuOpen(false); },
+      children: days.map((d) => ({ label: `${t('day_label')} ${pad(d.day)}`, name: d.title, go: () => goView(`/celebrations/${d.id}`) })),
+    },
     { name: t('nav_story'), go: () => { goSection('story'); setMenuOpen(false); } },
-    { name: t('nav_traditions'), go: () => goView('/traditions') },
+    { name: t('nav_attire'), go: () => goView('/attire') },
     { name: t('nav_travel'), go: () => goView('/travel') },
     { name: t('nav_qna'), go: () => goView('/qna') },
     { name: t('nav_registry'), go: () => { goSection('registry'); setMenuOpen(false); } },
     { name: t('nav_rsvp'), go: () => { goSection('rsvp'); setMenuOpen(false); } },
-  ].map((m, i) => ({ ...m, num: pad(i + 1) }));
+  ] as MenuItem[]).map((m, i) => ({ ...m, num: pad(i + 1) }));
 
   const btnClasses = "h-10 px-[14px] border border-wedding-gold/55 bg-wedding-ink/75 backdrop-blur-md text-wedding-goldLight font-sans font-semibold text-[11px] tracking-[.28em] uppercase cursor-pointer pt-[3px] transition-colors hover:border-wedding-gold hover:bg-wedding-pine";
 
@@ -74,14 +82,29 @@ const Navbar: React.FC = () => {
           </p>
           <nav className="flex flex-col my-auto">
             {menuItems.map((m) => (
-              <a
-                key={m.num}
-                onClick={m.go}
-                className="flex items-baseline gap-[18px] py-[clamp(8px,1.6vh,13px)] border-t border-wedding-gold/[.18] cursor-pointer no-underline text-wedding-cream hover:text-wedding-goldLight hover:pl-2 transition-all"
-              >
-                <span className="font-sans font-light text-xs tracking-[.2em] text-wedding-gold min-w-[28px]">{m.num}</span>
-                <span className="font-serif text-[clamp(26px,6.5vw,38px)] leading-[1.05] tracking-[.02em]">{m.name}</span>
-              </a>
+              <React.Fragment key={m.num}>
+                <a
+                  onClick={m.go}
+                  className="flex items-baseline gap-[18px] py-[clamp(8px,1.6vh,13px)] border-t border-wedding-gold/[.18] cursor-pointer no-underline text-wedding-cream hover:text-wedding-goldLight hover:pl-2 transition-all"
+                >
+                  <span className="font-sans font-light text-xs tracking-[.2em] text-wedding-gold min-w-[28px]">{m.num}</span>
+                  <span className="font-serif text-[clamp(26px,6.5vw,38px)] leading-[1.05] tracking-[.02em]">{m.name}</span>
+                </a>
+                {m.children && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1 pl-[46px] pb-[clamp(8px,1.6vh,14px)]">
+                    {m.children.map((c) => (
+                      <a
+                        key={c.name}
+                        onClick={c.go}
+                        className="block py-[6px] cursor-pointer no-underline text-wedding-cream/85 hover:text-wedding-goldLight transition-colors"
+                      >
+                        <span className="block font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-gold">{c.label}</span>
+                        <span className="block font-serif text-[clamp(16px,4.2vw,20px)] leading-[1.15]">{c.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </nav>
           <div className="mt-6 flex-none flex justify-between items-center pt-6 border-t border-wedding-gold/[.18]">

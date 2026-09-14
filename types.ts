@@ -29,16 +29,6 @@ export interface RegistryItem {
   description: string;
 }
 
-export interface WeddingCustom {
-  id: string;
-  title: string;
-  marathiTitle?: string;
-  significance: string;
-  whatToWear: string;
-  whatToExpect: string;
-  imageUrl: string;
-}
-
 export interface AttireItem {
   id: string;
   name: string;
@@ -49,16 +39,61 @@ export interface AttireItem {
   imageUrl: string;
 }
 
-export interface EventDressCode {
-  id: string;
+/** One moment in the rundown of a celebration day. */
+export interface CelebrationMoment {
+  /** Optional clock time, e.g. "11:00 AM". Leave empty for "sometime during". */
+  time?: string;
   title: string;
-  theme: string;
-  description: string;
-  options: {
+  desc: string;
+}
+
+/** A word guests will hear that day, with a one-line meaning. */
+export interface CelebrationTerm {
+  term: string;
+  meaning: string;
+}
+
+/**
+ * Everything a guest needs (and everything that gets them excited) about one
+ * day of the wedding. Logistics (time, venue, shuttle, calendar link) are not
+ * duplicated here — they are pulled from the matching WeddingEvent via eventId.
+ */
+export interface Celebration {
+  id: string;
+  /** id of the WeddingEvent in EVENTS_* that carries the logistics. */
+  eventId: string;
+  day: number;
+  weekday: string;
+  dateLabel: string;
+  title: string;
+  subtitle: string;
+  marathiTitle?: string;
+  /** One-line hook shown under the title. */
+  tagline: string;
+  heroImage: string;
+  /** Accent colour for this day (chips, rules, swatches). */
+  accent: string;
+  /** The exciting explanation of the event. */
+  intro: string;
+  /** The tradition and its meaning. */
+  significance: string;
+  moments: CelebrationMoment[];
+  expect: string[];
+  vibe: { label: string; value: string }[];
+  dress: {
+    theme: string;
+    description: string;
     women: string;
     men: string;
+    palette: string[];
+    tips: string[];
+    /** ids from ATTIRE_GUIDE_* to show as outfit inspiration. */
+    attireIds: string[];
   };
-  colorPalette: string[];
+  glossary: CelebrationTerm[];
+  /** Short logistical notes shown in "Getting there" (who, food, end time…). */
+  notes: string[];
+  tips: string[];
 }
 
 export interface RSVPFormData {
