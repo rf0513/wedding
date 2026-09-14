@@ -11,6 +11,7 @@ import {
 } from '../constants';
 import { Reveal, StepFrame, Sunburst, ChevronBand, scrollToId } from '../components/DecoUI';
 import MumbaiMap from '../components/MumbaiMap';
+import { ROUTES } from '../components/mumbaiGeo';
 
 const Travel: React.FC = () => {
   const { language, t } = useLanguage();
@@ -34,11 +35,14 @@ const Travel: React.FC = () => {
     ...food.map((f) => ({ id: f.id, title: f.title, query: f.query })),
   ];
   const active = locs.find((l) => l.id === activeLocId) || locs[0];
-  // Real directions live in Google Maps; the illustration is for orientation only.
+  // The map draws the road route and the panel below gives distance, typical time and the
+  // turns; live turn-by-turn navigation is handed to Google Maps.
+  const route = active.id === 'hotel' ? undefined : ROUTES[active.id];
+  const shuttle = active.id.startsWith('ev') ? events.find((e) => 'ev' + e.id === active.id)?.shuttleTime : undefined;
   const gmapsHref = active.id === 'hotel'
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(HOTEL_QUERY)}`
-    : `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(HOTEL_QUERY)}&destination=${encodeURIComponent(active.query)}`;
-  const mapCaption = active.id === 'hotel' ? t('map_hotel') : `${t('map_route')} ${active.title}`;
+    : `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(HOTEL_QUERY)}&destination=${encodeURIComponent(active.query)}&travelmode=driving`;
+  const kicker = 'm-0 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold';
 
   const selectMapLoc = (id: string) => {
     setActiveLocId(id);
@@ -167,12 +171,50 @@ const Travel: React.FC = () => {
             <div className="px-[10px] sm:px-[22px]">
               <MumbaiMap pins={locs} activeId={active.id} onSelect={setActiveLocId} />
             </div>
-            <div className="pt-4 px-[22px] pb-[18px] text-center">
-              <p className="m-0 font-sans font-light text-xs leading-[1.5] text-wedding-cream/60">{mapCaption}</p>
-              <p className="mt-1 mb-0 font-sans font-light text-[10px] leading-[1.5] tracking-[.08em] uppercase text-wedding-cream/40">{t('map_not_to_scale')}</p>
-              <a href={gmapsHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] mt-3 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold no-underline pt-[2px] hover:text-wedding-goldLight">
-                {t('map_open_gmaps')} ↗
-              </a>
+            <div className="pt-4 px-[10px] sm:px-[22px] pb-[22px]">
+              <div className="max-w-[520px] mx-auto border border-wedding-gold/35">
+                <div className="pt-[18px] px-[18px] pb-[14px] text-center">
+                  <p className={kicker}>{route ? t('map_route') : t('travel_stay')}</p>
+                  <p className="mt-[6px] mb-0 font-serif text-[24px] leading-[1.15] text-wedding-cream">{route ? active.title : 'Taj The Trees, Vikhroli'}</p>
+                  {!route && <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.5] text-wedding-cream/70">{t('map_hotel_desc')}</p>}
+                </div>
+                {route && (
+                  <>
+                    <div className="grid grid-cols-2 border-t border-wedding-gold/25 text-center">
+                      <div className="py-3 px-3 border-r border-wedding-gold/25">
+                        <p className={kicker}>{t('map_distance')}</p>
+                        <p className="mt-1 mb-0 font-sans font-light text-[26px] leading-none tracking-[.04em] text-wedding-cream">≈ {Math.round(route.km)} <span className="text-[14px]">km</span></p>
+                      </div>
+                      <div className="py-3 px-3">
+                        <p className={kicker}>{t('map_drive')}</p>
+                        <p className="mt-1 mb-0 font-sans font-light text-[26px] leading-none tracking-[.04em] text-wedding-cream">{route.minutes[0]}–{route.minutes[1]} <span className="text-[14px]">min</span></p>
+                        {route.ferry && <p className="mt-[6px] mb-0 font-sans font-light text-[11px] leading-[1.4] text-wedding-cream/70">+ {t('map_ferry')} ≈ {route.ferry.minutes} min</p>}
+                      </div>
+                    </div>
+                    <div className="border-t border-wedding-gold/25 py-[10px] px-[18px] text-center">
+                      <span className="font-sans font-semibold text-[10px] tracking-[.25em] uppercase text-wedding-cream/60">{t('map_via')} </span>
+                      <span className="font-sans font-light text-[12px] tracking-[.05em] text-wedding-cream/85">{route.via[language]}</span>
+                    </div>
+                    <ol className="m-0 list-none border-t border-wedding-gold/25 py-[14px] px-[18px] text-left">
+                      {route.steps[language].map((step, i) => (
+                        <li key={i} className="grid grid-cols-[28px_minmax(0,1fr)] gap-2 py-[5px] font-sans font-light text-[13px] leading-[1.5] text-wedding-cream/85">
+                          <span className="font-semibold text-[10px] tracking-[.2em] text-wedding-gold pt-[3px]">{pad(i + 1)}</span>
+                          <span>{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                    {shuttle && (
+                      <p className="m-0 border-t border-wedding-gold/25 py-[10px] px-[18px] text-center font-sans font-light text-[12px] leading-[1.5] text-wedding-goldLight">
+                        {t('map_shuttle')} {shuttle}
+                      </p>
+                    )}
+                  </>
+                )}
+                <a href={gmapsHref} target="_blank" rel="noopener noreferrer" className="block border-t border-wedding-gold/25 py-[14px] px-[18px] text-center font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold no-underline hover:text-wedding-goldLight hover:bg-wedding-gold/10">
+                  {route ? t('map_open_directions') : t('map_open_gmaps')} ↗
+                </a>
+              </div>
+              <p className="mt-3 mb-0 text-center font-sans font-light text-[10px] leading-[1.5] tracking-[.08em] uppercase text-wedding-cream/40">{t('map_note')}</p>
             </div>
           </StepFrame>
         </section>
