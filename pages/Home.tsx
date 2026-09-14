@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
-import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav } from '../components/DecoUI';
+import { Reveal, StepFrame, HeroFrame, Marquee, useCountdown, useSectionNav, scrollToId } from '../components/DecoUI';
 import Curtain from '../components/Curtain';
 import HeroSequence from '../components/HeroSequence';
 import StoryJourney from '../components/StoryJourney';
@@ -22,7 +22,12 @@ const Home: React.FC = () => {
   const celebrations = en ? CELEBRATIONS_EN : CELEBRATIONS_ES;
   const celebrationFor = (eventId: string) => celebrations.find((c) => c.eventId === eventId);
   const pad = (n: number) => String(n).padStart(2, '0');
-  const goDay = (id: string) => { navigate(`/celebrations/${id}`); window.scrollTo(0, 0); };
+  /** Open a celebration page, optionally landing on one of its sections. */
+  const goDay = (id: string, section?: string) => {
+    navigate(`/celebrations/${id}`);
+    if (section) setTimeout(() => scrollToId(section), 150);
+    else window.scrollTo(0, 0);
+  };
 
   // RSVP form
   const [rsvpDone, setRsvpDone] = useState(false);
@@ -142,7 +147,18 @@ const Home: React.FC = () => {
                 </div>
                 <div className="min-w-0">
                   <p className="m-0 mb-[6px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{ROMAN[i]}</p>
-                  <h3 className="m-0 mb-[10px] font-serif font-normal text-[clamp(24px,6vw,32px)] leading-[1.1] text-wedding-cream">{ev.title}</h3>
+                  <h3 className="m-0 mb-[10px] font-serif font-normal text-[clamp(24px,6vw,32px)] leading-[1.1] text-wedding-cream">
+                    {celebrationFor(ev.id) ? (
+                      <a
+                        href={`#/celebrations/${celebrationFor(ev.id)!.id}`}
+                        onClick={(e) => { e.preventDefault(); goDay(celebrationFor(ev.id)!.id); }}
+                        className="group inline-flex items-baseline gap-3 text-wedding-cream no-underline cursor-pointer hover:text-wedding-goldLight transition-colors"
+                      >
+                        {ev.title}
+                        <span aria-hidden className="font-sans text-[18px] text-wedding-gold transition-transform group-hover:translate-x-1">→</span>
+                      </a>
+                    ) : ev.title}
+                  </h3>
                   <p className="m-0 mb-[18px] font-sans font-light text-[15px] leading-[1.6] text-wedding-cream/75">{ev.description}</p>
                   <dl className="m-0 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-[9px] text-[13px] leading-[1.45]">
                     <dt className="font-sans font-semibold text-[10px] leading-[1.45] tracking-[.25em] uppercase text-wedding-gold pt-[2px]">{t('lbl_time')}</dt>
@@ -153,16 +169,9 @@ const Home: React.FC = () => {
                     <dd className="m-0 text-wedding-cream">{t('events_shuttle')} {ev.shuttleTime}</dd>
                     <dt className="font-sans font-semibold text-[10px] leading-[1.45] tracking-[.25em] uppercase text-wedding-gold pt-[2px]">{t('lbl_dress')}</dt>
                     <dd className="m-0">
-                      <a onClick={() => { const c = celebrationFor(ev.id); if (c) goDay(c.id); }} className="text-wedding-cream border-b border-wedding-gold/60 no-underline cursor-pointer pb-px hover:text-wedding-goldLight hover:border-wedding-goldLight">{ev.dressCode}</a>
+                      <a href={`#/celebrations/${celebrationFor(ev.id)?.id ?? ''}`} onClick={(e) => { e.preventDefault(); const c = celebrationFor(ev.id); if (c) goDay(c.id, 'dress'); }} className="text-wedding-cream border-b border-wedding-gold/60 no-underline cursor-pointer pb-px hover:text-wedding-goldLight hover:border-wedding-goldLight">{ev.dressCode}</a>
                     </dd>
                   </dl>
-                  <div className="flex flex-wrap gap-x-7 gap-y-2 mt-5">
-                    {celebrationFor(ev.id) && (
-                      <a href={`#/celebrations/${celebrationFor(ev.id)!.id}`} onClick={(e) => { e.preventDefault(); goDay(celebrationFor(ev.id)!.id); }} className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
-                        {t('home_explore')} {t('day_label')} {pad(i + 1)}<span className="inline-block w-[22px] h-px bg-current" />
-                      </a>
-                    )}
-                  </div>
                 </div>
               </Reveal>
             ))}

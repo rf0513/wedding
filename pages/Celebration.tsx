@@ -47,7 +47,6 @@ const Celebration: React.FC = () => {
   const endTime = cel.moments[cel.moments.length - 1]?.time?.replace(/^(Until|Hasta las)\s+/i, '') ?? '';
   const inspo = cel.dress.attireIds.map((aid) => attire.find((a) => a.id === aid)).filter(Boolean) as typeof attire;
   const directionsHref = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(HOTEL_QUERY)}&destination=${encodeURIComponent(`${ev.location}, ${ev.address}`)}`;
-  const menNotApplicable = cel.id === 'mehendi';
 
   const goDay = (dayId: string) => { navigate(`/celebrations/${dayId}`); window.scrollTo(0, 0); };
   const goHome = () => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
@@ -178,6 +177,7 @@ const Celebration: React.FC = () => {
 
         {/* ═══ IV · DRESS GUIDE ═══ */}
         <Reveal as="section" className="mt-[72px]">
+          <span id="dress" aria-hidden className="block -mt-24 pt-24" />
           <SectionHead n={4} kicker={t('cel_dress_kicker')} title={t('cel_dress_title')} />
           <div className="flex justify-between items-start gap-4 flex-wrap">
             <h3 className="m-0 font-serif font-normal text-[clamp(22px,5.5vw,28px)] leading-[1.1]">{cel.dress.theme}</h3>
@@ -195,7 +195,7 @@ const Celebration: React.FC = () => {
             </div>
             <div className="bg-wedding-cream py-5 px-5">
               <p className={`m-0 mb-2 ${label}`}>{t('attire_men')}</p>
-              <p className={`m-0 ${body} text-[15px] ${menNotApplicable ? 'italic text-wedding-ink/65' : ''}`}>{cel.dress.men}</p>
+              <p className={`m-0 ${body} text-[15px]`}>{cel.dress.men}</p>
             </div>
           </div>
           <p className={`mt-8 mb-3 ${label}`}>{t('cel_dress_tips')}</p>

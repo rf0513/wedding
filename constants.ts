@@ -98,7 +98,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     title: 'Mehendi', subtitle: 'The Henna Afternoon', marathiTitle: 'Mehendi',
     tagline: 'Where the week begins: henna, music, and a slow golden afternoon.',
     heroImage: pexels(28496968), accent: '#C2185B',
-    intro: 'Every Indian wedding opens with a breath, not a bang. The Mehendi is ours: a relaxed, sun-drenched afternoon where artists trace intricate henna designs onto Pavitra\'s hands and feet while the ladies gather around with chai, snacks, and music. It is the moment the week officially begins, and the best chance to settle in, meet everyone, and get your own hands decorated.',
+    intro: 'Every Indian wedding opens with a breath, not a bang. The Mehendi is ours: a relaxed, sun-drenched afternoon where artists trace intricate henna designs onto Pavitra\'s hands and feet while everyone gathers around with chai, snacks, and music. Come one, come all — this one is not just for the ladies. It is the moment the week officially begins, and the best chance to settle in, meet everyone, and get your own hands decorated.',
     significance: 'Mehendi (henna) is one of the oldest wedding traditions in South Asia. The paste, made from crushed henna leaves, cools the skin and calms a bride\'s nerves before her big days. Folklore adds a twist: the darker the stain, the deeper the love she will receive from her husband and in-laws. Somewhere in Pavitra\'s design, Ramon\'s name will be hidden, and tradition says he has to find it.',
     moments: [
       { time: '11:00 AM', title: 'Doors open', desc: 'Arrive to music, chai, and light bites. Find a spot near the artists.' },
@@ -108,7 +108,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
       { time: '2:30 PM', title: 'Wind down', desc: 'The paste needs time to set. Head back to the hotel, let it dry, and flake it off for the reveal.' },
     ],
     expect: [
-      'A ladies-only gathering. Gentlemen, you have the morning off.',
+      'Everyone is invited. Gentlemen, come hang out: there is chai, music, and a spot for you too.',
       'A calm, social pace: think garden party, not dance floor.',
       'Henna paste takes 20 to 30 minutes to dry and a few hours to set. Keep the hand you decorate free for a while.',
       'Light bites and drinks throughout the afternoon.',
@@ -124,7 +124,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
       theme: 'Vibrant & Colorful',
       description: 'Fun, casual, and festive. This is the day for florals, bright colours, and anything that makes you happy.',
       women: 'A bright Anarkali, a light Lehenga, a flowy maxi dress, or a printed jumpsuit. Pastels and florals photograph beautifully against the henna.',
-      men: 'Not needed: the Mehendi is ladies only. Gentlemen, the Travel Guide has ideas for a free morning in the city.',
+      men: 'A light cotton or linen Kurta, or a short-sleeved shirt with chinos. Bright colours and prints are welcome. Short sleeves help if you want a little henna too.',
       palette: ['#E91E63', '#9C27B0', '#00BCD4', '#8BC34A'],
       tips: [
         'Sleeveless or short sleeves make getting henna easier.',
@@ -132,7 +132,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
         'Comfortable flats or sandals. You will be sitting, chatting, and moving between rooms.',
         'If you would like henna, keep your right hand free of rings and bracelets.',
       ],
-      attireIds: ['anarkali', 'lehenga'],
+      attireIds: ['anarkali', 'lehenga', 'kurta'],
     },
     glossary: [
       { term: 'Mehendi', meaning: 'Henna: both the plant-based paste and the celebration itself.' },
@@ -140,7 +140,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
       { term: 'Chai', meaning: 'Spiced milk tea. There will be plenty.' },
       { term: 'Bollywood', meaning: 'Mumbai\'s film industry and the source of most of the music you will hear this week.' },
     ],
-    notes: ['Ladies only.', 'Light bites and drinks are served.', 'Wraps up around 2:30 PM.'],
+    notes: ['Everyone is welcome.', 'Light bites and drinks are served.', 'Wraps up around 2:30 PM.'],
     tips: [
       'Ask the artist for a design that suits your Sangeet and wedding outfits; henna lasts about a week.',
       'Do not wash the hand for a few hours after the paste flakes off. A dab of lemon and sugar helps it darken.',
@@ -320,7 +320,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     title: 'Mehendi', subtitle: 'La Tarde de la Henna', marathiTitle: 'Mehendi',
     tagline: 'Donde empieza la semana: henna, música y una tarde dorada sin prisa.',
     heroImage: pexels(28496968), accent: '#C2185B',
-    intro: 'Toda boda india empieza con una respiración, no con una explosión. El Mehendi es la nuestra: una tarde relajada y soleada en la que artistas dibujan intrincados diseños de henna en las manos y los pies de Pavitra mientras las mujeres se reúnen con chai, bocadillos y música. Es el momento en que la semana empieza oficialmente y la mejor ocasión para aclimatarse, conocer a todos y decorarte las manos.',
+    intro: 'Toda boda india empieza con una respiración, no con una explosión. El Mehendi es la nuestra: una tarde relajada y soleada en la que artistas dibujan intrincados diseños de henna en las manos y los pies de Pavitra mientras todos se reúnen con chai, bocadillos y música. Vengan todos: este día no es solo para las mujeres. Es el momento en que la semana empieza oficialmente y la mejor ocasión para aclimatarse, conocer a todos y decorarte las manos.',
     significance: 'El Mehendi (henna) es una de las tradiciones nupciales más antiguas del sur de Asia. La pasta, hecha de hojas de henna molidas, refresca la piel y calma los nervios de la novia antes de sus grandes días. El folclore añade un giro: cuanto más oscura la mancha, más profundo será el amor que recibirá de su esposo y su familia política. En algún lugar del diseño de Pavitra estará escondido el nombre de Ramón, y la tradición dice que él tiene que encontrarlo.',
     moments: [
       { time: '11:00 AM', title: 'Se abren las puertas', desc: 'Llega con música, chai y bocadillos. Busca un lugar cerca de las artistas.' },
@@ -330,7 +330,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
       { time: '2:30 PM', title: 'Cierre', desc: 'La pasta necesita tiempo para fijarse. Regresa al hotel, déjala secar y retírala para ver el resultado.' },
     ],
     expect: [
-      'Una reunión solo para damas. Caballeros, tienen la mañana libre.',
+      'Están todos invitados. Caballeros, vengan a pasarla bien: hay chai, música y un lugar para ustedes.',
       'Un ritmo tranquilo y social: piensa en una fiesta de jardín, no en una pista de baile.',
       'La henna tarda de 20 a 30 minutos en secar y unas horas en fijarse. Mantén libre la mano que decores por un rato.',
       'Bocadillos y bebidas durante toda la tarde.',
@@ -346,7 +346,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
       theme: 'Vibrante y Colorido',
       description: 'Divertido, casual y festivo. Es el día de los estampados florales, los colores vivos y cualquier cosa que te haga feliz.',
       women: 'Un Anarkali brillante, una Lehenga ligera, un vestido largo vaporoso o un enterizo estampado. Los pasteles y florales lucen preciosos junto a la henna.',
-      men: 'No aplica: el Mehendi es solo para damas. Caballeros, la Guía de Viaje tiene ideas para una mañana libre en la ciudad.',
+      men: 'Una Kurta ligera de algodón o lino, o una camisa de manga corta con chinos. Los colores vivos y los estampados son bienvenidos. La manga corta ayuda si también quieres un poco de henna.',
       palette: ['#E91E63', '#9C27B0', '#00BCD4', '#8BC34A'],
       tips: [
         'Sin mangas o mangas cortas facilitan la aplicación de la henna.',
@@ -354,7 +354,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
         'Sandalias o zapatos planos cómodos. Estarás sentada, conversando y moviéndote entre salones.',
         'Si quieres henna, lleva la mano derecha libre de anillos y pulseras.',
       ],
-      attireIds: ['anarkali', 'lehenga'],
+      attireIds: ['anarkali', 'lehenga', 'kurta'],
     },
     glossary: [
       { term: 'Mehendi', meaning: 'Henna: tanto la pasta vegetal como la celebración misma.' },
@@ -362,7 +362,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
       { term: 'Chai', meaning: 'Té con leche y especias. Habrá de sobra.' },
       { term: 'Bollywood', meaning: 'La industria del cine de Mumbai y la fuente de casi toda la música de esta semana.' },
     ],
-    notes: ['Solo para damas.', 'Se sirven bocadillos y bebidas.', 'Termina alrededor de las 2:30 PM.'],
+    notes: ['Todos son bienvenidos.', 'Se sirven bocadillos y bebidas.', 'Termina alrededor de las 2:30 PM.'],
     tips: [
       'Pídele a la artista un diseño que combine con tus atuendos del Sangeet y la boda; la henna dura cerca de una semana.',
       'No te laves la mano durante unas horas después de retirar la pasta. Un toque de limón con azúcar ayuda a que oscurezca.',
@@ -546,7 +546,7 @@ export const ATTIRE_GUIDE_EN: AttireItem[] = [
   { id: 'yellow-kurta', name: 'Kurta Set', pronunciation: 'Kur-ta', gender: 'Women', description: 'A comfortable, lightweight tunic worn with pants or leggings. Yellow or Orange is the traditional color for the Haldi ceremony as it signifies purity and glow.', bestFor: ['Haldi'], imageUrl: 'https://raw.githubusercontent.com/rf0513/pavitra-and-ramon-wedding/main/yellow-kurta.png' },
   { id: 'lehenga', name: 'Lehenga Choli', pronunciation: 'Leh-hen-gah', gender: 'Women', description: 'A three-piece outfit consisting of a long, full skirt (Lehenga), a fitted blouse (Choli), and a scarf drape (Dupatta). They can be simple or heavily embroidered.', bestFor: ['Vows & Sangeet', 'Wedding & Reception'], imageUrl: pexels(8881954, 800) },
   { id: 'saree', name: 'Saree', pronunciation: 'Saa-ree', gender: 'Women', description: 'A long drape of fabric (usually 6-9 yards) wrapped around the waist and draped over the shoulder, worn over a petticoat and a blouse. For our wedding, "Paithani" silk sarees are the local favorite.', bestFor: ['Wedding & Reception'], imageUrl: pexels(7037125, 800) },
-  { id: 'kurta', name: 'Kurta Pajama', pronunciation: 'Kur-ta Pa-ja-ma', gender: 'Men', description: 'A loose, collarless shirt (Kurta) falling below the knees, worn with lightweight trousers (Pajama). It is comfortable and perfect for daytime events.', bestFor: ['Haldi', 'Mehendi'], imageUrl: pexels(28113665, 800) },
+  { id: 'kurta', name: 'Kurta Pajama', pronunciation: 'Kur-ta Pa-ja-ma', gender: 'Men', description: 'A loose, collarless shirt (Kurta) falling below the knees, worn with lightweight trousers (Pajama). It is comfortable and perfect for daytime events.', bestFor: ['Mehendi', 'Haldi'], imageUrl: pexels(28113665, 800) },
   { id: 'sherwani', name: 'Sherwani', pronunciation: 'Sher-va-nee', gender: 'Men', description: 'A coat-like garment worn over a kurta, usually made of heavier fabric like silk or wool with lining. It is the equivalent of a tuxedo in Indian formal wear.', bestFor: ['Wedding & Reception'], imageUrl: pexels(11748430, 800) },
   { id: 'anarkali', name: 'Anarkali', pronunciation: 'Ah-nar-ka-lee', gender: 'Women', description: 'A long, frock-style top that flares out from the waist, worn with slim pants. It is essentially a very elegant dress and is comfortable for dancing.', bestFor: ['Mehendi', 'Vows & Sangeet'], imageUrl: pexels(18380706, 800) },
   { id: 'bandhgala', name: 'Bandhgala / Jodhpuri', pronunciation: 'Band-ga-la', gender: 'Men', description: 'A formal evening suit featuring a coat with a standing collar (Nehru collar). It looks sharp, modern, and is a great alternative to a western suit.', bestFor: ['Vows & Sangeet', 'Wedding & Reception'], imageUrl: 'https://manyavar.scene7.com/is/image/manyavar/8905100475357.23637_19-05-2023-10-17:650x900?&dpr=on,2' },
@@ -556,7 +556,7 @@ export const ATTIRE_GUIDE_ES: AttireItem[] = [
   { id: 'yellow-kurta', name: 'Kurta', pronunciation: 'Kur-ta', gender: 'Women', description: 'Una túnica cómoda y ligera que se usa con pantalones o leggings. El amarillo o naranja es el color tradicional de la ceremonia Haldi, ya que significa pureza y brillo.', bestFor: ['Haldi'], imageUrl: 'https://raw.githubusercontent.com/rf0513/pavitra-and-ramon-wedding/main/yellow-kurta.png' },
   { id: 'lehenga', name: 'Lehenga Choli', pronunciation: 'Leh-hen-gah', gender: 'Women', description: 'Un traje de tres piezas que consta de una falda larga y amplia (Lehenga), una blusa ajustada (Choli) y una bufanda drapeada (Dupatta). Pueden ser simples o muy bordados.', bestFor: ['Votos y Sangeet', 'Boda y Recepción'], imageUrl: pexels(8881954, 800) },
   { id: 'saree', name: 'Sari', pronunciation: 'Saa-ree', gender: 'Women', description: 'Una larga tela (generalmente 6-9 yardas) envuelta alrededor de la cintura y drapeada sobre el hombro, usada sobre una enagua y una blusa. Para nuestra boda, los saris de seda "Paithani" son los favoritos locales.', bestFor: ['Boda y Recepción'], imageUrl: pexels(7037125, 800) },
-  { id: 'kurta', name: 'Kurta Pajama', pronunciation: 'Kur-ta Pa-ja-ma', gender: 'Men', description: 'Una camisa suelta y sin cuello (Kurta) que cae por debajo de las rodillas, usada con pantalones ligeros (Pajama). Es cómodo y perfecto para eventos diurnos.', bestFor: ['Haldi', 'Mehendi'], imageUrl: pexels(28113665, 800) },
+  { id: 'kurta', name: 'Kurta Pajama', pronunciation: 'Kur-ta Pa-ja-ma', gender: 'Men', description: 'Una camisa suelta y sin cuello (Kurta) que cae por debajo de las rodillas, usada con pantalones ligeros (Pajama). Es cómodo y perfecto para eventos diurnos.', bestFor: ['Mehendi', 'Haldi'], imageUrl: pexels(28113665, 800) },
   { id: 'sherwani', name: 'Sherwani', pronunciation: 'Sher-va-nee', gender: 'Men', description: 'Una prenda similar a un abrigo que se usa sobre una kurta, generalmente hecha de tela más pesada como seda o lana con forro. Es el equivalente a un esmoquin en la vestimenta formal india.', bestFor: ['Boda y Recepción'], imageUrl: pexels(11748430, 800) },
   { id: 'anarkali', name: 'Anarkali', pronunciation: 'Ah-nar-ka-lee', gender: 'Women', description: 'Un top largo estilo vestido que se ensancha desde la cintura, usado con pantalones ajustados. Es esencialmente un vestido muy elegante y es cómodo para bailar.', bestFor: ['Mehendi', 'Votos y Sangeet'], imageUrl: pexels(18380706, 800) },
   { id: 'bandhgala', name: 'Bandhgala / Jodhpuri', pronunciation: 'Band-ga-la', gender: 'Men', description: 'Un traje de noche formal que presenta un abrigo con cuello alto (cuello Nehru). Se ve elegante, moderno y es una gran alternativa a un traje occidental.', bestFor: ['Votos y Sangeet', 'Boda y Recepción'], imageUrl: 'https://manyavar.scene7.com/is/image/manyavar/8905100475357.23637_19-05-2023-10-17:650x900?&dpr=on,2' },
