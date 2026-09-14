@@ -63,6 +63,8 @@ export interface Celebration {
   day: number;
   weekday: string;
   dateLabel: string;
+  /** Short form for tight spots such as the home cards, e.g. "Feb 2". */
+  dateShort: string;
   title: string;
   subtitle: string;
   marathiTitle?: string;

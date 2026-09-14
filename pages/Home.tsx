@@ -202,7 +202,7 @@ const Home: React.FC = () => {
                         </div>
                       </div>
                     </StepFrame>
-                    <span className="absolute -top-3 left-3 sm:left-5 px-[10px] sm:px-3 py-[6px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[8px] sm:text-[9px] tracking-[.24em] sm:tracking-[.3em] uppercase whitespace-nowrap deco-chamfer-8">{c.dateLabel}</span>
+                    <span className="absolute -top-3 left-3 sm:left-5 px-3 py-[6px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[9px] sm:text-[10px] tracking-[.3em] uppercase whitespace-nowrap deco-chamfer-8">{c.dateShort}</span>
                   </div>
                   <p className="mt-4 mb-2 font-serif text-[14px] sm:text-[17px] leading-[1.35]">{c.tagline}</p>
                   <span className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-ink">

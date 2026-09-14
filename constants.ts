@@ -94,7 +94,7 @@ const pexels = (id: number, w = 1200) => `https://images.pexels.com/photos/${id}
 // a guest about that day lives here.
 export const CELEBRATIONS_EN: Celebration[] = [
   {
-    id: 'mehendi', eventId: '1', day: 1, weekday: 'Tuesday', dateLabel: '2 February 2027',
+    id: 'mehendi', eventId: '1', day: 1, weekday: 'Tuesday', dateLabel: '2 February 2027', dateShort: 'Feb 2',
     title: 'Mehendi', subtitle: 'The Henna Afternoon', marathiTitle: 'Mehendi',
     tagline: 'Where the week begins: henna, music, and a slow golden afternoon.',
     heroImage: pexels(28496968), accent: '#C2185B',
@@ -148,7 +148,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     ],
   },
   {
-    id: 'haldi', eventId: '2', day: 2, weekday: 'Wednesday', dateLabel: '3 February 2027',
+    id: 'haldi', eventId: '2', day: 2, weekday: 'Wednesday', dateLabel: '3 February 2027', dateShort: 'Feb 3',
     title: 'Haldi', subtitle: 'The Turmeric Ceremony', marathiTitle: 'Halad Chadavne',
     tagline: 'Yellow everywhere. Drums, laughter, turmeric, and the happiest mess of the week.',
     heroImage: pexels(33508493), accent: '#E6A100',
@@ -202,7 +202,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     ],
   },
   {
-    id: 'sangeet', eventId: '3', day: 3, weekday: 'Thursday', dateLabel: '4 February 2027',
+    id: 'sangeet', eventId: '3', day: 3, weekday: 'Thursday', dateLabel: '4 February 2027', dateShort: 'Feb 4',
     title: 'Vows & Sangeet', subtitle: 'An Evening of Vows, Song & Dance', marathiTitle: 'Sangeet',
     tagline: 'Two families, one dance floor. Dress to shine.',
     heroImage: pexels(28589007), accent: '#5E35B1',
@@ -256,7 +256,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     ],
   },
   {
-    id: 'wedding', eventId: '4', day: 4, weekday: 'Friday', dateLabel: '5 February 2027',
+    id: 'wedding', eventId: '4', day: 4, weekday: 'Friday', dateLabel: '5 February 2027', dateShort: 'Feb 5',
     title: 'Wedding & Reception', subtitle: 'The Maharashtrian Wedding', marathiTitle: 'Lagna',
     tagline: 'Sacred fire, seven steps, and a grand reception to send us off.',
     heroImage: pexels(30171219), accent: '#B71C1C',
@@ -315,7 +315,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
 
 export const CELEBRATIONS_ES: Celebration[] = [
   {
-    id: 'mehendi', eventId: '1', day: 1, weekday: 'Martes', dateLabel: '2 de febrero de 2027',
+    id: 'mehendi', eventId: '1', day: 1, weekday: 'Martes', dateLabel: '2 de febrero de 2027', dateShort: '2 Feb',
     title: 'Mehendi', subtitle: 'La Tarde de la Henna', marathiTitle: 'Mehendi',
     tagline: 'Donde empieza la semana: henna, música y una tarde dorada sin prisa.',
     heroImage: pexels(28496968), accent: '#C2185B',
@@ -369,7 +369,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     ],
   },
   {
-    id: 'haldi', eventId: '2', day: 2, weekday: 'Miércoles', dateLabel: '3 de febrero de 2027',
+    id: 'haldi', eventId: '2', day: 2, weekday: 'Miércoles', dateLabel: '3 de febrero de 2027', dateShort: '3 Feb',
     title: 'Haldi', subtitle: 'La Ceremonia de la Cúrcuma', marathiTitle: 'Halad Chadavne',
     tagline: 'Amarillo por todas partes. Tambores, risas, cúrcuma y el desorden más feliz de la semana.',
     heroImage: pexels(33508493), accent: '#E6A100',
@@ -423,7 +423,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     ],
   },
   {
-    id: 'sangeet', eventId: '3', day: 3, weekday: 'Jueves', dateLabel: '4 de febrero de 2027',
+    id: 'sangeet', eventId: '3', day: 3, weekday: 'Jueves', dateLabel: '4 de febrero de 2027', dateShort: '4 Feb',
     title: 'Votos y Sangeet', subtitle: 'Una Noche de Votos, Canto y Baile', marathiTitle: 'Sangeet',
     tagline: 'Dos familias, una pista de baile. Vístete para brillar.',
     heroImage: pexels(28589007), accent: '#5E35B1',
@@ -477,7 +477,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     ],
   },
   {
-    id: 'wedding', eventId: '4', day: 4, weekday: 'Viernes', dateLabel: '5 de febrero de 2027',
+    id: 'wedding', eventId: '4', day: 4, weekday: 'Viernes', dateLabel: '5 de febrero de 2027', dateShort: '5 Feb',
     title: 'Boda y Recepción', subtitle: 'La Boda Maharashtriana', marathiTitle: 'Lagna',
     tagline: 'Fuego sagrado, siete pasos y una gran recepción para despedirnos.',
     heroImage: pexels(30171219), accent: '#B71C1C',
