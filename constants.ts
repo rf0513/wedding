@@ -29,6 +29,7 @@ import sfPalace1280 from './assets/photos/sf-palace-1280.webp';
 import sfPalace1920 from './assets/photos/sf-palace-1920.webp';
 import sfTwirl from './assets/photos/sf-twirl.webp';
 import sfMarina from './assets/photos/sf-marina.webp';
+import sangeetDance from './assets/photos/sangeet-dance.webp';
 // assets/photos/sf-grass.webp is generated but not imported: it is a portrait, and
 // every slot left on the site is wide. Import it here to use it — it costs nothing
 // while it sits unreferenced, since only imported assets reach the bundle.
@@ -119,7 +120,7 @@ export const STORY_EVENTS_EN: StoryEvent[] = [
   { id: '2', date: 'May 2022', title: 'Rocky Mountains', desc: 'They began dating after a spontanous trip to Rocky Mountains National Park in Colorado over Memorial Day.', img: storyRockies },
   { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: sfMarina },
   { id: '4', date: 'Oct 12, 2025', title: 'The Proposal', desc: "Sunset at Slacker's Hill. The Golden Gate Bridge, the San Francisco city skyline, and the hidden photographer as our witnesses.", img: heroProposal1920 },
-  { id: '5', date: 'Sep 12, 2026', title: 'The Engagement', desc: 'Back in Mumbai, both families together, for the puja that made it official: henna, a copper kalash, and the first of the ceremonies.', img: engagementCeremony },
+  { id: '5', date: 'Sep 12, 2026', title: 'The Engagement', desc: 'Another trip to Mumbai and a puja made it official: henna, a copper kalash, and the first of the many ceremonies.', img: engagementCeremony },
 ];
 
 export const STORY_EVENTS_ES: StoryEvent[] = [
@@ -127,7 +128,7 @@ export const STORY_EVENTS_ES: StoryEvent[] = [
   { id: '2', date: 'May 2022', title: 'Montañas Rocosas', desc: 'Comenzaron a salir después de un viaje espontáneo al Parque Nacional de las Montañas Rocosas en Colorado durante el Día de los Caídos.', img: storyRockies },
   { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: sfMarina },
   { id: '4', date: 'Oct 12, 2025', title: 'La Propuesta', desc: "Atardecer en Slacker's Hill. El puente Golden Gate, el horizonte de la ciudad de San Francisco y el fotógrafo oculto como nuestros testigos.", img: heroProposal1920 },
-  { id: '5', date: 'Sep 12, 2026', title: 'El Compromiso', desc: 'De vuelta en Mumbai, con las dos familias juntas, la puja que lo hizo oficial: henna, un kalash de cobre y la primera de las ceremonias.', img: engagementCeremony },
+  { id: '5', date: 'Sep 12, 2026', title: 'El Compromiso', desc: 'Otro viaje a Mumbai y una puja lo hicieron oficial: henna, un kalash de cobre y la primera de muchas ceremonias.', img: engagementCeremony },
 ];
 
 // The story page's header ground. A letterbox header wants a composition built wide:
@@ -278,7 +279,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     id: 'sangeet', eventId: '3', day: 3, weekday: 'Thursday', dateLabel: '4 February 2027', dateShort: '4 Feb',
     title: 'Vows & Sangeet', subtitle: 'An Evening of Vows, Song & Dance', marathiTitle: 'Sangeet',
     tagline: 'Two families, one dance floor. Dress to shine.',
-    heroImage: pexels(28589007), accent: '#5E35B1',
+    heroImage: sangeetDance, accent: '#5E35B1',
     intro: 'This is the night we have been most excited to plan. It opens as the sun sets over the Mahalaxmi Race Course, with Pavitra and Ramon exchanging vows in their own words in front of everyone they love. Then the Sangeet takes over: choreographed performances by family and friends, dinner under the lights, and an open dance floor that runs Bollywood, Latin, and pop late into the night.',
     significance: 'Sangeet means "sung together". Traditionally the women of both families would gather in the days before a wedding to sing folk songs, tease the groom, and get to know each other. Today it has grown into the biggest party of the week: a night of performances, music, and dancing built to bring two families onto one floor. For us it also carries the vows, a nod to Ramon\'s Panamanian side and the Western ceremony many of you know, so both traditions get their moment.',
     moments: [
@@ -499,7 +500,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     id: 'sangeet', eventId: '3', day: 3, weekday: 'Jueves', dateLabel: '4 de febrero de 2027', dateShort: '4 Feb',
     title: 'Votos y Sangeet', subtitle: 'Una Noche de Votos, Canto y Baile', marathiTitle: 'Sangeet',
     tagline: 'Dos familias, una pista de baile. Vístete para brillar.',
-    heroImage: pexels(28589007), accent: '#5E35B1',
+    heroImage: sangeetDance, accent: '#5E35B1',
     intro: 'Esta es la noche que más nos ha emocionado planear. Empieza mientras el sol se pone sobre el Hipódromo de Mahalaxmi, con Pavitra y Ramón intercambiando votos con sus propias palabras frente a todos los que aman. Luego el Sangeet toma el control: presentaciones coreografiadas de familiares y amigos, cena bajo las luces y una pista abierta con Bollywood, música latina y pop hasta tarde.',
     significance: 'Sangeet significa "cantado juntos". Tradicionalmente, las mujeres de ambas familias se reunían en los días previos a la boda para cantar canciones populares, bromear con el novio y conocerse. Hoy se ha convertido en la fiesta más grande de la semana: una noche de presentaciones, música y baile hecha para llevar a dos familias a una misma pista. Para nosotros también incluye los votos, un guiño al lado panameño de Ramón y a la ceremonia occidental que muchos conocen, para que ambas tradiciones tengan su momento.',
     moments: [

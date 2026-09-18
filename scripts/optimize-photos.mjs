@@ -55,6 +55,7 @@ const PHOTOS = [
   { file: 'sf-twirl.jpg', name: 'sf-twirl', widths: [1920] },
   { file: 'sf-grass.jpg', name: 'sf-grass', widths: [1920] },
   { file: 'sf-marina.jpg', name: 'sf-marina', widths: [1520] },
+  { file: 'sangeet-dance.jpg', name: 'sangeet-dance', widths: [1520] },
 ];
 
 await mkdir(OUT, { recursive: true });
