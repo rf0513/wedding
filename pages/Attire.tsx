@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ATTIRE_GUIDE_EN, ATTIRE_GUIDE_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
-import { Reveal, StepFrame, TileBand, PageHeader, btnGhostLight } from '../components/DecoUI';
+import { Reveal, StepFrame, TileBand, PageHeader, btnGhostLight, linkArrow } from '../components/DecoUI';
 import { Lotus } from '../components/Ornaments';
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -114,6 +114,9 @@ const Attire: React.FC = () => {
             <Lotus size={64} className="mx-auto mb-4" />
             <h3 className="m-0 mb-2 font-serif font-normal text-2xl leading-[1.15]">{t('traditions_q_title')}</h3>
             <p className="m-0 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/80">{t('traditions_q_desc')}</p>
+            <a href="#/qna" onClick={(e) => { e.preventDefault(); navigate('/qna'); window.scrollTo(0, 0); }} className={`${linkArrow} mt-6 text-wedding-bronze hover:text-wedding-ink`}>
+              {t('traditions_q_link')}<span className="inline-block w-[22px] h-px bg-current" />
+            </a>
           </div>
           <div className="mt-12 text-center">
             <a onClick={goHome} className={btnGhostLight}>

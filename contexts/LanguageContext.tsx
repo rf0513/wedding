@@ -20,16 +20,19 @@ const translations = {
     nav_home: "Home",
     nav_story: "Our Story",
     nav_events: "Schedule",
-    nav_travel: "Travel Guide",
+    nav_travel: "Mumbai",
     nav_celebrations: "The Celebrations",
-    nav_attire: "Wardrobe & Shopping",
+    nav_attire: "What to Wear",
     nav_registry: "Registry",
     nav_rsvp: "RSVP",
     nav_qna: "Q&A",
 
     // Home
-    home_view_events: "View Schedule",
-    home_quote: "“As soon as I saw you, I knew an adventure was going to happen.”",
+    home_view_events: "The Four Days",
+    // ➜ EDIT: a short welcome from the two of you (this is a draft)
+    home_note_kicker: "A note from us",
+    home_note: "We met in Albuquerque, made a home in the Bay Area, and are getting married where Pavitra's story began: Mumbai. Over four days we will gather our families from Maharashtra, Panama and the United States, and nothing would make us happier than to have you there, from the first henna on Tuesday to the last dance on Friday.",
+    home_note_sign: "Pavitra & Ramon",
     countdown_label: "Until the Mehendi",
     cd_days: "Days",
     cd_hours: "Hours",
@@ -51,9 +54,9 @@ const translations = {
     journey_place_4: "San Francisco, CA",
 
     // Events / Programme
-    events_subtitle: "The Schedule",
-    events_title: "Wedding Schedule",
-    events_desc: "Join us for a vibrant celebration of love across Mumbai's most beautiful venues.",
+    events_subtitle: "At a glance",
+    events_title: "The Programme",
+    events_desc: "Shuttles leave from Taj The Trees before every event.",
     events_shuttle: "Departs Taj The Trees at",
     lbl_time: "Time",
     lbl_venue: "Venue",
@@ -124,7 +127,7 @@ const translations = {
     cel_dress_title: "Dress Guide",
     cel_dress_tips: "Style Notes",
     cel_inspo_title: "Outfit Inspiration",
-    cel_full_wardrobe: "Full Wardrobe Guide & Where to Shop",
+    cel_full_wardrobe: "What to Wear & Where to Shop",
     cel_glossary_kicker: "A little vocabulary",
     cel_glossary_title: "Words You'll Hear",
     cel_logistics_kicker: "Logistics",
@@ -142,7 +145,7 @@ const translations = {
 
     // Wardrobe guide
     traditions_subtitle: "For Our Guests",
-    attire_title: "Wardrobe & Shopping",
+    attire_title: "What to Wear",
     attire_desc: "Unsure what a Lehenga or a Sherwani is, or where to find one? This is your cheat sheet. For the dress code of a specific day, head to that celebration's page.",
     attire_glance_title: "Dress Code at a Glance",
     attire_glance_desc: "Four days, four moods. Tap a day for the full guide.",
@@ -155,7 +158,8 @@ const translations = {
     traditions_shop_title: "Where to Shop",
     traditions_shop_desc: "Whether you prefer to order online before your trip or experience the vibrant fashion of Mumbai in person, here are our curated recommendations.",
     traditions_q_title: "Still have questions?",
-    traditions_q_desc: "Don't worry about getting everything perfect. The most important thing is your presence!",
+    traditions_q_desc: "Don't worry about getting everything perfect. The most important thing is your presence.",
+    traditions_q_link: "Read the Q&A",
 
     // Registry
     registry_kicker: "Gifts",
@@ -163,7 +167,9 @@ const translations = {
     registry_desc: "Your attendance and love is all we need, but here are some suggestions if the plane ticket to Mumbai was not expensive enough:",
     registry_charity: "If you are attending this wedding, it is likely you have been blessed with opportunities. Others are not as fortunate. Consider supporting Educate Girls Globally, one of the most rigorously measured and impactful education charities in India.",
     registry_donate: "Donate Now",
-    registry_btc: "If you insist of quantifying your love to us, you can send Bitcoin to the wallet below.",
+    registry_btc: "If you insist on quantifying your love to us, you can send Bitcoin to the wallet below.",
+    registry_show_btc: "Show wallet address",
+    registry_hide_btc: "Hide wallet address",
     registry_copy: "Copy Address",
     registry_copied: "Copied",
 
@@ -185,11 +191,11 @@ const translations = {
     rsvp_back_home: "Back to Home",
 
     // Q&A
-    qna_title: "Frequently Asked Questions",
+    qna_title: "Q&A",
     qna_subtitle: "Everything you need to know for the big trip.",
 
     // Footer
-    footer_msg: "See you in Mumbai!"
+    footer_msg: "See you in Mumbai"
   },
   es: {
     // Chrome
@@ -202,16 +208,18 @@ const translations = {
     nav_home: "Inicio",
     nav_story: "Nuestra Historia",
     nav_events: "Itinerario",
-    nav_travel: "Guía de Viaje",
+    nav_travel: "Mumbai",
     nav_celebrations: "Las Celebraciones",
-    nav_attire: "Vestuario y Compras",
+    nav_attire: "Qué Ponerse",
     nav_registry: "Regalos",
     nav_rsvp: "RSVP",
     nav_qna: "Preguntas",
 
     // Home
-    home_view_events: "Ver Itinerario",
-    home_quote: "“Tan pronto como te vi, supe que una aventura estaba por suceder.”",
+    home_view_events: "Los Cuatro Días",
+    home_note_kicker: "Una nota de nosotros",
+    home_note: "Nos conocimos en Albuquerque, hicimos un hogar en el Área de la Bahía y nos casamos donde empezó la historia de Pavitra: Mumbai. Durante cuatro días reuniremos a nuestras familias de Maharashtra, Panamá y Estados Unidos, y nada nos haría más felices que tenerte allí, desde la primera henna del martes hasta el último baile del viernes.",
+    home_note_sign: "Pavitra y Ramón",
     countdown_label: "Para el Mehendi",
     cd_days: "Días",
     cd_hours: "Horas",
@@ -233,9 +241,9 @@ const translations = {
     journey_place_4: "San Francisco, CA",
 
     // Events / Programme
-    events_subtitle: "El Itinerario",
-    events_title: "Itinerario de la Boda",
-    events_desc: "Únase a nosotros para una vibrante celebración del amor en los lugares más hermosos de Mumbai.",
+    events_subtitle: "De un vistazo",
+    events_title: "El Programa",
+    events_desc: "Los traslados salen de Taj The Trees antes de cada evento.",
     events_shuttle: "Sale de Taj The Trees a las",
     lbl_time: "Hora",
     lbl_venue: "Lugar",
@@ -306,7 +314,7 @@ const translations = {
     cel_dress_title: "Guía de vestimenta",
     cel_dress_tips: "Notas de estilo",
     cel_inspo_title: "Inspiración de atuendos",
-    cel_full_wardrobe: "Guía completa de vestuario y dónde comprar",
+    cel_full_wardrobe: "Qué ponerse y dónde comprar",
     cel_glossary_kicker: "Un poco de vocabulario",
     cel_glossary_title: "Palabras que escucharás",
     cel_logistics_kicker: "Logística",
@@ -324,7 +332,7 @@ const translations = {
 
     // Wardrobe guide
     traditions_subtitle: "Para Nuestros Invitados",
-    attire_title: "Vestuario y Compras",
+    attire_title: "Qué Ponerse",
     attire_desc: "¿No sabes qué es una Lehenga o un Sherwani, ni dónde conseguirlos? Esta es tu hoja de trucos. Para el código de vestimenta de un día específico, visita la página de esa celebración.",
     attire_glance_title: "Código de vestimenta de un vistazo",
     attire_glance_desc: "Cuatro días, cuatro ambientes. Toca un día para ver la guía completa.",
@@ -337,7 +345,8 @@ const translations = {
     traditions_shop_title: "Dónde Comprar",
     traditions_shop_desc: "Ya sea que prefieras ordenar en línea antes de tu viaje o experimentar la vibrante moda de Mumbai en persona, aquí están nuestras recomendaciones.",
     traditions_q_title: "¿Tienes preguntas?",
-    traditions_q_desc: "No te preocupes por que todo sea perfecto. ¡Lo más importante es tu presencia!",
+    traditions_q_desc: "No te preocupes por que todo sea perfecto. Lo más importante es tu presencia.",
+    traditions_q_link: "Leer las preguntas",
 
     // Registry
     registry_kicker: "Regalos",
@@ -346,6 +355,8 @@ const translations = {
     registry_charity: "Si asistes a esta boda, es probable que hayas sido bendecido con oportunidades. Otros no son tan afortunados. Considere apoyar a Educate Girls Globally, una de las organizaciones benéficas educativas de mayor impacto en la India.",
     registry_donate: "Donar Ahora",
     registry_btc: "Si insistes en cuantificar tu amor por nosotros, puedes enviar Bitcoin a la siguiente billetera.",
+    registry_show_btc: "Mostrar dirección de la billetera",
+    registry_hide_btc: "Ocultar dirección",
     registry_copy: "Copiar Dirección",
     registry_copied: "Copiado",
 
@@ -367,11 +378,11 @@ const translations = {
     rsvp_back_home: "Volver al Inicio",
 
     // Q&A
-    qna_title: "Preguntas Frecuentes",
+    qna_title: "Preguntas",
     qna_subtitle: "Todo lo que necesitas saber para el gran viaje.",
 
     // Footer
-    footer_msg: "¡Nos vemos en Mumbai!"
+    footer_msg: "Nos vemos en Mumbai"
   }
 };
 

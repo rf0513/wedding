@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
-import { Reveal, StepFrame, HeroFrame, Marquee, SectionTitle, TileBand, useCountdown, useSectionNav, btnPrimary, btnGhostDark, linkArrow } from '../components/DecoUI';
-import { SunburstFloor, RayFan, MirrorEmblem, RisingSun, Lotus, PalmFan, DecoRule, CornerBrackets } from '../components/Ornaments';
+import { Reveal, StepFrame, HeroFrame, BrassBand, SectionTitle, TileBand, useCountdown, useSectionNav, btnPrimary, btnGhostDark, linkArrow } from '../components/DecoUI';
+import { SunburstFloor, RayFan, MirrorEmblem, RisingSun, Lotus, PalmFan, CornerBrackets } from '../components/Ornaments';
 import Curtain from '../components/Curtain';
 import HeroSequence from '../components/HeroSequence';
 import StoryJourney from '../components/StoryJourney';
-
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
 const Home: React.FC = () => {
   const { language, t } = useLanguage();
@@ -34,7 +32,10 @@ const Home: React.FC = () => {
   const submitRsvp = (e: React.FormEvent) => { e.preventDefault(); setRsvpDone(true); };
   const resetRsvp = () => { setRsvpDone(false); setForm({ first: '', last: '', email: '', guests: '1', diet: '' }); setAttending('yes'); };
 
-  // Registry BTC copy
+  // Registry
+  const charity = registryItems.find((r) => r.id === 'charity');
+  const btc = registryItems.find((r) => r.id === 'btc');
+  const [showBtc, setShowBtc] = useState(false);
   const [copied, setCopied] = useState(false);
   const copyBtc = () => {
     try { navigator.clipboard.writeText(WEDDING_DATA.btcAddress); } catch {}
@@ -89,7 +90,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <Marquee text="Mumbai ✦ 2 – 5 February 2027 ✦ #PR27 ✦ Pavitra & Ramon ✦ Mehendi ✦ Haldi ✦ Sangeet ✦ Lagna ✦ " />
+      <BrassBand text={`${t('hero_dates')} · Mumbai`} />
 
       {/* ═══ COUNTDOWN MEDALLION + QUOTE ═══ */}
       <section className="marble-white text-wedding-ink pt-16 sm:pt-20 px-6 pb-16 sm:pb-24 overflow-hidden">
@@ -107,12 +108,13 @@ const Home: React.FC = () => {
             <p className={`mt-6 mb-0 text-center ${label} text-wedding-bronze`}>{t('countdown_label')}</p>
           </Reveal>
           <Reveal delay={0.1} className="text-center lg:text-left">
-            <div className="inlay marble-white p-9 sm:p-12 lg:p-14 text-center">
+            <div className="inlay marble-white px-9 py-10 sm:px-12 sm:py-12 lg:px-14 text-center">
               <RisingSun size={54} color="#0C0B0A" className="mx-auto" />
-              <blockquote className="mt-6 mb-0 font-italic italic text-[clamp(26px,4vw,40px)] leading-[1.3] text-wedding-ink" style={{ textWrap: 'balance' as any }}>
-                {t('home_quote')}
-              </blockquote>
-              <p className={`mt-6 mb-0 ${label} text-wedding-bronze`}>A.A. Milne</p>
+              <p className={`mt-4 mb-5 ${label} text-wedding-bronze`}>{t('home_note_kicker')}</p>
+              <p className="m-0 font-italic italic text-[clamp(19px,2.4vw,23px)] leading-[1.55] text-wedding-ink" style={{ textWrap: 'pretty' as any }}>
+                {t('home_note')}
+              </p>
+              <p className="mt-6 mb-0 font-serif text-[20px] tracking-[.04em] text-wedding-ink">{t('home_note_sign')}</p>
             </div>
           </Reveal>
         </div>
@@ -159,71 +161,59 @@ const Home: React.FC = () => {
               );
             })}
           </div>
-        </div>
-      </section>
 
-      <TileBand />
-
-      {/* ═══ PROGRAMME ═══ */}
-      <section id="programme" className="marble-white text-wedding-ink pt-20 sm:pt-24 pb-20 sm:pb-24">
-        <div className="max-w-[1000px] mx-auto px-5 sm:px-6">
-          <Reveal>
-            <SectionTitle kicker={t('events_subtitle')} title={t('events_title')} desc={t('events_desc')} />
-          </Reveal>
-          <Reveal className="mt-12 sm:mt-16">
-            <div className="inlay marble-white px-4 py-6 sm:px-10 sm:py-10">
-              <div className="flex flex-col">
-                {events.map((ev, i) => {
-                  const c = celebrationFor(ev.id);
-                  return (
-                    <article key={ev.id} className={`grid grid-cols-[64px_minmax(0,1fr)] sm:grid-cols-[96px_minmax(0,1fr)] md:grid-cols-[110px_minmax(0,1.1fr)_minmax(0,1fr)] gap-x-4 sm:gap-x-8 gap-y-4 py-7 sm:py-9 ${i > 0 ? 'border-t border-wedding-ink/60' : ''}`}>
-                      <div className="text-center">
-                        <div className="font-serif text-[44px] sm:text-[64px] leading-none text-wedding-ink tracking-[-.02em]">{ev.day}</div>
-                        <div className={`mt-[6px] ${label} text-wedding-bronze`}>{ev.month}</div>
-                        <span className="block mx-auto mt-3 w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className={`m-0 mb-[6px] ${label} text-wedding-bronze`}>{ROMAN[i]}{c ? ` · ${c.weekday}` : ''}</p>
-                        <h3 className="m-0 mb-[10px] font-serif font-normal text-[clamp(24px,5.5vw,34px)] leading-[1.1] text-wedding-ink">
-                          {c ? (
-                            <a href={`#/celebrations/${c.id}`} onClick={(e) => { e.preventDefault(); goDay(c.id); }} className="group inline-flex items-baseline gap-3 text-wedding-ink no-underline cursor-pointer hover:text-wedding-bronze transition-colors">
-                              {ev.title}
-                              <span aria-hidden className="font-sans text-[18px] text-wedding-gold transition-transform group-hover:translate-x-1">→</span>
-                            </a>
-                          ) : ev.title}
-                        </h3>
-                        <p className="m-0 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/80">{ev.description}</p>
-                      </div>
-                      <dl className="m-0 col-start-2 md:col-start-3 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-[8px] text-[13px] leading-[1.45] md:border-l md:border-wedding-ink/25 md:pl-8 self-start">
-                        <dt className={`${label} text-wedding-bronze pt-[2px]`}>{t('lbl_time')}</dt>
-                        <dd className="m-0 text-wedding-ink">{ev.time}</dd>
-                        <dt className={`${label} text-wedding-bronze pt-[2px]`}>{t('lbl_venue')}</dt>
-                        <dd className="m-0 text-wedding-ink">{ev.location}<span className="block text-wedding-ink/60 font-light">{ev.address}</span></dd>
-                        <dt className={`${label} text-wedding-bronze pt-[2px]`}>{t('lbl_shuttle')}</dt>
-                        <dd className="m-0 text-wedding-ink">{t('events_shuttle')} {ev.shuttleTime}</dd>
-                        <dt className={`${label} text-wedding-bronze pt-[2px]`}>{t('lbl_dress')}</dt>
-                        <dd className="m-0 text-wedding-ink">{ev.dressCode}</dd>
-                      </dl>
-                    </article>
-                  );
-                })}
+          {/* ═══ PROGRAMME · at a glance (old #programme links land here) ═══ */}
+          <Reveal id="programme" className="mt-16 sm:mt-20 scroll-mt-6">
+            <div className="flex items-end justify-between gap-6 mb-5 flex-wrap">
+              <div>
+                <p className={`m-0 mb-2 ${label} text-wedding-gold`}>{t('events_subtitle')}</p>
+                <h3 className="m-0 font-serif font-normal text-[clamp(26px,5vw,36px)] leading-[1.05] text-wedding-cream">{t('events_title')}</h3>
               </div>
-              <div className="border-t border-wedding-ink/60 pt-7 text-center">
-                <a onClick={() => goPage('/travel')} className={`${linkArrow} text-wedding-bronze hover:text-wedding-ink`}>
-                  {t('see_map')}<span className="inline-block w-[22px] h-px bg-current" />
-                </a>
+              <p className="m-0 font-italic italic text-[17px] text-wedding-cream/70">{t('events_desc')}</p>
+            </div>
+            <div className="border-y border-wedding-gold/60">
+              <div className={`hidden md:grid grid-cols-[88px_1.3fr_.8fr_1.1fr_.9fr_1.1fr] gap-x-6 py-3 border-b border-wedding-gold/30 ${label} text-[9px] text-wedding-gold/80`}>
+                <span>{t('lbl_date')}</span><span /><span>{t('lbl_time')}</span><span>{t('lbl_venue')}</span><span>{t('lbl_shuttle')}</span><span>{t('lbl_dress')}</span>
               </div>
+              {events.map((ev, i) => {
+                const c = celebrationFor(ev.id);
+                const cell = 'font-sans font-light text-[14px] leading-[1.45] text-wedding-cream/85';
+                const mlabel = `md:hidden ${label} text-[8px] text-wedding-gold/80 mr-2`;
+                return (
+                  <div key={ev.id} className={`grid grid-cols-[64px_minmax(0,1fr)] md:grid-cols-[88px_1.3fr_.8fr_1.1fr_.9fr_1.1fr] gap-x-4 md:gap-x-6 gap-y-1.5 py-5 md:items-baseline ${i > 0 ? 'border-t border-wedding-gold/30' : ''}`}>
+                    <div className="row-span-5 md:row-span-1">
+                      <span className="font-serif text-[30px] md:text-[34px] leading-none text-wedding-cream">{ev.day}</span>
+                      <span className={`block mt-1 ${label} text-[8px] text-wedding-gold`}>{ev.month}{c ? ` · ${c.weekday.slice(0, 3)}` : ''}</span>
+                    </div>
+                    <h4 className="m-0 font-serif font-normal text-[20px] md:text-[22px] leading-[1.15] text-wedding-cream">
+                      {c ? (
+                        <a href={`#/celebrations/${c.id}`} onClick={(e) => { e.preventDefault(); goDay(c.id); }} className="text-wedding-cream no-underline cursor-pointer hover:text-wedding-goldLight transition-colors">{ev.title}</a>
+                      ) : ev.title}
+                    </h4>
+                    <p className={`m-0 ${cell}`}><span className={mlabel}>{t('lbl_time')}</span>{ev.time}</p>
+                    <p className={`m-0 ${cell}`}><span className={mlabel}>{t('lbl_venue')}</span>{ev.location}<span className="hidden md:block text-[12px] text-wedding-cream/55">{ev.address}</span></p>
+                    <p className={`m-0 ${cell}`}><span className={mlabel}>{t('lbl_shuttle')}</span>{ev.shuttleTime}</p>
+                    <p className={`m-0 ${cell}`}><span className={mlabel}>{t('lbl_dress')}</span>{ev.dressCode}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="pt-6 text-center">
+              <a onClick={() => goPage('/travel')} className={`${linkArrow} text-wedding-gold hover:text-wedding-goldLight`}>
+                {t('see_map')}<span className="inline-block w-[22px] h-px bg-current" />
+              </a>
             </div>
           </Reveal>
         </div>
       </section>
 
+      <TileBand />
+
       {/* ═══ STORY ═══ */}
-      <section id="story" className="relative marble-white text-wedding-ink pt-6 pb-20 sm:pb-24">
-        <DecoRule tone="ink" className="mb-12 sm:mb-14" />
+      <section id="story" className="relative marble-white text-wedding-ink pt-20 sm:pt-24 pb-20 sm:pb-24">
         <div className="max-w-[760px] mx-auto px-6">
           <Reveal>
-            <SectionTitle kicker={t('story_kicker')} title={t('story_title')} ornament={false} />
+            <SectionTitle kicker={t('story_kicker')} title={t('story_title')} />
           </Reveal>
           <Reveal className="mt-12 mb-16">
             <StepFrame size={20} borderWidth={3} innerBg="#0C0B0A" innerPadding={14}>
@@ -264,42 +254,6 @@ const Home: React.FC = () => {
                     </span>
                   </div>
                 </a>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <TileBand />
-
-      {/* ═══ REGISTRY ═══ */}
-      <section id="registry" className="marble-white text-wedding-ink pt-20 sm:pt-24 pb-20 sm:pb-24">
-        <div className="max-w-[1000px] mx-auto px-5 sm:px-6">
-          <Reveal>
-            <SectionTitle kicker={t('registry_kicker')} title={t('registry_title')} desc={t('registry_desc')} wide />
-          </Reveal>
-          <div className="mt-12 sm:mt-16 grid md:grid-cols-2 gap-6">
-            {registryItems.map((item, i) => (
-              <Reveal key={item.id} delay={i * 0.08} className="h-full">
-                <div className="inlay marble-white h-full px-8 py-10 sm:px-10 sm:py-12 flex flex-col">
-                  <p className={`m-0 ${label} text-wedding-bronze`}>{ROMAN[i]}</p>
-                  <h3 className="mt-3 mb-4 font-serif font-normal text-[clamp(26px,5vw,32px)] leading-[1.1]">{item.store}</h3>
-                  <p className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/80">{item.description}</p>
-                  <div className="mt-auto pt-7">
-                    {item.id === 'btc' ? (
-                      <div className="flex flex-wrap gap-[10px] items-stretch">
-                        <code className="flex-1 basis-[200px] min-w-0 py-[13px] px-[14px] border border-wedding-ink/35 font-mono text-xs leading-[1.5] break-all text-wedding-ink bg-wedding-ink/[.04]">{item.link}</code>
-                        <button onClick={copyBtc} className="py-[15px] px-5 border border-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase cursor-pointer whitespace-nowrap transition-all" style={{ background: copied ? '#0C0B0A' : 'transparent', color: copied ? '#E2C88A' : '#0C0B0A' }}>
-                          {copied ? t('registry_copied') : t('registry_copy')}
-                        </button>
-                      </div>
-                    ) : (
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-block py-[15px] px-6 bg-wedding-ink text-wedding-goldLight font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline deco-chamfer-8 hover:bg-wedding-pine hover:text-wedding-cream">
-                        {t('registry_donate')}
-                      </a>
-                    )}
-                  </div>
-                </div>
               </Reveal>
             ))}
           </div>
@@ -385,6 +339,45 @@ const Home: React.FC = () => {
               )}
               </div>
             </StepFrame>
+          </Reveal>
+        </div>
+      </section>
+      <TileBand />
+
+      {/* ═══ REGISTRY (last, and quiet) ═══ */}
+      <section id="registry" className="marble-white text-wedding-ink pt-20 sm:pt-24 pb-20 sm:pb-24">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
+          <Reveal>
+            <SectionTitle kicker={t('registry_kicker')} title={t('registry_title')} desc={t('registry_desc')} wide />
+          </Reveal>
+          <Reveal delay={0.08} className="mt-12">
+            <div className="inlay marble-white px-8 py-10 sm:px-12 sm:py-12">
+              {charity && (
+                <>
+                  <h3 className="m-0 mb-4 font-serif font-normal text-[clamp(24px,5vw,30px)] leading-[1.1]">{charity.store}</h3>
+                  <p className="m-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-ink/80">{charity.description}</p>
+                  <a href={charity.link} target="_blank" rel="noopener noreferrer" className="inline-block mt-7 py-[15px] px-6 bg-wedding-ink text-wedding-goldLight font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline deco-chamfer-8 hover:bg-wedding-pine hover:text-wedding-cream">
+                    {t('registry_donate')}
+                  </a>
+                </>
+              )}
+              {btc && (
+                <div className="mt-9 pt-7 border-t border-wedding-ink/25">
+                  <p className="m-0 font-sans font-light text-[14px] leading-[1.6] text-wedding-ink/70">{btc.description}</p>
+                  <button onClick={() => setShowBtc((v) => !v)} className={`mt-3 bg-transparent border-0 border-b border-wedding-bronze p-0 pb-[3px] ${label} text-wedding-bronze cursor-pointer hover:text-wedding-ink hover:border-wedding-ink`}>
+                    {showBtc ? t('registry_hide_btc') : t('registry_show_btc')}
+                  </button>
+                  {showBtc && (
+                    <div className="flex flex-wrap gap-[10px] items-stretch mt-4 animate-heroIn">
+                      <code className="flex-1 basis-[200px] min-w-0 py-[13px] px-[14px] border border-wedding-ink/35 font-mono text-xs leading-[1.5] break-all text-wedding-ink bg-wedding-ink/[.04]">{btc.link}</code>
+                      <button onClick={copyBtc} className="py-[15px] px-5 border border-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase cursor-pointer whitespace-nowrap transition-all" style={{ background: copied ? '#0C0B0A' : 'transparent', color: copied ? '#E2C88A' : '#0C0B0A' }}>
+                        {copied ? t('registry_copied') : t('registry_copy')}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </Reveal>
         </div>
       </section>

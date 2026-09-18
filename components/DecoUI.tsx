@@ -8,7 +8,8 @@ export const Reveal: React.FC<{
   className?: string;
   delay?: number;
   as?: 'div' | 'article' | 'section';
-}> = ({ children, className = '', delay = 0, as = 'div' }) => {
+  id?: string;
+}> = ({ children, className = '', delay = 0, as = 'div', id }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -38,6 +39,7 @@ export const Reveal: React.FC<{
   return (
     <Tag
       ref={ref}
+      id={id}
       className={className}
       style={{
         opacity: visible ? 1 : 0,
@@ -85,12 +87,15 @@ export const ChevronBand: React.FC<{ className?: string }> = ({ className = '' }
   <div aria-hidden className={`deco-chevron h-[10px] opacity-50 ${className}`} />
 );
 
-// ─── Scrolling marquee ticker ───
-export const Marquee: React.FC<{ text: string }> = ({ text }) => (
-  <div className="brass text-wedding-ink overflow-hidden py-3 pb-[9px] border-y border-wedding-ink">
-    <div className="flex w-max animate-marquee font-sans font-semibold text-[11px] tracking-[.34em] uppercase whitespace-nowrap">
-      <span className="pr-9">{text}</span>
-      <span className="pr-9">{text}</span>
+// ─── Static brass band under the hero: the dates, once ───
+export const BrassBand: React.FC<{ text: string }> = ({ text }) => (
+  <div className="brass text-wedding-ink border-y border-wedding-ink py-[13px] pb-[10px] px-4">
+    <div className="flex items-center justify-center gap-4 font-sans font-semibold text-[11px] tracking-[.34em] uppercase whitespace-nowrap">
+      <span className="hidden sm:block h-px w-[60px] bg-wedding-ink/60" />
+      <span className="w-[6px] h-[6px] rotate-45 bg-wedding-ink" />
+      <span>{text}</span>
+      <span className="w-[6px] h-[6px] rotate-45 bg-wedding-ink" />
+      <span className="hidden sm:block h-px w-[60px] bg-wedding-ink/60" />
     </div>
   </div>
 );

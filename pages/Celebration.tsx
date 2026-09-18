@@ -110,10 +110,23 @@ const Celebration: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-x-7 gap-y-3 mt-4">
-            <a href={directionsHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze no-underline pt-[2px] hover:text-wedding-ink">
-              {t('cel_directions')} ↗
-            </a>
+          <div className="mt-5 grid sm:grid-cols-[minmax(0,1fr)_auto] gap-x-10 gap-y-4 items-start">
+            <ul className="m-0 p-0 list-none">
+              {cel.notes.map((n, i) => (
+                <li key={i} className="grid grid-cols-[18px_minmax(0,1fr)] gap-x-3 py-[5px]">
+                  <span className="mt-[8px] block w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
+                  <span className="font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/85">{n}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col items-start gap-3 sm:items-end sm:text-right pt-1">
+              <a href={directionsHref} target="_blank" rel="noopener noreferrer" className={`${linkArrow} text-wedding-bronze hover:text-wedding-ink`}>
+                {t('cel_directions')} ↗
+              </a>
+              <a href="#/travel" onClick={(e) => { e.preventDefault(); navigate('/travel'); window.scrollTo(0, 0); }} className={`${linkArrow} text-wedding-bronze hover:text-wedding-ink`}>
+                {t('see_map')}
+              </a>
+            </div>
           </div>
         </Reveal>
 
@@ -238,47 +251,9 @@ const Celebration: React.FC = () => {
           </dl>
         </Reveal>
 
-        {/* ═══ VI · GETTING THERE (dark panel) ═══ */}
+        {/* ═══ VI · INSIDER TIPS ═══ */}
         <Reveal as="section" className="mt-[72px]">
-          <StepFrame size={20} borderWidth={2} innerBg="#0C0B0A" innerPadding={0}>
-            <div className="pt-8 px-6 sm:px-8 pb-8 text-wedding-cream">
-              <SectionHead n={6} kicker={t('cel_logistics_kicker')} title={t('cel_logistics_title')} dark />
-              <div className="grid gap-px bg-wedding-gold/35 border border-wedding-gold/35" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
-                <div className="bg-wedding-ink pt-5 px-5 pb-[18px]">
-                  <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('lbl_shuttle')}</p>
-                  <div className="font-serif text-[34px] leading-none text-wedding-goldLight">{ev.shuttleTime}</div>
-                  <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.45] text-wedding-cream/70">{t('events_shuttle').replace(/ at$| a las$/, '')} · {cel.weekday}</p>
-                </div>
-                <div className="bg-wedding-ink pt-5 px-5 pb-[18px]">
-                  <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('lbl_venue')}</p>
-                  <div className="font-serif text-[22px] leading-[1.15]">{ev.location}</div>
-                  <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.45] text-wedding-cream/70">{ev.address}<span className="block">{ev.time}{endTime ? ` – ${endTime}` : ''}</span></p>
-                </div>
-              </div>
-              <p className="mt-7 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('cel_notes_title')}</p>
-              <ul className="m-0 p-0 list-none">
-                {cel.notes.map((n, i) => (
-                  <li key={i} className="grid grid-cols-[18px_minmax(0,1fr)] gap-x-3 py-[7px] border-t border-wedding-gold/20">
-                    <span className="mt-[8px] block w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
-                    <span className="font-sans font-light text-[15px] leading-[1.6] text-wedding-cream/85">{n}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap items-center gap-x-7 gap-y-4 mt-7">
-                <a href={directionsHref} target="_blank" rel="noopener noreferrer" className="pt-4 px-[22px] pb-[13px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline deco-chamfer-8 hover:bg-wedding-goldLight">
-                  {t('cel_directions')} ↗
-                </a>
-                <a href="#/travel" onClick={(e) => { e.preventDefault(); navigate('/travel'); window.scrollTo(0, 0); }} className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
-                  {t('see_map')}
-                </a>
-              </div>
-            </div>
-          </StepFrame>
-        </Reveal>
-
-        {/* ═══ VII · INSIDER TIPS ═══ */}
-        <Reveal as="section" className="mt-[72px]">
-          <SectionHead n={7} kicker={t('cel_tips_kicker')} title={t('cel_tips_title')} />
+          <SectionHead n={6} kicker={t('cel_tips_kicker')} title={t('cel_tips_title')} />
           <div className="border border-wedding-gold bg-wedding-cream/60">
             {cel.tips.map((tip, i) => (
               <div key={i} className={`grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 py-[18px] px-5 ${i > 0 ? 'border-t border-wedding-gold/50' : ''}`}>

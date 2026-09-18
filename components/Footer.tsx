@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
         {WEDDING_DATA.couple.partner1} &amp; {WEDDING_DATA.couple.partner2}
       </p>
       <div className="flex items-center justify-center gap-3 text-wedding-cream/55 font-sans font-light text-[11px] tracking-[.28em] uppercase">
-        <span>2 – 5 · II · 2027</span>
+        <span>{t('hero_dates')}</span>
         <span className="w-1 h-1 bg-wedding-gold rotate-45" />
         <span>Mumbai</span>
         <span className="w-1 h-1 bg-wedding-gold rotate-45" />
