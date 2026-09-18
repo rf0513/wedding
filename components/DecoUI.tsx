@@ -173,21 +173,17 @@ export const btnGhostDark = 'inline-block min-w-[150px] pt-4 px-[26px] pb-[13px]
 export const btnGhostLight = 'inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer transition-colors hover:bg-wedding-ink hover:text-wedding-goldLight text-center';
 export const linkArrow = 'inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer pt-[2px]';
 
-// ─── Live countdown to the first event ───
+// ─── Days remaining until the first event ───
+// Days only: an hours-and-minutes readout implies a precision nobody needs sixteen
+// months out, and it forced a re-render every half minute to say the same thing.
 export function useCountdown(targetISO: string) {
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
-    const iv = setInterval(() => setNow(Date.now()), 30000);
+    const iv = setInterval(() => setNow(Date.now()), 60_000);
     return () => clearInterval(iv);
   }, []);
-  const target = new Date(targetISO).getTime();
-  const diff = Math.max(0, target - now);
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return {
-    days: String(Math.floor(diff / 864e5)),
-    hours: pad(Math.floor(diff / 36e5) % 24),
-    minutes: pad(Math.floor(diff / 6e4) % 60),
-  };
+  const diff = Math.max(0, new Date(targetISO).getTime() - now);
+  return { days: String(Math.floor(diff / 864e5)) };
 }
 
 // ─── Anchor-scroll helpers (Home is one long scroll; guide pages are real routes) ───

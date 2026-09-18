@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
+import { WEDDING_DATA, EVENTS_EN, EVENTS_ES, REGISTRY_ITEMS_EN, REGISTRY_ITEMS_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
 import { Reveal, StepFrame, HeroFrame, BrassBand, SectionTitle, TileBand, useCountdown, useSectionNav, btnPrimary, btnGhostDark, linkArrow } from '../components/DecoUI';
 import { SunburstFloor, RayFan, MirrorEmblem, RisingSun, Lotus, PalmFan, CornerBrackets } from '../components/Ornaments';
 import Curtain from '../components/Curtain';
 import HeroSequence from '../components/HeroSequence';
-import StoryJourney from '../components/StoryJourney';
 
 const Home: React.FC = () => {
   const { language, t } = useLanguage();
@@ -16,7 +15,6 @@ const Home: React.FC = () => {
   const cd = useCountdown('2027-02-02T11:00:00+05:30');
 
   const events = en ? EVENTS_EN : EVENTS_ES;
-  const storyEvents = en ? STORY_EVENTS_EN : STORY_EVENTS_ES;
   const registryItems = en ? REGISTRY_ITEMS_EN : REGISTRY_ITEMS_ES;
   const celebrations = en ? CELEBRATIONS_EN : CELEBRATIONS_ES;
   const celebrationFor = (eventId: string) => celebrations.find((c) => c.eventId === eventId);
@@ -103,11 +101,6 @@ const Home: React.FC = () => {
             <SunburstFloor disc="#0C0B0A" ray="#F2EFE9" ring="#F2EFE9" ground="#F2EFE9" outline="#C8A75C" className="animate-raysIn">
               <div className="font-serif text-[clamp(34px,8.5vw,72px)] leading-none tracking-[-.01em] tabular-nums text-wedding-ink">{cd.days}</div>
               <div className={`mt-1 ${label} text-[8px] sm:text-[10px] text-wedding-bronze`}>{t('cd_days')}</div>
-              <div className="mt-1.5 sm:mt-2 flex items-center justify-center gap-1.5 sm:gap-2 font-sans font-light text-[9px] sm:text-[12px] tracking-[.12em] tabular-nums text-wedding-ink/70 whitespace-nowrap">
-                <span>{cd.hours}<span className="ml-[3px] text-[7px] sm:text-[8px] uppercase tracking-[.15em]">{t('cd_hours').slice(0, 3)}</span></span>
-                <span className="w-1 h-1 bg-wedding-gold rotate-45" />
-                <span>{cd.minutes}<span className="ml-[3px] text-[7px] sm:text-[8px] uppercase tracking-[.15em]">{t('cd_minutes').slice(0, 3)}</span></span>
-              </div>
             </SunburstFloor>
             <p className={`mt-6 mb-0 text-center ${label} text-wedding-bronze`}>{t('countdown_label')}</p>
           </Reveal>
@@ -219,23 +212,8 @@ const Home: React.FC = () => {
 
       <TileBand />
 
-      {/* ═══ STORY ═══ */}
-      <section id="story" className="relative marble-white text-wedding-ink pt-20 sm:pt-24 pb-20 sm:pb-24">
-        <div className="max-w-[760px] mx-auto px-6">
-          <Reveal>
-            <SectionTitle kicker={t('story_kicker')} title={t('story_title')} />
-          </Reveal>
-          <Reveal className="mt-12 mb-16">
-            <StepFrame size={20} borderWidth={3} innerBg="#0C0B0A" innerPadding={14}>
-              <img src={STORY_MAIN_IMAGE} alt="Pavitra and Ramon" className="block w-full aspect-[3/2] object-cover" />
-            </StepFrame>
-          </Reveal>
-          {/* Milestones on an animated route: Albuquerque → Bay Area → Mumbai */}
-          <StoryJourney events={storyEvents} />
-        </div>
-      </section>
-
-      <TileBand />
+      {/* Our Journey used to sit here. It ran to about a third of this page's height
+          and pushed everything practical below it, so it lives at /story now. */}
 
       {/* ═══ GUIDES ═══ */}
       <section className="relative overflow-hidden marble-black text-wedding-cream pt-20 sm:pt-24 pb-20 sm:pb-24">

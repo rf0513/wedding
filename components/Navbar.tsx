@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
       go: () => { goSection('celebrations'); setMenuOpen(false); },
       children: days.map((d) => ({ label: `${t('day_label')} ${pad(d.day)}`, name: d.title, href: `#/celebrations/${d.id}`, go: () => goView(`/celebrations/${d.id}`) })),
     },
-    { name: t('nav_story'), href: '#/story', go: () => { goSection('story'); setMenuOpen(false); } },
+    { name: t('nav_story'), href: '#/story', go: () => goView('/story') },
     { name: t('nav_attire'), href: '#/attire', go: () => goView('/attire') },
     { name: t('nav_travel'), href: '#/travel', go: () => goView('/travel') },
     { name: t('nav_qna'), href: '#/qna', go: () => goView('/qna') },
@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
   // the full index — these five are the shortcuts, not the whole contents.
   const primaryNav = [
     { name: t('nav_celebrations'), href: '#/celebrations', go: () => goSection('celebrations') },
-    { name: t('nav_story'), href: '#/story', go: () => goSection('story') },
+    { name: t('nav_story'), href: '#/story', go: () => goView('/story') },
     { name: t('nav_attire'), href: '#/attire', go: () => goView('/attire') },
     { name: t('nav_travel'), href: '#/travel', go: () => goView('/travel') },
     { name: t('nav_qna'), href: '#/qna', go: () => goView('/qna') },

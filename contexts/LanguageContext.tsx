@@ -31,16 +31,15 @@ const translations = {
     home_view_events: "The Four Days",
     // ➜ EDIT: a short welcome from the two of you (this is a draft)
     home_note_kicker: "A note from us",
-    home_note: "We met in Albuquerque, made a home in the Bay Area, and are getting married where Pavitra's story began: Mumbai. Over four days we will gather our families from Maharashtra, Panama and the United States, and nothing would make us happier than to have you there, from the first henna on Tuesday to the last dance on Friday.",
+    home_note: "We met in Albuquerque, made a home in the Bay Area, and are getting married in Mumbai. Over four days we will gather our families from India, Panama and the United States, and nothing would make us happier than to have you there, from the first henna on Tuesday to the last dance on Friday.",
     home_note_sign: "Pavitra & Ramon",
     countdown_label: "Until the Mehendi",
     cd_days: "Days",
-    cd_hours: "Hours",
-    cd_minutes: "Minutes",
 
     // Story
     story_kicker: "How We Met",
     story_title: "Our Journey",
+    story_desc: "From a desk in Albuquerque to a rooftop in Mumbai, by way of a mountain and a bridge.",
     journey_from: "Where it began",
     journey_home: "Home base",
     journey_next_stop: "Next stop",
@@ -219,16 +218,15 @@ const translations = {
     // Home
     home_view_events: "Los Cuatro Días",
     home_note_kicker: "Una nota de nosotros",
-    home_note: "Nos conocimos en Albuquerque, hicimos un hogar en el Área de la Bahía y nos casamos donde empezó la historia de Pavitra: Mumbai. Durante cuatro días reuniremos a nuestras familias de Maharashtra, Panamá y Estados Unidos, y nada nos haría más felices que tenerte allí, desde la primera henna del martes hasta el último baile del viernes.",
+    home_note: "Nos conocimos en Albuquerque, hicimos un hogar en el Área de la Bahía y nos casamos en Mumbai. Durante cuatro días reuniremos a nuestras familias de India, Panamá y Estados Unidos, y nada nos haría más felices que tenerte allí, desde la primera henna del martes hasta el último baile del viernes.",
     home_note_sign: "Pavitra y Ramón",
     countdown_label: "Para el Mehendi",
     cd_days: "Días",
-    cd_hours: "Horas",
-    cd_minutes: "Minutos",
 
     // Story
     story_kicker: "Cómo Nos Conocimos",
     story_title: "Nuestro Viaje",
+    story_desc: "De un escritorio en Albuquerque a una azotea en Mumbai, pasando por una montaña y un puente.",
     journey_from: "Donde empezó",
     journey_home: "Nuestro hogar",
     journey_next_stop: "Próxima parada",
