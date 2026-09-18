@@ -152,9 +152,34 @@ export const PageHeader: React.FC<{
   desc?: string;
   children?: React.ReactNode;
   tall?: boolean;
-}> = ({ kicker, title, desc, children, tall = false }) => (
-  <div className={`relative overflow-hidden marble-black text-wedding-cream pt-28 px-6 ${tall ? 'pb-[150px]' : 'pb-16'} text-center`}>
-    <div className="absolute inset-0 deco-coffer opacity-[.28]" aria-hidden />
+  /** Photo behind the header, given the hero's duotone so it reads as ground, not as
+   *  a picture. Without one the header keeps its plain black marble. */
+  bgImage?: string;
+  /** Where the crop sits — a portrait in a wide header needs biasing, or it keeps the
+   *  middle of the frame and loses whoever is standing at the bottom of it. */
+  bgPosition?: string;
+  bgAlt?: string;
+}> = ({ kicker, title, desc, children, tall = false, bgImage, bgPosition = 'center 50%', bgAlt = '' }) => (
+  <div className={`relative overflow-hidden marble-black text-wedding-cream px-6 text-center ${bgImage ? 'pt-36 sm:pt-40' : 'pt-28'} ${tall ? 'pb-[150px]' : bgImage ? 'pb-24 sm:pb-28' : 'pb-16'}`}>
+    {bgImage && (
+      <>
+        <img
+          src={bgImage}
+          alt={bgAlt}
+          aria-hidden={!bgAlt}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: bgPosition, filter: 'grayscale(1) sepia(.5) hue-rotate(-8deg) saturate(1.15) brightness(.78) contrast(1.12)' }}
+        />
+        {/* Wash: the title has to stay readable over whatever the photo is doing, and
+            the section below has to start from solid ink rather than a hard seam. */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(180deg,rgba(12,11,10,.82) 0%,rgba(12,11,10,.34) 42%,rgba(12,11,10,.72) 82%,#0C0B0A 100%)' }}
+          aria-hidden
+        />
+      </>
+    )}
+    <div className={`absolute inset-0 deco-coffer ${bgImage ? 'opacity-[.14]' : 'opacity-[.28]'}`} aria-hidden />
     <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,167,92,.16), transparent 70%)' }} aria-hidden />
     <RayFan className="absolute left-1/2 -translate-x-1/2 -top-[300px] w-[900px] h-[900px]" spread={360} opacity={.35} />
     <div className="relative max-w-[720px] mx-auto animate-heroIn">

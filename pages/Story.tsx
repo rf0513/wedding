@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { STORY_EVENTS_EN, STORY_EVENTS_ES, STORY_MAIN_IMAGE } from '../constants';
-import { Reveal, StepFrame, TileBand, PageHeader, btnGhostLight } from '../components/DecoUI';
+import { TileBand, PageHeader, btnGhostLight } from '../components/DecoUI';
 import StoryJourney from '../components/StoryJourney';
 
 /**
@@ -19,16 +19,20 @@ const Story: React.FC = () => {
 
   return (
     <main className="marble-white text-wedding-ink pb-20">
-      <PageHeader kicker={t('story_kicker')} title={t('story_title')} desc={t('story_desc')} />
+      {/* The photo is the header's ground rather than a framed picture sitting under
+          it: as a 3:2 crop of a portrait it kept the stone and cut the two of them off
+          at the bottom edge, and it read as an odd first thing on the page. */}
+      <PageHeader
+        kicker={t('story_kicker')}
+        title={t('story_title')}
+        desc={t('story_desc')}
+        bgImage={STORY_MAIN_IMAGE}
+        bgPosition="center 66%"
+        bgAlt="Pavitra and Ramon"
+      />
       <TileBand />
 
-      <div className="max-w-[760px] mx-auto px-6">
-        <Reveal className="mt-12 mb-16">
-          <StepFrame size={20} borderWidth={3} innerBg="#0C0B0A" innerPadding={14}>
-            <img src={STORY_MAIN_IMAGE} alt="Pavitra and Ramon" className="block w-full aspect-[3/2] object-cover" />
-          </StepFrame>
-        </Reveal>
-
+      <div className="max-w-[760px] mx-auto px-6 pt-14">
         {/* Milestones on an animated route: Albuquerque → Bay Area → Mumbai */}
         <StoryJourney events={storyEvents} />
 

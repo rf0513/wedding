@@ -28,8 +28,10 @@ import pujaKalash from './assets/photos/puja-kalash.webp';
 import sfPalace1280 from './assets/photos/sf-palace-1280.webp';
 import sfPalace1920 from './assets/photos/sf-palace-1920.webp';
 import sfTwirl from './assets/photos/sf-twirl.webp';
-import sfGrass from './assets/photos/sf-grass.webp';
 import sfMarina from './assets/photos/sf-marina.webp';
+// assets/photos/sf-grass.webp is generated but not imported: it is a portrait, and
+// every slot left on the site is wide. Import it here to use it — it costs nothing
+// while it sits unreferenced, since only imported assets reach the bundle.
 import engagementLoopMp4 from './assets/video/engagement-loop.mp4';
 import engagementLoopWebm from './assets/video/engagement-loop.webm';
 import engagementLoopPoster from './assets/video/engagement-poster.webp';
@@ -126,7 +128,10 @@ export const STORY_EVENTS_ES: StoryEvent[] = [
   { id: '5', date: 'Sep 12, 2026', title: 'El Compromiso', desc: 'De vuelta en Mumbai, con las dos familias juntas, la puja que lo hizo oficial: henna, un kalash de cobre y la primera de las ceremonias.', img: engagementCeremony },
 ];
 
-export const STORY_MAIN_IMAGE = sfGrass;  // was a Google Photos share link, which rotates
+// The story page's header ground. A letterbox header wants a composition built wide:
+// the colonnade fills the top behind the title and the two of them walk along the
+// bottom. sf-grass is a portrait — cropped this flat it is mostly stone and shrubs.
+export const STORY_MAIN_IMAGE = sfPalace1920;
 
 // ─── REGISTRY ───
 export const REGISTRY_ITEMS_EN: RegistryItem[] = [
