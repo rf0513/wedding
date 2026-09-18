@@ -216,11 +216,15 @@ const Home: React.FC = () => {
           and pushed everything practical below it, so it lives at /story now. */}
 
       {/* ═══ GUIDES ═══ */}
-      <section className="relative overflow-hidden marble-black text-wedding-cream pt-20 sm:pt-24 pb-20 sm:pb-24">
-        <div className="absolute inset-0 deco-coffer opacity-[.2]" aria-hidden />
+      {/* White marble, not black. Once Our Journey moved to its own page the home ran
+          celebrations, guides and RSVP all on ink — three dark sections in a row with
+          only the tile bands between them. The guides are the one of the three that
+          converts cleanly: cards of line-art, no photography and no form. The coffered
+          ceiling goes with the dark ground; on marble it is the lobby floor instead. */}
+      <section className="relative overflow-hidden marble-white text-wedding-ink pt-20 sm:pt-24 pb-20 sm:pb-24">
         <div className="relative max-w-[1100px] mx-auto px-5 sm:px-6">
           <Reveal>
-            <SectionTitle tone="dark" kicker={t('guides_list_title')} title={t('guides_title')} />
+            <SectionTitle kicker={t('guides_list_title')} title={t('guides_title')} />
           </Reveal>
           <div className="mt-12 sm:mt-16 grid md:grid-cols-3 gap-5 sm:gap-6">
             {guides.map((g, i) => (
@@ -228,22 +232,24 @@ const Home: React.FC = () => {
                 <a
                   href={`#${g.path}`}
                   onClick={(e) => { e.preventDefault(); goPage(g.path); }}
-                  className="group relative flex h-full flex-col no-underline cursor-pointer border border-wedding-gold/50 hover:border-wedding-gold bg-wedding-ink/40 transition-colors"
+                  className="group relative flex h-full flex-col no-underline cursor-pointer border border-wedding-ink/30 hover:border-wedding-ink bg-wedding-cream/45 transition-colors"
                 >
-                  <CornerBrackets inset={6} size={18} />
-                  <span className="absolute inset-[14px] border border-wedding-gold/25 pointer-events-none group-hover:border-wedding-gold/50 transition-colors" aria-hidden />
+                  {/* Brass on cream is 2:1 — fine for a hairline, invisible for the
+                      brackets that give these cards their shape. Ink for both. */}
+                  <CornerBrackets color="#0C0B0A" inset={6} size={18} />
+                  <span className="absolute inset-[14px] border border-wedding-ink/20 pointer-events-none group-hover:border-wedding-ink/40 transition-colors" aria-hidden />
                   <div className="relative flex flex-1 flex-col px-7 pt-10 pb-9 text-center">
                     {/* The rising sun is a third the height of the lotus and the palm,
                         so give all three the same box and sit them on its floor —
                         otherwise this card's whole stack floats 40px high. */}
                     <div className="h-[84px] flex items-end justify-center">
-                      <g.Icon size={g.Icon === RisingSun ? 84 : 78} className="mx-auto" />
+                      <g.Icon size={g.Icon === RisingSun ? 84 : 78} color="#7D6836" className="mx-auto" />
                     </div>
-                    <p className={`mt-5 mb-3 ${label} text-wedding-gold`}>{g.tag}</p>
-                    <h3 className="m-0 mb-3 flex items-center justify-center min-h-[2.2em] font-serif font-normal text-[clamp(24px,5.5vw,30px)] leading-[1.1] text-wedding-cream">{g.title}</h3>
-                    <p className="m-0 font-sans font-light text-[15px] leading-[1.6] text-wedding-cream/70">{g.desc}</p>
+                    <p className={`mt-5 mb-3 ${label} text-wedding-bronze`}>{g.tag}</p>
+                    <h3 className="m-0 mb-3 flex items-center justify-center min-h-[2.2em] font-serif font-normal text-[clamp(24px,5.5vw,30px)] leading-[1.1] text-wedding-ink">{g.title}</h3>
+                    <p className="m-0 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/75">{g.desc}</p>
                     <div className="mt-auto pt-6">
-                      <span className={`${linkArrow} text-wedding-gold group-hover:text-wedding-goldLight`}>
+                      <span className={`${linkArrow} text-wedding-bronze group-hover:text-wedding-ink`}>
                         {t('home_explore')}<span className="inline-block w-[22px] h-px bg-current transition-all group-hover:w-[34px]" />
                       </span>
                     </div>

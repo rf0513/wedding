@@ -47,18 +47,18 @@ export const PLACES: Record<string, PlaceStyle> = {
   hotel:     { ll: [19.1030, 72.9250], side: 'r' },
   airport:   { ll: [19.0975, 72.8745], side: 'r', dy: 10 },
   avartana:  { ll: [19.1063, 72.8668], side: 'l', label: 'Avartana' },
-  jio:       { ll: [19.0668, 72.8660], side: 'l', dy: -5 },
-  ev4:       { ll: [19.0625, 72.8625], side: 'l', dy: 7, label: 'MCA Club · BKC' },          // Wedding & Reception
+  jio:       { ll: [19.0668, 72.8660], side: 'l', dy: -10 },
+  ev4:       { ll: [19.0625, 72.8625], side: 'l', dy: 12, label: 'MCA Club · BKC' },         // Wedding & Reception
   ev1:       { ll: [19.0610, 72.8990], side: 'r', label: 'Thapar Suburbia' },                 // Mehendi (Chembur)
   ev2:       { ll: [19.0610, 72.8990], side: 'r', label: 'Thapar Suburbia' },                 // Haldi (same venue)
   siddhi:    { ll: [19.0170, 72.8302], side: 'r' },
   goodearth: { ll: [18.9985, 72.8265], side: 'l', label: 'Good Earth' },
-  masque:    { ll: [18.9873, 72.8236], side: 'l', dy: -4 },
+  masque:    { ll: [18.9873, 72.8236], side: 'l', dy: -8 },
   ev3:       { ll: [18.9820, 72.8195], side: 'r', dy: 11, label: 'Turf Lawn · Race Course' },  // Vows & Sangeet
-  csmvs:     { ll: [18.9269, 72.8326], side: 'l', dy: -9, label: 'CSMVS Museum' },
-  gateway:   { ll: [18.9220, 72.8347], side: 'r', dy: -2 },
+  csmvs:     { ll: [18.9269, 72.8326], side: 'l', dy: -17, label: 'CSMVS Museum' },
+  gateway:   { ll: [18.9220, 72.8347], side: 'r', dy: -8 },
   sealounge: { ll: [18.9217, 72.8332], side: 'r', dx: 4, dy: 13, label: 'Sea Lounge · Taj Palace' },
-  colaba:    { ll: [18.9175, 72.8285], side: 'l', dy: 12 },
+  colaba:    { ll: [18.9175, 72.8285], side: 'l', dy: 21 },
   elephanta: { ll: [18.9633, 72.9310], side: 'b' },
 };
 

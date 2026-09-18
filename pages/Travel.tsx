@@ -140,15 +140,19 @@ const Travel: React.FC = () => {
             {t('travel_zomato')} ↗
           </a>
         </section>
+      </div>
 
-        {/* Map */}
+      {/* The map breaks out of the reading column: prose wants a narrow measure, a map
+          wants width. At lg the map and its route panel sit side by side, which uses
+          the space rather than just making a very tall drawing. */}
+      <div className="max-w-[1180px] mx-auto px-6">
         <section id="travel-map" className="mt-[72px]">
           <StepFrame size={20} borderWidth={2} innerBg="#0C0B0A" innerPadding={0}>
             <div className="pt-[30px] px-[22px] pb-[18px] text-center">
               <h2 className="m-0 mb-2 font-serif font-normal text-[28px] leading-[1.1] text-wedding-cream">{t('travel_map_title')}</h2>
               <p className="m-0 font-sans font-light text-xs leading-[1.5] tracking-[.12em] uppercase text-wedding-cream/60">{t('travel_map_subtitle')}</p>
             </div>
-            <div className="hide-scrollbar flex gap-2 overflow-x-auto pt-1.5 px-[22px] pb-[18px]">
+            <div className="hide-scrollbar flex lg:flex-wrap lg:justify-center gap-2 overflow-x-auto lg:overflow-visible pt-1.5 px-[22px] pb-[18px]">
               {locs.map((loc) => {
                 const isActive = loc.id === active.id;
                 return (
@@ -163,11 +167,10 @@ const Travel: React.FC = () => {
                 );
               })}
             </div>
-            <div className="px-[10px] sm:px-[22px]">
+            <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-8 lg:items-start px-[10px] sm:px-[22px] pb-[22px]">
               <MumbaiMap pins={locs} activeId={active.id} onSelect={setActiveLocId} />
-            </div>
-            <div className="pt-4 px-[10px] sm:px-[22px] pb-[22px]">
-              <div className="max-w-[520px] mx-auto border border-wedding-gold/35">
+              <div className="pt-4 lg:pt-2">
+              <div className="max-w-[520px] lg:max-w-none mx-auto border border-wedding-gold/35">
                 <div className="pt-[18px] px-[18px] pb-[14px] text-center">
                   <p className={kicker}>{route ? t('map_route') : t('travel_stay')}</p>
                   <p className="mt-[6px] mb-0 font-serif text-[24px] leading-[1.15] text-wedding-cream">{route ? active.title : 'Taj The Trees, Vikhroli'}</p>
@@ -210,10 +213,13 @@ const Travel: React.FC = () => {
                 </a>
               </div>
               <p className="mt-3 mb-0 text-center font-sans font-light text-[10px] leading-[1.5] tracking-[.08em] uppercase text-wedding-cream/60">{t('map_note')}</p>
+              </div>
             </div>
           </StepFrame>
         </section>
+      </div>
 
+      <div className="max-w-[760px] mx-auto px-6">
         {/* Survival */}
         <section className="mt-[72px]">
           <h2 className="m-0 mb-2 font-serif font-normal text-[clamp(30px,7vw,44px)] leading-[1.05]">{t('travel_survival_title')}</h2>

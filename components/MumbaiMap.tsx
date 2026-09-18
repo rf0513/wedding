@@ -43,7 +43,7 @@ const MumbaiMap: React.FC<{ pins: MapPin[]; activeId: string; onSelect: (id: str
   return (
     <svg
       viewBox={`0 0 ${VIEW.w} ${VIEW.h}`}
-      className="block w-full h-auto max-w-[520px] mx-auto select-none"
+      className="block w-full h-auto max-w-[520px] lg:max-w-none mx-auto select-none"
       role="img"
       aria-label={t('travel_map_title')}
       style={{ fontFamily: '"Josefin Sans", sans-serif' }}
@@ -137,7 +137,16 @@ const MumbaiMap: React.FC<{ pins: MapPin[]; activeId: string; onSelect: (id: str
         const { side, dx = 0, dy = 0 } = g.place;
         const lx = (side === 'r' ? x + 11 : side === 'l' ? x - 11 : x) + dx;
         const ly = (side === 'b' ? y + 26 : y + 3) + dy;
-        const leader = Math.abs(dy) >= 9 && side !== 'b';
+        // Colaba puts four markers inside about twenty pixels, and BKC two. The markers
+        // cannot move — the whole point is that they sit on real coordinates — so the
+        // labels fan out instead, and a leader ties each one back to its own diamond.
+        // Elbowed rather than straight: a diagonal that ends in a short horizontal run
+        // reads as belonging to the line of text it meets.
+        const leader = Math.abs(dy) >= 6 && side !== 'b';
+        const ldy = ly - 3.5;
+        const leaderPath = side === 'r'
+          ? `M${x + 6} ${y} L${lx - 7} ${ldy} L${lx - 2} ${ldy}`
+          : `M${x - 6} ${y} L${lx + 7} ${ldy} L${lx + 2} ${ldy}`;
         const primary = isHotel || isAirport;
         return (
           <g
@@ -157,7 +166,15 @@ const MumbaiMap: React.FC<{ pins: MapPin[]; activeId: string; onSelect: (id: str
             {/* hit area */}
             <circle cx={x} cy={y} r="11" fill="transparent" />
             {leader && (
-              <path d={`M${x} ${y} L${side === 'r' ? lx - 3 : lx + 3} ${ly - 3}`} stroke={GOLD} strokeOpacity=".6" strokeWidth=".6" fill="none" />
+              <path
+                d={leaderPath}
+                fill="none"
+                stroke={active ? GOLD_LIGHT : GOLD}
+                strokeOpacity={active ? .95 : .55}
+                strokeWidth={active ? 1 : .7}
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
             )}
             {isHotel ? (
               // Hotel: stepped square (matches the logo mark)
