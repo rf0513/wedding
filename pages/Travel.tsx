@@ -209,7 +209,7 @@ const Travel: React.FC = () => {
                   {route ? t('map_open_directions') : t('map_open_gmaps')} ↗
                 </a>
               </div>
-              <p className="mt-3 mb-0 text-center font-sans font-light text-[10px] leading-[1.5] tracking-[.08em] uppercase text-wedding-cream/40">{t('map_note')}</p>
+              <p className="mt-3 mb-0 text-center font-sans font-light text-[10px] leading-[1.5] tracking-[.08em] uppercase text-wedding-cream/60">{t('map_note')}</p>
             </div>
           </StepFrame>
         </section>

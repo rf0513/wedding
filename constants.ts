@@ -12,7 +12,6 @@ import heroHands1280 from './assets/photos/engagement-hands-1280.webp';
 import heroHands1920 from './assets/photos/engagement-hands-1920.webp';
 import heroProposal1280 from './assets/photos/proposal-1280.webp';
 import heroProposal1920 from './assets/photos/proposal-1920.webp';
-import heroBoat from './assets/photos/boat.webp';
 import storyTram from './assets/photos/tram.webp';
 import storyRockies from './assets/photos/rockies.webp';
 import siddhivinayakImg from './assets/photos/siddhivinayak.webp';
@@ -77,7 +76,6 @@ export const HERO_IMAGES: {
   { src: sfTwirl, objectPosition: 'center 85%' },
   { src: heroHands1920, srcSet: `${heroHands1280} 1280w, ${heroHands1920} 1920w`, objectPosition: 'center 45%' },
   { src: heroProposal1920, srcSet: `${heroProposal1280} 1280w, ${heroProposal1920} 1920w`, objectPosition: 'center 60%' },
-  { src: heroBoat, objectPosition: 'center 35%' },
   // ➜ drop additional hero photos here
 ];
 

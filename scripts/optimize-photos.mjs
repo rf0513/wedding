@@ -37,7 +37,6 @@ const PHOTOS = [
   { file: 'engagement-hug.jpg', name: 'engagement-hug', widths: [1280, 1920] },
   { file: 'engagement-hands.jpg', name: 'engagement-hands', widths: [1280, 1920] },
   { file: 'proposal.jpg', name: 'proposal', widths: [1280, 1920] },
-  { file: 'boat.jpeg', name: 'boat', widths: [1280, 1920] },
   { file: 'tram.jpeg', name: 'tram', widths: [1520] },
   { file: 'rockies.jpeg', name: 'rockies', widths: [1520] },
   { file: 'siddhivinayak-temple-mumbai.jpg', name: 'siddhivinayak', widths: [800] },

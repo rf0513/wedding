@@ -36,7 +36,7 @@ const Attire: React.FC = () => {
           <div className="flex flex-col border-t border-wedding-ink">
             {days.map((d) => (
               <a key={d.id} href={`#/celebrations/${d.id}`} onClick={(e) => { e.preventDefault(); goDay(d.id); }} className="group grid grid-cols-[52px_minmax(0,1fr)_auto] gap-x-4 items-center py-[22px] border-b border-wedding-ink/35 no-underline cursor-pointer text-wedding-ink hover:pl-2 transition-all">
-                <span className="font-sans font-light text-[34px] leading-none text-wedding-gold tracking-[-.02em]">{pad(d.day)}</span>
+                <span className="font-sans font-light text-[34px] leading-none text-wedding-bronze tracking-[-.02em]">{pad(d.day)}</span>
                 <div className="min-w-0">
                   <h3 className="m-0 mb-1 font-serif font-normal text-[22px] leading-[1.1]">{d.title}</h3>
                   <p className="m-0 font-sans font-semibold text-[10px] leading-[1.4] tracking-[.28em] uppercase text-wedding-bronze">{d.dress.theme}</p>

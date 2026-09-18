@@ -12,6 +12,12 @@ export const Reveal: React.FC<{
 }> = ({ children, className = '', delay = 0, as = 'div', id }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  // The @media (prefers-reduced-motion) block in index.css only reaches the animate-*
+  // classes; this transition is set inline, so it ran regardless and every section on
+  // the site still slid up for people who asked for no motion. Reduced motion now
+  // means shown immediately, with nothing to transition.
+  const reduced = usePrefersReducedMotion();
+  const shown = visible || reduced;
 
   useEffect(() => {
     const el = ref.current;
@@ -42,9 +48,9 @@ export const Reveal: React.FC<{
       id={id}
       className={className}
       style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'none' : 'translateY(28px)',
-        transition: `opacity .9s ${delay}s cubic-bezier(.2,.7,.2,1), transform .9s ${delay}s cubic-bezier(.2,.7,.2,1)`,
+        opacity: shown ? 1 : 0,
+        transform: shown ? 'none' : 'translateY(28px)',
+        transition: reduced ? 'none' : `opacity .9s ${delay}s cubic-bezier(.2,.7,.2,1), transform .9s ${delay}s cubic-bezier(.2,.7,.2,1)`,
       }}
     >
       {children}

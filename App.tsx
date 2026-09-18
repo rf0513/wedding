@@ -30,7 +30,7 @@ const App: React.FC = () => {
         <ScrollToTop />
         <div className="font-sans text-wedding-cream bg-wedding-ink antialiased selection:bg-wedding-gold selection:text-wedding-ink">
           <Navbar />
-          <main className="flex-grow">
+          <div className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/story" element={<Story />} />
@@ -45,7 +45,7 @@ const App: React.FC = () => {
               <Route path="/qna" element={<QnA />} />
               <Route path="/rsvp" element={<RSVP />} />
             </Routes>
-          </main>
+          </div>
           <Footer />
         </div>
       </HashRouter>

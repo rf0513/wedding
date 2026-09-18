@@ -292,16 +292,16 @@ const Home: React.FC = () => {
                   <div className="grid gap-[18px]" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))' }}>
                     <label className="flex flex-col gap-2">
                       <span className={`${label} text-wedding-gold`}>{t('rsvp_first_name')}</span>
-                      <input type="text" required value={form.first} onChange={(e) => setForm({ ...form, first: e.target.value })} className={field} />
+                      <input type="text" required autoComplete="given-name" value={form.first} onChange={(e) => setForm({ ...form, first: e.target.value })} className={field} />
                     </label>
                     <label className="flex flex-col gap-2">
                       <span className={`${label} text-wedding-gold`}>{t('rsvp_last_name')}</span>
-                      <input type="text" required value={form.last} onChange={(e) => setForm({ ...form, last: e.target.value })} className={field} />
+                      <input type="text" required autoComplete="family-name" value={form.last} onChange={(e) => setForm({ ...form, last: e.target.value })} className={field} />
                     </label>
                   </div>
                   <label className="flex flex-col gap-2">
                     <span className={`${label} text-wedding-gold`}>{t('rsvp_email')}</span>
-                    <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="email@example.com" className={field} />
+                    <input type="email" required autoComplete="email" inputMode="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="email@example.com" className={field} />
                   </label>
                   <div className="flex flex-col gap-[10px]">
                     <span className={`${label} text-wedding-gold`}>{t('rsvp_attending')}</span>
