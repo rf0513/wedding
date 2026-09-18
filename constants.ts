@@ -58,15 +58,17 @@ export const HERO_IMAGES: {
   srcSet?: string;
   objectPosition?: string;
   video?: { mp4: string; webm: string };
-  /** ms to hold this frame; video frames want one full pass rather than the usual 4.5s */
+  /** ms to hold this frame, overriding the default */
   hold?: number;
 }[] = [
-  // Order matters more than length here. Eight frames is about 38 seconds all the way
-  // round, and few guests watch the hero that long — so the strongest go first and the
-  // two cities alternate, rather than all of Mumbai then all of San Francisco.
+  // The loop opens. Its poster is 40 kB, so the hero still paints immediately — the
+  // first thing on screen is the rings, and they start moving a beat later. It holds
+  // a little longer than the photos because motion needs a moment to register; a
+  // still does not.
+  { src: engagementLoopPoster, video: { mp4: engagementLoopMp4, webm: engagementLoopWebm }, objectPosition: 'center 50%', hold: 4200 },
+  // Then the strongest photos, alternating the two cities rather than all of Mumbai
+  // and then all of San Francisco.
   { src: heroHug1920, srcSet: `${heroHug1280} 1280w, ${heroHug1920} 1920w`, objectPosition: 'center 30%' },
-  // Second, not first: the hero paints instantly on a photo, then comes alive.
-  { src: engagementLoopPoster, video: { mp4: engagementLoopMp4, webm: engagementLoopWebm }, objectPosition: 'center 50%', hold: 7200 },
   { src: sfPalace1920, srcSet: `${sfPalace1280} 1280w, ${sfPalace1920} 1920w`, objectPosition: 'center 45%' },
   { src: engagementPortrait1920, srcSet: `${engagementPortrait1280} 1280w, ${engagementPortrait1920} 1920w`, objectPosition: 'center 32%' },
   // A portrait in a 1.95:1 hero: centred, this keeps a band of columns and loses the

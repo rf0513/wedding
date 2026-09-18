@@ -20,8 +20,11 @@ import { usePrefersReducedMotion } from './DecoUI';
  * To add frames, edit HERO_IMAGES in constants.ts.
  */
 
-const HOLD_MS = 4500;   // time each frame is held, unless it sets its own `hold`
-const FADE_MS = 1600;   // crossfade duration
+// A frame is only "settled" for hold minus fade, so these two move together: at a 3s
+// hold the old 1.6s crossfade left barely a second of stillness and the sequence read
+// as a permanent dissolve.
+const HOLD_MS = 3000;   // time each frame is held, unless it sets its own `hold`
+const FADE_MS = 1000;   // crossfade duration
 
 const DUOTONE = 'grayscale(1) sepia(.5) hue-rotate(-8deg) saturate(1.15) brightness(.78) contrast(1.15)';
 
@@ -164,6 +167,11 @@ const HeroSequence: React.FC<{ alt?: string }> = ({ alt = 'Pavitra and Ramon' })
             loading={i === 0 ? 'eager' : 'lazy'}
             decoding="async"
             onLoad={() => loaded.current.add(i)}
+            // Without this a photo that fails to load never reports ready, and the
+            // advance loop — which waits on the next frame rather than fading to
+            // nothing — retries every 400ms forever, freezing the hero on whatever
+            // is on screen. Counting the failure as ready lets the sequence move on.
+            onError={() => loaded.current.add(i)}
             {...shared}
           />
         );
