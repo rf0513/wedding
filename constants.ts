@@ -15,7 +15,6 @@ import heroProposal1920 from './assets/photos/proposal-1920.webp';
 import heroBoat from './assets/photos/boat.webp';
 import storyTram from './assets/photos/tram.webp';
 import storyRockies from './assets/photos/rockies.webp';
-import storyMackinac from './assets/photos/mackinac.webp';
 import siddhivinayakImg from './assets/photos/siddhivinayak.webp';
 import yellowKurtaImg from './assets/photos/yellow-kurta.webp';
 // Mumbai engagement ceremony
@@ -25,6 +24,12 @@ import engagementCeremony from './assets/photos/engagement-ceremony.webp';
 import mehendiHands from './assets/photos/mehendi-hands.webp';
 import haldiThali from './assets/photos/haldi-thali.webp';
 import pujaKalash from './assets/photos/puja-kalash.webp';
+// San Francisco photoshoot
+import sfPalace1280 from './assets/photos/sf-palace-1280.webp';
+import sfPalace1920 from './assets/photos/sf-palace-1920.webp';
+import sfTwirl from './assets/photos/sf-twirl.webp';
+import sfGrass from './assets/photos/sf-grass.webp';
+import sfMarina from './assets/photos/sf-marina.webp';
 import engagementLoopMp4 from './assets/video/engagement-loop.mp4';
 import engagementLoopWebm from './assets/video/engagement-loop.webm';
 import engagementLoopPoster from './assets/video/engagement-poster.webp';
@@ -54,13 +59,20 @@ export const HERO_IMAGES: {
   /** ms to hold this frame; video frames want one full pass rather than the usual 4.5s */
   hold?: number;
 }[] = [
+  // Order matters more than length here. Eight frames is about 38 seconds all the way
+  // round, and few guests watch the hero that long — so the strongest go first and the
+  // two cities alternate, rather than all of Mumbai then all of San Francisco.
   { src: heroHug1920, srcSet: `${heroHug1280} 1280w, ${heroHug1920} 1920w`, objectPosition: 'center 30%' },
   // Second, not first: the hero paints instantly on a photo, then comes alive.
   { src: engagementLoopPoster, video: { mp4: engagementLoopMp4, webm: engagementLoopWebm }, objectPosition: 'center 50%', hold: 7200 },
+  { src: sfPalace1920, srcSet: `${sfPalace1280} 1280w, ${sfPalace1920} 1920w`, objectPosition: 'center 45%' },
+  { src: engagementPortrait1920, srcSet: `${engagementPortrait1280} 1280w, ${engagementPortrait1920} 1920w`, objectPosition: 'center 32%' },
+  // A portrait in a 1.95:1 hero: centred, this keeps a band of columns and loses the
+  // couple entirely, so the crop is biased right down.
+  { src: sfTwirl, objectPosition: 'center 85%' },
   { src: heroHands1920, srcSet: `${heroHands1280} 1280w, ${heroHands1920} 1920w`, objectPosition: 'center 45%' },
   { src: heroProposal1920, srcSet: `${heroProposal1280} 1280w, ${heroProposal1920} 1920w`, objectPosition: 'center 60%' },
   { src: heroBoat, objectPosition: 'center 35%' },
-  { src: engagementPortrait1920, srcSet: `${engagementPortrait1280} 1280w, ${engagementPortrait1920} 1920w`, objectPosition: 'center 32%' },
   // ➜ drop additional hero photos here
 ];
 
@@ -101,7 +113,7 @@ export const EVENTS_ES: WeddingEvent[] = [
 export const STORY_EVENTS_EN: StoryEvent[] = [
   { id: '1', date: 'Feb 2022', title: 'Co-workers', desc: 'Pavi and Ramon met at work in Albuquerque (Metamates, as Meta calls it): simple co-workers who quickly became inseparable.', img: storyTram },
   { id: '2', date: 'May 2022', title: 'Rocky Mountains', desc: 'They began dating after a spontanous trip to Rocky Mountains National Park in Colorado over Memorial Day.', img: storyRockies },
-  { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: storyMackinac },
+  { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: sfMarina },
   { id: '4', date: 'Oct 12, 2025', title: 'The Proposal', desc: "Sunset at Slacker's Hill. The Golden Gate Bridge, the San Francisco city skyline, and the hidden photographer as our witnesses.", img: heroProposal1920 },
   { id: '5', date: 'Sep 12, 2026', title: 'The Engagement', desc: 'Back in Mumbai, both families together, for the puja that made it official: henna, a copper kalash, and the first of the ceremonies.', img: engagementCeremony },
 ];
@@ -109,12 +121,12 @@ export const STORY_EVENTS_EN: StoryEvent[] = [
 export const STORY_EVENTS_ES: StoryEvent[] = [
   { id: '1', date: 'Feb 2022', title: 'Compañeros de trabajo', desc: 'Pavi y Ramón se conocieron en el trabajo en Albuquerque (Metamates, como dice Meta): simples compañeros que rápidamente se volvieron inseparables.', img: storyTram },
   { id: '2', date: 'May 2022', title: 'Montañas Rocosas', desc: 'Comenzaron a salir después de un viaje espontáneo al Parque Nacional de las Montañas Rocosas en Colorado durante el Día de los Caídos.', img: storyRockies },
-  { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: storyMackinac },
+  { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: sfMarina },
   { id: '4', date: 'Oct 12, 2025', title: 'La Propuesta', desc: "Atardecer en Slacker's Hill. El puente Golden Gate, el horizonte de la ciudad de San Francisco y el fotógrafo oculto como nuestros testigos.", img: heroProposal1920 },
   { id: '5', date: 'Sep 12, 2026', title: 'El Compromiso', desc: 'De vuelta en Mumbai, con las dos familias juntas, la puja que lo hizo oficial: henna, un kalash de cobre y la primera de las ceremonias.', img: engagementCeremony },
 ];
 
-export const STORY_MAIN_IMAGE = engagementPortrait1920;  // was a Google Photos share link, which rotates
+export const STORY_MAIN_IMAGE = sfGrass;  // was a Google Photos share link, which rotates
 
 // ─── REGISTRY ───
 export const REGISTRY_ITEMS_EN: RegistryItem[] = [

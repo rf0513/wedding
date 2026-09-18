@@ -40,7 +40,6 @@ const PHOTOS = [
   { file: 'boat.jpeg', name: 'boat', widths: [1280, 1920] },
   { file: 'tram.jpeg', name: 'tram', widths: [1520] },
   { file: 'rockies.jpeg', name: 'rockies', widths: [1520] },
-  { file: 'mackinac.jpeg', name: 'mackinac', widths: [1520] },
   { file: 'siddhivinayak-temple-mumbai.jpg', name: 'siddhivinayak', widths: [800] },
   { file: 'yellow-kurta.png', name: 'yellow-kurta', widths: [640] },
   // Mumbai engagement ceremony. The first joins the hero rotation, so it gets the
@@ -50,6 +49,12 @@ const PHOTOS = [
   { file: 'mehendi-hands.jpg', name: 'mehendi-hands', widths: [1520] },
   { file: 'haldi-thali.jpg', name: 'haldi-thali', widths: [1520] },
   { file: 'puja-kalash.jpg', name: 'puja-kalash', widths: [1520] },
+  // San Francisco photoshoot. The two landscapes carry the hero and a milestone; the
+  // portraits are 1333px on their long-ish edge, so a 1920 tier just clamps to source.
+  { file: 'sf-palace.jpg', name: 'sf-palace', widths: [1280, 1920] },
+  { file: 'sf-twirl.jpg', name: 'sf-twirl', widths: [1920] },
+  { file: 'sf-grass.jpg', name: 'sf-grass', widths: [1920] },
+  { file: 'sf-marina.jpg', name: 'sf-marina', widths: [1520] },
 ];
 
 await mkdir(OUT, { recursive: true });
