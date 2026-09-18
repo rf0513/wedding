@@ -25,6 +25,9 @@ import engagementCeremony from './assets/photos/engagement-ceremony.webp';
 import mehendiHands from './assets/photos/mehendi-hands.webp';
 import haldiThali from './assets/photos/haldi-thali.webp';
 import pujaKalash from './assets/photos/puja-kalash.webp';
+import engagementLoopMp4 from './assets/video/engagement-loop.mp4';
+import engagementLoopWebm from './assets/video/engagement-loop.webm';
+import engagementLoopPoster from './assets/video/engagement-poster.webp';
 
 // ─── HERO PHOTO SEQUENCE ───
 // The Home hero slowly crossfades through these photos (in order, looping), with the
@@ -38,8 +41,22 @@ import pujaKalash from './assets/photos/puja-kalash.webp';
 // ➜ TO ADD MORE PHOTOS: add the original to the rf0513/pavitra-and-ramon-wedding
 //   repo, list it in scripts/optimize-photos.mjs, run `npm run photos`, then import
 //   the generated file above and add one line below.
-export const HERO_IMAGES: { src: string; srcSet?: string; objectPosition?: string }[] = [
+// A frame is a photo, or a photo that turns out to be the poster of a silent loop.
+// `video` frames play muted, on repeat, with no controls — motion behind the names,
+// not something a guest is asked to watch. If the loop is skipped (reduced motion,
+// a metered connection) or fails to load, `src` is what stays on screen, so a frame
+// is never blank.
+export const HERO_IMAGES: {
+  src: string;
+  srcSet?: string;
+  objectPosition?: string;
+  video?: { mp4: string; webm: string };
+  /** ms to hold this frame; video frames want one full pass rather than the usual 4.5s */
+  hold?: number;
+}[] = [
   { src: heroHug1920, srcSet: `${heroHug1280} 1280w, ${heroHug1920} 1920w`, objectPosition: 'center 30%' },
+  // Second, not first: the hero paints instantly on a photo, then comes alive.
+  { src: engagementLoopPoster, video: { mp4: engagementLoopMp4, webm: engagementLoopWebm }, objectPosition: 'center 50%', hold: 7200 },
   { src: heroHands1920, srcSet: `${heroHands1280} 1280w, ${heroHands1920} 1920w`, objectPosition: 'center 45%' },
   { src: heroProposal1920, srcSet: `${heroProposal1280} 1280w, ${heroProposal1920} 1920w`, objectPosition: 'center 60%' },
   { src: heroBoat, objectPosition: 'center 35%' },
