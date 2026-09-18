@@ -65,23 +65,23 @@ const Home: React.FC = () => {
         {/* Brass rays fan up from the floor behind the names, like the lobby sunburst */}
         <RayFan className="absolute left-1/2 -translate-x-1/2 -bottom-[560px] w-[1240px] h-[1240px]" spread={190} n={64} opacity={.55} />
         <HeroFrame />
-        <div className="relative z-[2] pt-[min(34vh,300px)] px-6 sm:px-9 pb-16 sm:pb-20 text-center animate-heroIn">
-          <RisingSun size={64} className="mx-auto mb-5" />
+        <div className="relative z-[2] pt-[min(34vh,300px)] px-6 sm:px-9 pb-8 sm:pb-20 text-center animate-heroIn">
+          <RisingSun size={64} className="mx-auto mb-3 sm:mb-5" />
           <p className="m-0 mb-[18px] font-sans font-semibold text-[10px] tracking-[.46em] uppercase text-wedding-gold">{t('the_wedding_of')}</p>
           <h1 className="m-0 font-serif font-normal text-wedding-cream text-[clamp(50px,13vw,132px)] leading-[.96] tracking-[.05em] uppercase" style={{ textWrap: 'balance' as any }}>
             Pavitra
             <span className="block font-italic italic normal-case text-[.46em] leading-[1.35] brass-text tracking-[.04em]">&amp;</span>
             Ramon
           </h1>
-          <div className="flex items-center justify-center gap-[14px] mt-7">
+          <div className="flex items-center justify-center gap-[14px] mt-4 sm:mt-7">
             <span className="h-px w-[34px] sm:w-[60px] bg-wedding-gold" />
             <span className="w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
             <p className="m-0 font-sans text-xs sm:text-[13px] leading-[1.4] tracking-[.28em] uppercase text-wedding-cream">{t('hero_dates')}</p>
             <span className="w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
             <span className="h-px w-[34px] sm:w-[60px] bg-wedding-gold" />
           </div>
-          <p className="mt-3 mb-0 font-sans font-light text-xs tracking-[.34em] uppercase text-wedding-goldLight/80">Mumbai · India</p>
-          <div className="flex flex-wrap gap-[10px] justify-center mt-9">
+          <p className="mt-2 sm:mt-3 mb-0 font-sans font-light text-xs tracking-[.34em] uppercase text-wedding-goldLight/80">Mumbai · India</p>
+          <div className="flex flex-wrap gap-[10px] justify-center mt-5 sm:mt-9">
             {/* Real hrefs, not click handlers: these are the two most important
                 buttons on the site, and without one they are invisible to the
                 keyboard and announced as plain text. #/rsvp and #/celebrations

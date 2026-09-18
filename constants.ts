@@ -45,6 +45,14 @@ import engagementLoopPoster from './assets/video/engagement-poster.webp';
 // `srcSet` lets a phone download the 1280px copy instead of the 1920px one — worth
 // roughly half the bytes on mobile data. A photo with only one size just omits it.
 //
+// objectPosition is 'X Y', and the two halves work on different screens. The hero box
+// is wide on a desktop and tall on a phone, so for a landscape photo the desktop crops
+// off the top and bottom (Y decides what is kept, X does nothing) while a phone crops
+// off the left and right — it shows only the middle third of the width, and there X
+// decides while Y does nothing. Set both: Y frames it on a laptop, X frames it on a
+// phone. Getting X wrong is how Pavitra's face ended up cropped out of the rooftop
+// portrait on mobile while the desktop looked fine.
+//
 // ➜ TO ADD MORE PHOTOS: add the original to the rf0513/pavitra-and-ramon-wedding
 //   repo, list it in scripts/optimize-photos.mjs, run `npm run photos`, then import
 //   the generated file above and add one line below.
@@ -70,12 +78,12 @@ export const HERO_IMAGES: {
   // and then all of San Francisco.
   { src: heroHug1920, srcSet: `${heroHug1280} 1280w, ${heroHug1920} 1920w`, objectPosition: 'center 30%' },
   { src: sfPalace1920, srcSet: `${sfPalace1280} 1280w, ${sfPalace1920} 1920w`, objectPosition: 'center 45%' },
-  { src: engagementPortrait1920, srcSet: `${engagementPortrait1280} 1280w, ${engagementPortrait1920} 1920w`, objectPosition: 'center 32%' },
+  { src: engagementPortrait1920, srcSet: `${engagementPortrait1280} 1280w, ${engagementPortrait1920} 1920w`, objectPosition: '31% 32%' },
   // A portrait in a 1.95:1 hero: centred, this keeps a band of columns and loses the
   // couple entirely, so the crop is biased right down.
   { src: sfTwirl, objectPosition: 'center 85%' },
   { src: heroHands1920, srcSet: `${heroHands1280} 1280w, ${heroHands1920} 1920w`, objectPosition: 'center 45%' },
-  { src: heroProposal1920, srcSet: `${heroProposal1280} 1280w, ${heroProposal1920} 1920w`, objectPosition: 'center 60%' },
+  { src: heroProposal1920, srcSet: `${heroProposal1280} 1280w, ${heroProposal1920} 1920w`, objectPosition: '40% 60%' },
   // ➜ drop additional hero photos here
 ];
 

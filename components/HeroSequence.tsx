@@ -117,7 +117,7 @@ const HeroSequence: React.FC<{ alt?: string }> = ({ alt = 'Pavitra and Ramon' })
   const frames = reduced ? [0] : mounted;
 
   return (
-    <div ref={wrapRef} className="absolute left-0 -top-[6%] w-full h-[82%] will-change-transform">
+    <div ref={wrapRef} className="absolute left-0 -top-[11%] sm:-top-[6%] w-full h-[82%] will-change-transform">
       {frames.map((i) => {
         const frame = HERO_IMAGES[i];
         const isActive = i === active;
