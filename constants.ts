@@ -1,6 +1,23 @@
 import { WeddingEvent, StoryEvent, RegistryItem, AttireItem, FAQItem, TravelSpot, SurvivalTip, Celebration } from './types';
 
-const GH_RAW = 'https://github.com/rf0513/pavitra-and-ramon-wedding/blob/main/';
+// ─── OUR OWN PHOTOS ───
+// These ship with the site instead of being hotlinked, so they load from the same
+// server as everything else, get a content hash (cached forever, never stale), and
+// cannot break if somebody else's host changes. The originals live in the separate
+// rf0513/pavitra-and-ramon-wedding repo at full resolution; `npm run photos` turns
+// them into the WebP files in assets/photos/. See scripts/optimize-photos.mjs.
+import heroHug1280 from './assets/photos/engagement-hug-1280.webp';
+import heroHug1920 from './assets/photos/engagement-hug-1920.webp';
+import heroHands1280 from './assets/photos/engagement-hands-1280.webp';
+import heroHands1920 from './assets/photos/engagement-hands-1920.webp';
+import heroProposal1280 from './assets/photos/proposal-1280.webp';
+import heroProposal1920 from './assets/photos/proposal-1920.webp';
+import heroBoat from './assets/photos/boat.webp';
+import storyTram from './assets/photos/tram.webp';
+import storyRockies from './assets/photos/rockies.webp';
+import storyMackinac from './assets/photos/mackinac.webp';
+import siddhivinayakImg from './assets/photos/siddhivinayak.webp';
+import yellowKurtaImg from './assets/photos/yellow-kurta.webp';
 
 // ─── HERO PHOTO SEQUENCE ───
 // The Home hero slowly crossfades through these photos (in order, looping), with the
@@ -8,16 +25,17 @@ const GH_RAW = 'https://github.com/rf0513/pavitra-and-ramon-wedding/blob/main/';
 // image is cropped to `objectPosition` (where the faces are) — tweak per photo if a
 // crop lands badly on phones.
 //
-// ➜ TO ADD MORE PHOTOS: upload the file to the rf0513/pavitra-and-ramon-wedding repo
-//   and add one line below, e.g.
-//   { src: `${GH_RAW}our-new-photo.jpg?raw=true`, objectPosition: 'center 40%' },
-//   Keep the files reasonably sized (≤ 2–3 MB, ~2000px on the long edge) — guests
-//   will be on hotel wifi and mobile data.
-export const HERO_IMAGES: { src: string; objectPosition?: string }[] = [
-  { src: `${GH_RAW}engagement-hug.jpg?raw=true`, objectPosition: 'center 30%' },
-  { src: `${GH_RAW}engagement-hands.jpg?raw=true`, objectPosition: 'center 45%' },
-  { src: `${GH_RAW}proposal.jpg?raw=true`, objectPosition: 'center 60%' },
-  { src: `${GH_RAW}boat.jpeg?raw=true`, objectPosition: 'center 35%' },
+// `srcSet` lets a phone download the 1280px copy instead of the 1920px one — worth
+// roughly half the bytes on mobile data. A photo with only one size just omits it.
+//
+// ➜ TO ADD MORE PHOTOS: add the original to the rf0513/pavitra-and-ramon-wedding
+//   repo, list it in scripts/optimize-photos.mjs, run `npm run photos`, then import
+//   the generated file above and add one line below.
+export const HERO_IMAGES: { src: string; srcSet?: string; objectPosition?: string }[] = [
+  { src: heroHug1920, srcSet: `${heroHug1280} 1280w, ${heroHug1920} 1920w`, objectPosition: 'center 30%' },
+  { src: heroHands1920, srcSet: `${heroHands1280} 1280w, ${heroHands1920} 1920w`, objectPosition: 'center 45%' },
+  { src: heroProposal1920, srcSet: `${heroProposal1280} 1280w, ${heroProposal1920} 1920w`, objectPosition: 'center 60%' },
+  { src: heroBoat, objectPosition: 'center 35%' },
   // ➜ drop additional hero photos here
 ];
 
@@ -56,17 +74,17 @@ export const EVENTS_ES: WeddingEvent[] = [
 
 // ─── STORY ───
 export const STORY_EVENTS_EN: StoryEvent[] = [
-  { id: '1', date: 'Feb 2022', title: 'Co-workers', desc: 'Pavi and Ramon met at work in Albuquerque (Metamates, as Meta calls it): simple co-workers who quickly became inseparable.', img: `${GH_RAW}tram.jpeg?raw=true` },
-  { id: '2', date: 'May 2022', title: 'Rocky Mountains', desc: 'They began dating after a spontanous trip to Rocky Mountains National Park in Colorado over Memorial Day.', img: `${GH_RAW}rockies.jpeg?raw=true` },
-  { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: `${GH_RAW}mackinac.jpeg?raw=true` },
-  { id: '4', date: 'Oct 12, 2025', title: 'The Proposal', desc: "Sunset at Slacker's Hill. The Golden Gate Bridge, the San Francisco city skyline, and the hidden photographer as our witnesses.", img: `${GH_RAW}proposal.jpg?raw=true` },
+  { id: '1', date: 'Feb 2022', title: 'Co-workers', desc: 'Pavi and Ramon met at work in Albuquerque (Metamates, as Meta calls it): simple co-workers who quickly became inseparable.', img: storyTram },
+  { id: '2', date: 'May 2022', title: 'Rocky Mountains', desc: 'They began dating after a spontanous trip to Rocky Mountains National Park in Colorado over Memorial Day.', img: storyRockies },
+  { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: storyMackinac },
+  { id: '4', date: 'Oct 12, 2025', title: 'The Proposal', desc: "Sunset at Slacker's Hill. The Golden Gate Bridge, the San Francisco city skyline, and the hidden photographer as our witnesses.", img: heroProposal1920 },
 ];
 
 export const STORY_EVENTS_ES: StoryEvent[] = [
-  { id: '1', date: 'Feb 2022', title: 'Compañeros de trabajo', desc: 'Pavi y Ramón se conocieron en el trabajo en Albuquerque (Metamates, como dice Meta): simples compañeros que rápidamente se volvieron inseparables.', img: `${GH_RAW}tram.jpeg?raw=true` },
-  { id: '2', date: 'May 2022', title: 'Montañas Rocosas', desc: 'Comenzaron a salir después de un viaje espontáneo al Parque Nacional de las Montañas Rocosas en Colorado durante el Día de los Caídos.', img: `${GH_RAW}rockies.jpeg?raw=true` },
-  { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: `${GH_RAW}mackinac.jpeg?raw=true` },
-  { id: '4', date: 'Oct 12, 2025', title: 'La Propuesta', desc: "Atardecer en Slacker's Hill. El puente Golden Gate, el horizonte de la ciudad de San Francisco y el fotógrafo oculto como nuestros testigos.", img: `${GH_RAW}proposal.jpg?raw=true` },
+  { id: '1', date: 'Feb 2022', title: 'Compañeros de trabajo', desc: 'Pavi y Ramón se conocieron en el trabajo en Albuquerque (Metamates, como dice Meta): simples compañeros que rápidamente se volvieron inseparables.', img: storyTram },
+  { id: '2', date: 'May 2022', title: 'Montañas Rocosas', desc: 'Comenzaron a salir después de un viaje espontáneo al Parque Nacional de las Montañas Rocosas en Colorado durante el Día de los Caídos.', img: storyRockies },
+  { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: storyMackinac },
+  { id: '4', date: 'Oct 12, 2025', title: 'La Propuesta', desc: "Atardecer en Slacker's Hill. El puente Golden Gate, el horizonte de la ciudad de San Francisco y el fotógrafo oculto como nuestros testigos.", img: heroProposal1920 },
 ];
 
 export const STORY_MAIN_IMAGE = 'https://lh3.googleusercontent.com/pw/AP1GczO1xDfNPI3ZJkGHdniIfQKvv9U2hBSBAwRjD-UdjmTpXE3SEsZnammzDWAutk-kbAJ0LK-1tpDHGVloUvvu50pd7gcqAzuMgRpqYtlgfWVVQsYzRgN2_nP1WvdfZCjhKwRixb2bXITrTqZ8hJv0K6rLJA=w1307-h872-s-no-gm?authuser=0';
@@ -86,6 +104,15 @@ export const REGISTRY_ITEMS_ES: RegistryItem[] = [
 // Pexels serves stable, hotlink-friendly URLs. `pexels(id)` builds one from the
 // numeric photo id (the number at the end of any pexels.com/photo/... URL).
 // ➜ TO SWAP A PHOTO: find one you love on pexels.com, copy the id, replace it below.
+//
+// ⚠ STILL HOTLINKED — everything below this line loads from somebody else's server
+//   and can break without warning between now and February 2027. Pexels is the
+//   safe end of that (stable ids, hotlinking is the intended use); the riskiest are
+//   STORY_MAIN_IMAGE (a Google Photos share link, which rotates) and the single
+//   retailer/hotel/editorial URLs (manyavar, theleela, gqindia, cloudfront), which
+//   die whenever those sites reorganise. To bring one in-house: save the file into
+//   the photo repo, add it to scripts/optimize-photos.mjs, run `npm run photos`,
+//   and import it the way the hero and story photos above are imported.
 const pexels = (id: number, w = 1200) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
 // ─── THE CELEBRATIONS (one page per day) ───
@@ -541,7 +568,7 @@ export function getCelebration(id: string | undefined, lang: 'en' | 'es'): Celeb
 
 // ─── ATTIRE GLOSSARY ───
 export const ATTIRE_GUIDE_EN: AttireItem[] = [
-  { id: 'yellow-kurta', name: 'Kurta Set', pronunciation: 'Kur-ta', gender: 'Women', description: 'A comfortable, lightweight tunic worn with pants or leggings. Yellow or Orange is the traditional color for the Haldi ceremony as it signifies purity and glow.', bestFor: ['Haldi'], imageUrl: 'https://raw.githubusercontent.com/rf0513/pavitra-and-ramon-wedding/main/yellow-kurta.png' },
+  { id: 'yellow-kurta', name: 'Kurta Set', pronunciation: 'Kur-ta', gender: 'Women', description: 'A comfortable, lightweight tunic worn with pants or leggings. Yellow or Orange is the traditional color for the Haldi ceremony as it signifies purity and glow.', bestFor: ['Haldi'], imageUrl: yellowKurtaImg },
   { id: 'lehenga', name: 'Lehenga Choli', pronunciation: 'Leh-hen-gah', gender: 'Women', description: 'A three-piece outfit consisting of a long, full skirt (Lehenga), a fitted blouse (Choli), and a scarf drape (Dupatta). They can be simple or heavily embroidered.', bestFor: ['Vows & Sangeet', 'Wedding & Reception'], imageUrl: pexels(8881954, 800) },
   { id: 'saree', name: 'Saree', pronunciation: 'Saa-ree', gender: 'Women', description: 'A long drape of fabric (usually 6-9 yards) wrapped around the waist and draped over the shoulder, worn over a petticoat and a blouse. For our wedding, "Paithani" silk sarees are the local favorite.', bestFor: ['Wedding & Reception'], imageUrl: pexels(7037125, 800) },
   { id: 'kurta', name: 'Kurta Pajama', pronunciation: 'Kur-ta Pa-ja-ma', gender: 'Men', description: 'A loose, collarless shirt (Kurta) falling below the knees, worn with lightweight trousers (Pajama). It is comfortable and perfect for daytime events.', bestFor: ['Mehendi', 'Haldi'], imageUrl: pexels(28113665, 800) },
@@ -551,7 +578,7 @@ export const ATTIRE_GUIDE_EN: AttireItem[] = [
 ];
 
 export const ATTIRE_GUIDE_ES: AttireItem[] = [
-  { id: 'yellow-kurta', name: 'Kurta', pronunciation: 'Kur-ta', gender: 'Women', description: 'Una túnica cómoda y ligera que se usa con pantalones o leggings. El amarillo o naranja es el color tradicional de la ceremonia Haldi, ya que significa pureza y brillo.', bestFor: ['Haldi'], imageUrl: 'https://raw.githubusercontent.com/rf0513/pavitra-and-ramon-wedding/main/yellow-kurta.png' },
+  { id: 'yellow-kurta', name: 'Kurta', pronunciation: 'Kur-ta', gender: 'Women', description: 'Una túnica cómoda y ligera que se usa con pantalones o leggings. El amarillo o naranja es el color tradicional de la ceremonia Haldi, ya que significa pureza y brillo.', bestFor: ['Haldi'], imageUrl: yellowKurtaImg },
   { id: 'lehenga', name: 'Lehenga Choli', pronunciation: 'Leh-hen-gah', gender: 'Women', description: 'Un traje de tres piezas que consta de una falda larga y amplia (Lehenga), una blusa ajustada (Choli) y una bufanda drapeada (Dupatta). Pueden ser simples o muy bordados.', bestFor: ['Votos y Sangeet', 'Boda y Recepción'], imageUrl: pexels(8881954, 800) },
   { id: 'saree', name: 'Sari', pronunciation: 'Saa-ree', gender: 'Women', description: 'Una larga tela (generalmente 6-9 yardas) envuelta alrededor de la cintura y drapeada sobre el hombro, usada sobre una enagua y una blusa. Para nuestra boda, los saris de seda "Paithani" son los favoritos locales.', bestFor: ['Boda y Recepción'], imageUrl: pexels(7037125, 800) },
   { id: 'kurta', name: 'Kurta Pajama', pronunciation: 'Kur-ta Pa-ja-ma', gender: 'Men', description: 'Una camisa suelta y sin cuello (Kurta) que cae por debajo de las rodillas, usada con pantalones ligeros (Pajama). Es cómodo y perfecto para eventos diurnos.', bestFor: ['Mehendi', 'Haldi'], imageUrl: pexels(28113665, 800) },
@@ -564,14 +591,14 @@ export const ATTIRE_GUIDE_ES: AttireItem[] = [
 export const SIGHTSEEING_EN: TravelSpot[] = [
   { id: 'gateway', title: 'Gateway of India', desc: "Mumbai's most iconic monument. Built in 1924, it overlooks the Arabian Sea. Free public entry. We recommend visiting in the early morning or at sunset for the best photos without the intense heat.", img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop', query: 'Gateway of India, Apollo Bandar, Colaba, Mumbai, Maharashtra 400001', link: 'https://www.tripadvisor.com/AttractionProductReview-g304554-d11487374-Private_Mumbai_Sightseeing_Tour_Traveller_s_Choice_Award_Winner-Mumbai_Maharashtra.html' },
   { id: 'elephanta', title: 'Elephanta Caves', desc: 'A UNESCO World Heritage site featuring rock-cut Hindu caves dedicated to Lord Shiva. It requires a fun ferry ride from Gateway of India.', img: 'https://images.unsplash.com/photo-1620766182966-c6eb5ed2b788?q=80&w=800&auto=format&fit=crop', query: 'Elephanta Caves, Gharapuri, Maharashtra 400094', link: 'https://www.tripadvisor.com/AttractionProductReview-g304554-d17800956-Elephanta_Caves_Island_Guided_Private_Tour-Mumbai_Maharashtra.html' },
-  { id: 'siddhi', title: 'Siddhivinayak Temple', desc: "Mumbai's most famous and affluent temple dedicated to Lord Ganesha. It is a spiritual power center. Pro-tip: Book a 'Special Darshan' pass online to skip the long queues.", img: `${GH_RAW}siddhivinayak-temple-mumbai.jpg?raw=true`, query: 'Siddhivinayak Temple, SK Bole Marg, Prabhadevi, Mumbai, Maharashtra 400028', link: 'https://www.siddhivinayak.org/' },
+  { id: 'siddhi', title: 'Siddhivinayak Temple', desc: "Mumbai's most famous and affluent temple dedicated to Lord Ganesha. It is a spiritual power center. Pro-tip: Book a 'Special Darshan' pass online to skip the long queues.", img: siddhivinayakImg, query: 'Siddhivinayak Temple, SK Bole Marg, Prabhadevi, Mumbai, Maharashtra 400028', link: 'https://www.siddhivinayak.org/' },
   { id: 'csmvs', title: 'CSMVS Museum', desc: 'The Chhatrapati Shivaji Maharaj Vastu Sangrahalaya is a stunning Indo-Saracenic masterpiece. It is air-conditioned, peaceful, and houses incredible Indian art.', img: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxAVarqGSXmRhkIrXK7G0ZLunq9qAvw3Sf61owqcc_28NqpeEH3J2EnsYgMivA7-tc-UcjZOmg6HtVHjHsPWI5V8RXfuSSD6Bt7cpv5ZU2auU78rgyu54NU8mZSkxYyhCuh-2rU=s680-w680-h510-rw', query: 'Chhatrapati Shivaji Maharaj Vastu Sangrahalaya, Mahatma Gandhi Road, Kala Ghoda, Fort, Mumbai, Maharashtra 400023', link: 'https://booking.csmvs.in/' },
 ];
 
 export const SIGHTSEEING_ES: TravelSpot[] = [
   { id: 'gateway', title: 'Puerta de la India', desc: 'El monumento más emblemático de Mumbai. Construido en 1924, domina el Mar Arábigo. Entrada pública gratuita. Recomendamos visitarlo temprano en la mañana o al atardecer para obtener las mejores fotos sin el intenso calor.', img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop', query: 'Gateway of India, Apollo Bandar, Colaba, Mumbai, Maharashtra 400001', link: 'https://www.tripadvisor.com/AttractionProductReview-g304554-d11487374-Private_Mumbai_Sightseeing_Tour_Traveller_s_Choice_Award_Winner-Mumbai_Maharashtra.html' },
   { id: 'elephanta', title: 'Cuevas de Elephanta', desc: 'Un sitio del Patrimonio Mundial de la UNESCO con cuevas hindúes excavadas en la roca dedicadas a Lord Shiva. Requiere un divertido viaje en ferry desde la Puerta de la India.', img: 'https://images.unsplash.com/photo-1620766182966-c6eb5ed2b788?q=80&w=800&auto=format&fit=crop', query: 'Elephanta Caves, Gharapuri, Maharashtra 400094', link: 'https://www.tripadvisor.com/AttractionProductReview-g304554-d17800956-Elephanta_Caves_Island_Guided_Private_Tour-Mumbai_Maharashtra.html' },
-  { id: 'siddhi', title: 'Templo Siddhivinayak', desc: "El templo más famoso de Mumbai dedicado a Lord Ganesha. Es un centro de poder espiritual. Consejo: Reserve un pase de 'Darshan Especial' en línea para evitar las largas filas.", img: `${GH_RAW}siddhivinayak-temple-mumbai.jpg?raw=true`, query: 'Siddhivinayak Temple, SK Bole Marg, Prabhadevi, Mumbai, Maharashtra 400028', link: 'https://www.siddhivinayak.org/' },
+  { id: 'siddhi', title: 'Templo Siddhivinayak', desc: "El templo más famoso de Mumbai dedicado a Lord Ganesha. Es un centro de poder espiritual. Consejo: Reserve un pase de 'Darshan Especial' en línea para evitar las largas filas.", img: siddhivinayakImg, query: 'Siddhivinayak Temple, SK Bole Marg, Prabhadevi, Mumbai, Maharashtra 400028', link: 'https://www.siddhivinayak.org/' },
   { id: 'csmvs', title: 'Museo CSMVS', desc: 'El Chhatrapati Shivaji Maharaj Vastu Sangrahalaya es una impresionante obra maestra indo-sarracena. Tiene aire acondicionado, es tranquilo y alberga increíble arte indio.', img: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxAVarqGSXmRhkIrXK7G0ZLunq9qAvw3Sf61owqcc_28NqpeEH3J2EnsYgMivA7-tc-UcjZOmg6HtVHjHsPWI5V8RXfuSSD6Bt7cpv5ZU2auU78rgyu54NU8mZSkxYyhCuh-2rU=s680-w680-h510-rw', query: 'Chhatrapati Shivaji Maharaj Vastu Sangrahalaya, Mahatma Gandhi Road, Kala Ghoda, Fort, Mumbai, Maharashtra 400023', link: 'https://booking.csmvs.in/' },
 ];
 

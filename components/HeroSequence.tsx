@@ -75,6 +75,8 @@ const HeroSequence: React.FC<{ alt?: string }> = ({ alt = 'Pavitra and Ramon' })
           <img
             key={img.src}
             src={img.src}
+            srcSet={img.srcSet}
+            sizes="100vw"
             alt={isActive ? alt : ''}
             aria-hidden={!isActive}
             loading={i === 0 ? 'eager' : 'lazy'}

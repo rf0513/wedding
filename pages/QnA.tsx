@@ -45,7 +45,7 @@ const QnA: React.FC = () => {
         </div>
         </div>
         <div className="mt-14 text-center">
-          <a onClick={goHome} className={btnGhostLight}>
+          <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} className={btnGhostLight}>
             ← {t('rsvp_back_home')}
           </a>
         </div>

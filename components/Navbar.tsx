@@ -17,6 +17,26 @@ const Navbar: React.FC = () => {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  // Escape closes the menu. Without it the overlay is a trap: the only way out is
+  // finding the Close button.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
+
+  // The bar is transparent over the hero and lays down an ink ground once you scroll,
+  // so links never sit unreadably on white marble — and never collide with the text
+  // underneath them.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const goHome = () => {
     navigate('/');
     setMenuOpen(false);
@@ -50,22 +70,67 @@ const Navbar: React.FC = () => {
 
   const btnClasses = "h-10 px-[14px] border border-wedding-gold/60 bg-wedding-ink/70 backdrop-blur-md text-wedding-goldLight font-sans font-semibold text-[11px] tracking-[.28em] uppercase cursor-pointer pt-[3px] transition-colors hover:border-wedding-goldLight hover:bg-wedding-ink/90 deco-chamfer-8";
 
+  // Shown as a real bar from lg up. The hamburger stays at every width because it is
+  // the full index — these five are the shortcuts, not the whole contents.
+  const primaryNav = [
+    { name: t('nav_celebrations'), href: '#/celebrations', go: () => goSection('celebrations') },
+    { name: t('nav_story'), href: '#/story', go: () => goSection('story') },
+    { name: t('nav_attire'), href: '#/attire', go: () => goView('/attire') },
+    { name: t('nav_travel'), href: '#/travel', go: () => goView('/travel') },
+    { name: t('nav_qna'), href: '#/qna', go: () => goView('/qna') },
+  ];
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-[60] flex justify-between items-center px-[18px] py-[14px] pointer-events-none">
-        <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} aria-label="Pavitra & Ramon — home" className="pointer-events-auto cursor-pointer no-underline flex items-center gap-[10px]">
+      <header className="fixed top-0 left-0 right-0 z-[60] flex justify-between items-center gap-5 px-[18px] py-[14px] pointer-events-none">
+        {/* Visual ground only — kept pointer-events-none so the hero stays clickable
+            through the transparent bar, exactly as before. */}
+        <span
+          aria-hidden
+          className={`absolute inset-0 border-b transition-[background-color,border-color] duration-300 ${
+            scrolled && !menuOpen
+              ? 'bg-wedding-ink/95 backdrop-blur-md border-wedding-gold/25'
+              : 'bg-transparent border-transparent'
+          }`}
+        />
+        <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} aria-label="Pavitra & Ramon — home" className="relative pointer-events-auto cursor-pointer no-underline flex items-center gap-[10px]">
           <LogoMark />
         </a>
-        <div className="pointer-events-auto flex items-center gap-2">
+
+        <nav aria-label={t('menu_label')} className="relative pointer-events-auto hidden lg:flex items-center gap-7">
+          {primaryNav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={(e) => { e.preventDefault(); item.go(); }}
+              className="font-sans font-semibold text-[11px] tracking-[.22em] uppercase text-wedding-cream/85 no-underline cursor-pointer whitespace-nowrap transition-colors hover:text-wedding-goldLight"
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
+
+        <div className="relative pointer-events-auto flex items-center gap-2">
+          <a
+            href="#/rsvp"
+            onClick={(e) => { e.preventDefault(); goSection('rsvp'); }}
+            className="hidden lg:inline-flex items-center h-10 px-[18px] pt-[3px] brass font-sans font-semibold text-[11px] tracking-[.28em] uppercase no-underline cursor-pointer deco-chamfer-8"
+          >
+            {t('nav_rsvp')}
+          </a>
           <button
+            type="button"
             onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+            aria-label={language === 'en' ? 'Cambiar a español' : 'Switch to English'}
             className={btnClasses}
           >
             {language === 'en' ? 'ES' : 'EN'}
           </button>
           <button
+            type="button"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menu"
+            aria-expanded={menuOpen}
             className={`${btnClasses} flex items-center gap-[10px]`}
           >
             {menuOpen ? (language === 'en' ? 'Close' : 'Cerrar') : (language === 'en' ? 'Menu' : 'Menú')}

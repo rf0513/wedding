@@ -84,8 +84,12 @@ const Home: React.FC = () => {
           </div>
           <p className="mt-3 mb-0 font-sans font-light text-xs tracking-[.34em] uppercase text-wedding-goldLight/80">Mumbai · India</p>
           <div className="flex flex-wrap gap-[10px] justify-center mt-9">
-            <a onClick={() => goSection('rsvp')} className={btnPrimary}>{t('nav_rsvp')}</a>
-            <a onClick={() => goSection('celebrations')} className={btnGhostDark}>{t('home_view_events')}</a>
+            {/* Real hrefs, not click handlers: these are the two most important
+                buttons on the site, and without one they are invisible to the
+                keyboard and announced as plain text. #/rsvp and #/celebrations
+                are routes that bounce to the matching section. */}
+            <a href="#/rsvp" onClick={(e) => { e.preventDefault(); goSection('rsvp'); }} className={btnPrimary}>{t('nav_rsvp')}</a>
+            <a href="#/celebrations" onClick={(e) => { e.preventDefault(); goSection('celebrations'); }} className={btnGhostDark}>{t('home_view_events')}</a>
           </div>
         </div>
       </section>
@@ -134,8 +138,8 @@ const Home: React.FC = () => {
             {celebrations.map((c, i) => {
               const ev = eventFor(c);
               return (
-                <Reveal key={c.id} delay={(i % 4) * 0.07}>
-                  <a href={`#/celebrations/${c.id}`} onClick={(e) => { e.preventDefault(); goDay(c.id); }} className="group block no-underline cursor-pointer text-wedding-cream">
+                <Reveal key={c.id} delay={(i % 4) * 0.07} className="h-full">
+                  <a href={`#/celebrations/${c.id}`} onClick={(e) => { e.preventDefault(); goDay(c.id); }} className="group flex h-full flex-col no-underline cursor-pointer text-wedding-cream">
                     <div className="relative">
                       <StepFrame size={16} borderWidth={2} innerBg="#0C0B0A" innerPadding={6}>
                         <div className="relative overflow-hidden">
@@ -143,16 +147,22 @@ const Home: React.FC = () => {
                           <div className="absolute inset-0 transition-opacity duration-700 group-hover:opacity-70" style={{ background: 'linear-gradient(180deg,rgba(12,11,10,.1) 0%,rgba(12,11,10,0) 30%,rgba(12,11,10,.9) 100%)' }} />
                           <div className="absolute left-0 right-0 bottom-0 p-3 sm:p-5">
                             <p className={`m-0 mb-1.5 ${label} text-[9px] sm:text-[10px] text-wedding-gold`}>{t('day_label')} {pad(c.day)} <span className="hidden sm:inline">· {c.weekday}</span></p>
-                            <h3 className="m-0 font-serif font-normal text-[clamp(20px,4.6vw,32px)] leading-[1.05] text-wedding-cream" style={{ textWrap: 'balance' as any }}>{c.title}</h3>
+                            {/* Two lines' worth of box, bottom-aligned: "Mehendi" and
+                                "Wedding & Reception" then start at the same height, so
+                                the DAY kickers above them line up across the row. */}
+                            <h3 className="m-0 flex items-end min-h-[2.1em] font-serif font-normal text-[clamp(20px,4.6vw,32px)] leading-[1.05] text-wedding-cream" style={{ textWrap: 'balance' as any }}>{c.title}</h3>
                           </div>
                         </div>
                       </StepFrame>
                       <span className="absolute -top-3 left-3 sm:left-5 px-3 py-[6px] brass font-sans font-semibold text-[9px] sm:text-[10px] tracking-[.3em] uppercase whitespace-nowrap deco-chamfer-8">{c.dateShort}</span>
                     </div>
-                    <div className="mt-4 pt-3 border-t border-wedding-gold/30">
-                      {ev && <p className={`m-0 ${label} text-[9px] tracking-[.22em] text-wedding-cream/60`}>{ev.time} · {ev.location}</p>}
+                    {/* A flex column so the row reads as a row: the venue line reserves
+                        two lines (long names wrap), and Explore is pinned to the bottom
+                        so all four sit on one line however long the taglines run. */}
+                    <div className="mt-4 pt-3 border-t border-wedding-gold/30 flex flex-1 flex-col">
+                      {ev && <p className={`m-0 ${label} text-[9px] leading-[1.5] min-h-[27px] tracking-[.22em] text-wedding-cream/60`}>{ev.time} · {ev.location}</p>}
                       <p className="mt-2 mb-3 font-italic italic text-[15px] sm:text-[18px] leading-[1.35] text-wedding-cream/85">{c.tagline}</p>
-                      <span className={`${linkArrow} text-wedding-gold group-hover:text-wedding-goldLight`}>
+                      <span className={`${linkArrow} mt-auto text-wedding-gold group-hover:text-wedding-goldLight`}>
                         {t('home_explore')}<span className="inline-block w-[22px] h-px bg-current transition-all group-hover:w-[34px]" />
                       </span>
                     </div>
@@ -199,7 +209,7 @@ const Home: React.FC = () => {
               })}
             </div>
             <div className="pt-6 text-center">
-              <a onClick={() => goPage('/travel')} className={`${linkArrow} text-wedding-gold hover:text-wedding-goldLight`}>
+              <a href="#/travel" onClick={(e) => { e.preventDefault(); goPage('/travel'); }} className={`${linkArrow} text-wedding-gold hover:text-wedding-goldLight`}>
                 {t('see_map')}<span className="inline-block w-[22px] h-px bg-current" />
               </a>
             </div>
@@ -236,22 +246,29 @@ const Home: React.FC = () => {
           </Reveal>
           <div className="mt-12 sm:mt-16 grid md:grid-cols-3 gap-5 sm:gap-6">
             {guides.map((g, i) => (
-              <Reveal key={g.path} delay={i * 0.08}>
+              <Reveal key={g.path} delay={i * 0.08} className="h-full">
                 <a
                   href={`#${g.path}`}
                   onClick={(e) => { e.preventDefault(); goPage(g.path); }}
-                  className="group relative block h-full no-underline cursor-pointer border border-wedding-gold/50 hover:border-wedding-gold bg-wedding-ink/40 transition-colors"
+                  className="group relative flex h-full flex-col no-underline cursor-pointer border border-wedding-gold/50 hover:border-wedding-gold bg-wedding-ink/40 transition-colors"
                 >
                   <CornerBrackets inset={6} size={18} />
                   <span className="absolute inset-[14px] border border-wedding-gold/25 pointer-events-none group-hover:border-wedding-gold/50 transition-colors" aria-hidden />
-                  <div className="relative px-7 pt-10 pb-9 text-center">
-                    <g.Icon size={g.Icon === RisingSun ? 84 : 78} className="mx-auto" />
+                  <div className="relative flex flex-1 flex-col px-7 pt-10 pb-9 text-center">
+                    {/* The rising sun is a third the height of the lotus and the palm,
+                        so give all three the same box and sit them on its floor —
+                        otherwise this card's whole stack floats 40px high. */}
+                    <div className="h-[84px] flex items-end justify-center">
+                      <g.Icon size={g.Icon === RisingSun ? 84 : 78} className="mx-auto" />
+                    </div>
                     <p className={`mt-5 mb-3 ${label} text-wedding-gold`}>{g.tag}</p>
-                    <h3 className="m-0 mb-3 font-serif font-normal text-[clamp(24px,5.5vw,30px)] leading-[1.1] text-wedding-cream">{g.title}</h3>
+                    <h3 className="m-0 mb-3 flex items-center justify-center min-h-[2.2em] font-serif font-normal text-[clamp(24px,5.5vw,30px)] leading-[1.1] text-wedding-cream">{g.title}</h3>
                     <p className="m-0 font-sans font-light text-[15px] leading-[1.6] text-wedding-cream/70">{g.desc}</p>
-                    <span className={`${linkArrow} mt-6 text-wedding-gold group-hover:text-wedding-goldLight`}>
-                      {t('home_explore')}<span className="inline-block w-[22px] h-px bg-current transition-all group-hover:w-[34px]" />
-                    </span>
+                    <div className="mt-auto pt-6">
+                      <span className={`${linkArrow} text-wedding-gold group-hover:text-wedding-goldLight`}>
+                        {t('home_explore')}<span className="inline-block w-[22px] h-px bg-current transition-all group-hover:w-[34px]" />
+                      </span>
+                    </div>
                   </div>
                 </a>
               </Reveal>

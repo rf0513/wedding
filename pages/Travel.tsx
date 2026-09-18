@@ -128,7 +128,9 @@ const Travel: React.FC = () => {
                   <p className="m-0 mb-3 font-sans font-light text-sm leading-[1.6] text-wedding-ink/75">{it.desc}</p>
                   <div className="flex gap-5 flex-wrap">
                     <a href={it.link} target="_blank" rel="noopener noreferrer" className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze no-underline">{t('travel_visit_website')} ↗</a>
-                    <a onClick={() => selectMapLoc(it.id)} className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-ink no-underline cursor-pointer border-b border-wedding-ink pb-0.5">{t('view_on_map')}</a>
+                    {/* A button, not a link: it selects a pin and scrolls to the map
+                        on this page rather than navigating anywhere. */}
+                    <button type="button" onClick={() => selectMapLoc(it.id)} className="bg-transparent border-0 border-b border-wedding-ink p-0 pb-0.5 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-ink cursor-pointer hover:text-wedding-bronze hover:border-wedding-bronze transition-colors">{t('view_on_map')}</button>
                   </div>
                 </div>
               </div>
@@ -227,7 +229,7 @@ const Travel: React.FC = () => {
         </section>
 
         <div className="mt-16 text-center">
-          <a onClick={goHome} className={btnGhostLight}>
+          <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} className={btnGhostLight}>
             ← {t('rsvp_back_home')}
           </a>
         </div>
