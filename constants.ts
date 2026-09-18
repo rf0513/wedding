@@ -56,14 +56,14 @@ export const EVENTS_ES: WeddingEvent[] = [
 
 // ─── STORY ───
 export const STORY_EVENTS_EN: StoryEvent[] = [
-  { id: '1', date: 'Feb 2022', title: 'Metamates', desc: 'Pavi and Ramon met at work in Albuquerque, as simple co-workers who quickly became inseparable.', img: `${GH_RAW}tram.jpeg?raw=true` },
+  { id: '1', date: 'Feb 2022', title: 'Co-workers', desc: 'Pavi and Ramon met at work in Albuquerque (Metamates, as Meta calls it): simple co-workers who quickly became inseparable.', img: `${GH_RAW}tram.jpeg?raw=true` },
   { id: '2', date: 'May 2022', title: 'Rocky Mountains', desc: 'They began dating after a spontanous trip to Rocky Mountains National Park in Colorado over Memorial Day.', img: `${GH_RAW}rockies.jpeg?raw=true` },
   { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: `${GH_RAW}mackinac.jpeg?raw=true` },
   { id: '4', date: 'Oct 12, 2025', title: 'The Proposal', desc: "Sunset at Slacker's Hill. The Golden Gate Bridge, the San Francisco city skyline, and the hidden photographer as our witnesses.", img: `${GH_RAW}proposal.jpg?raw=true` },
 ];
 
 export const STORY_EVENTS_ES: StoryEvent[] = [
-  { id: '1', date: 'Feb 2022', title: 'Metamates', desc: 'Pavi y Ramon se conocieron en el trabajo en Albuquerque, como simples compañeros de trabajo que rápidamente se volvieron inseparables.', img: `${GH_RAW}tram.jpeg?raw=true` },
+  { id: '1', date: 'Feb 2022', title: 'Compañeros de trabajo', desc: 'Pavi y Ramón se conocieron en el trabajo en Albuquerque (Metamates, como dice Meta): simples compañeros que rápidamente se volvieron inseparables.', img: `${GH_RAW}tram.jpeg?raw=true` },
   { id: '2', date: 'May 2022', title: 'Montañas Rocosas', desc: 'Comenzaron a salir después de un viaje espontáneo al Parque Nacional de las Montañas Rocosas en Colorado durante el Día de los Caídos.', img: `${GH_RAW}rockies.jpeg?raw=true` },
   { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: `${GH_RAW}mackinac.jpeg?raw=true` },
   { id: '4', date: 'Oct 12, 2025', title: 'La Propuesta', desc: "Atardecer en Slacker's Hill. El puente Golden Gate, el horizonte de la ciudad de San Francisco y el fotógrafo oculto como nuestros testigos.", img: `${GH_RAW}proposal.jpg?raw=true` },
@@ -74,7 +74,7 @@ export const STORY_MAIN_IMAGE = 'https://lh3.googleusercontent.com/pw/AP1GczO1xD
 // ─── REGISTRY ───
 export const REGISTRY_ITEMS_EN: RegistryItem[] = [
   { id: 'charity', store: 'Educate Girls Globally', link: 'https://www.educategirls.org/', description: 'If you are attending this wedding, it is likely you have been blessed with opportunities. Others are not as fortunate. Consider supporting Educate Girls Globally, one of the most rigorously measured and impactful education charities in India.' },
-  { id: 'btc', store: 'Bitcoin', link: WEDDING_DATA.btcAddress, description: 'If you insist of quantifying your love to us, you can send Bitcoin to the wallet below.' },
+  { id: 'btc', store: 'Bitcoin', link: WEDDING_DATA.btcAddress, description: 'If you insist on quantifying your love to us, you can send Bitcoin to the wallet below.' },
 ];
 
 export const REGISTRY_ITEMS_ES: RegistryItem[] = [
@@ -94,7 +94,7 @@ const pexels = (id: number, w = 1200) => `https://images.pexels.com/photos/${id}
 // a guest about that day lives here.
 export const CELEBRATIONS_EN: Celebration[] = [
   {
-    id: 'mehendi', eventId: '1', day: 1, weekday: 'Tuesday', dateLabel: '2 February 2027', dateShort: 'Feb 2',
+    id: 'mehendi', eventId: '1', day: 1, weekday: 'Tuesday', dateLabel: '2 February 2027', dateShort: '2 Feb',
     title: 'Mehendi', subtitle: 'The Henna Afternoon', marathiTitle: 'Mehendi',
     tagline: 'Where the week begins: henna, music, and a slow golden afternoon.',
     heroImage: pexels(28496968), accent: '#C2185B',
@@ -148,7 +148,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     ],
   },
   {
-    id: 'haldi', eventId: '2', day: 2, weekday: 'Wednesday', dateLabel: '3 February 2027', dateShort: 'Feb 3',
+    id: 'haldi', eventId: '2', day: 2, weekday: 'Wednesday', dateLabel: '3 February 2027', dateShort: '3 Feb',
     title: 'Haldi', subtitle: 'The Turmeric Ceremony', marathiTitle: 'Halad Chadavne',
     tagline: 'Yellow everywhere. Drums, laughter, turmeric, and the happiest mess of the week.',
     heroImage: pexels(33508493), accent: '#E6A100',
@@ -202,7 +202,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     ],
   },
   {
-    id: 'sangeet', eventId: '3', day: 3, weekday: 'Thursday', dateLabel: '4 February 2027', dateShort: 'Feb 4',
+    id: 'sangeet', eventId: '3', day: 3, weekday: 'Thursday', dateLabel: '4 February 2027', dateShort: '4 Feb',
     title: 'Vows & Sangeet', subtitle: 'An Evening of Vows, Song & Dance', marathiTitle: 'Sangeet',
     tagline: 'Two families, one dance floor. Dress to shine.',
     heroImage: pexels(28589007), accent: '#5E35B1',
@@ -256,7 +256,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     ],
   },
   {
-    id: 'wedding', eventId: '4', day: 4, weekday: 'Friday', dateLabel: '5 February 2027', dateShort: 'Feb 5',
+    id: 'wedding', eventId: '4', day: 4, weekday: 'Friday', dateLabel: '5 February 2027', dateShort: '5 Feb',
     title: 'Wedding & Reception', subtitle: 'The Maharashtrian Wedding', marathiTitle: 'Lagna',
     tagline: 'Sacred fire, seven steps, and a grand reception to send us off.',
     heroImage: pexels(30171219), accent: '#B71C1C',

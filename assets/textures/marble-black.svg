@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1400" viewBox="0 0 1400 1400">
+  <filter id="cloud" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.002 0.004" numOctaves="5" seed="12" stitchTiles="stitch"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0.95  0 0 0 0 0.93  0 0 0 0 0.88  0 1.8 0 0 -0.7"/>
+  </filter>
+  <filter id="warp" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="3" seed="11" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="180" xChannelSelector="R" yChannelSelector="G"/>
+    <feGaussianBlur stdDeviation="0.35"/>
+  </filter>
+  <radialGradient id="fade" cx="50%" cy="50%" r="50%"><stop offset="70%" stop-color="#fff"/><stop offset="100%" stop-color="#000"/></radialGradient>
+  <mask id="m"><rect width="1400" height="1400" fill="url(#fade)"/></mask>
+  <rect width="1400" height="1400" fill="#0C0B0A"/>
+  <rect width="1400" height="1400" filter="url(#cloud)" opacity="0.07"/>
+  <g filter="url(#warp)" mask="url(#m)" opacity="0.6">
+<path d="M176 726 Q919.0 344.82180149792134 1538 -222.35639700415732" stroke="rgb(235,230,220)" stroke-width="1.8" stroke-opacity="0.45" fill="none" stroke-linecap="round"/>
+<path d="M157 1424 Q917.0 1551.8040319143076 1367 1937.6080638286153" stroke="rgb(235,230,220)" stroke-width="0.8" stroke-opacity="0.65" fill="none" stroke-linecap="round"/>
+<path d="M712 1659 l381 70" stroke="rgb(235,230,220)" stroke-width="0.50" stroke-opacity="0.45" fill="none" stroke-linecap="round"/>
+<path d="M-285 1060 Q487.5 498.9201449352918 1466 -8.159710129416453" stroke="rgb(235,230,220)" stroke-width="0.8" stroke-opacity="0.38" fill="none" stroke-linecap="round"/>
+<path d="M785 407 l317 -23" stroke="rgb(235,230,220)" stroke-width="0.50" stroke-opacity="0.27" fill="none" stroke-linecap="round"/>
+<path d="M1 200 Q841.5 585.4218251864224 1412 986.8436503728449" stroke="rgb(235,230,220)" stroke-width="1.8" stroke-opacity="0.40" fill="none" stroke-linecap="round"/>
+<path d="M735 610 l192 48" stroke="rgb(235,230,220)" stroke-width="1.08" stroke-opacity="0.28" fill="none" stroke-linecap="round"/>
+<path d="M225 445 Q677.5 890.2846217221777 1420 1225.5692434443554" stroke="rgb(235,230,220)" stroke-width="0.8" stroke-opacity="0.66" fill="none" stroke-linecap="round"/>
+<path d="M723 770 l184 101" stroke="rgb(235,230,220)" stroke-width="0.50" stroke-opacity="0.46" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

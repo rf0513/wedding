@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { MirrorEmblem, RayFan, RisingSun } from './Ornaments';
 
 // ─── Scroll-reveal wrapper (mirrors the design's [data-reveal] fade/rise-in) ───
 export const Reveal: React.FC<{
@@ -7,7 +8,8 @@ export const Reveal: React.FC<{
   className?: string;
   delay?: number;
   as?: 'div' | 'article' | 'section';
-}> = ({ children, className = '', delay = 0, as = 'div' }) => {
+  id?: string;
+}> = ({ children, className = '', delay = 0, as = 'div', id }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -37,6 +39,7 @@ export const Reveal: React.FC<{
   return (
     <Tag
       ref={ref}
+      id={id}
       className={className}
       style={{
         opacity: visible ? 1 : 0,
@@ -58,8 +61,10 @@ export const StepFrame: React.FC<{
   className?: string;
   style?: React.CSSProperties;
   children: React.ReactNode;
-}> = ({ size = 14, borderWidth = 2, innerBg = '#F3EEE1', innerPadding = 8, className = '', style, children }) => (
-  <div className={`deco-step-${size} ${className}`} style={{ padding: borderWidth, background: '#C8A951', ...style }}>
+  /** brass gradient border instead of flat gold */
+  brass?: boolean;
+}> = ({ size = 14, borderWidth = 2, innerBg = '#F2EFE9', innerPadding = 8, className = '', style, brass = true, children }) => (
+  <div className={`deco-step-${size} ${className}`} style={{ padding: borderWidth, background: brass ? 'linear-gradient(160deg,#E2C88A 0%,#C8A75C 40%,#A98A45 70%,#D9BC78 100%)' : '#C8A75C', ...style }}>
     <div className={`deco-step-${size}`} style={{ background: innerBg, padding: innerPadding }}>
       {children}
     </div>
@@ -82,12 +87,15 @@ export const ChevronBand: React.FC<{ className?: string }> = ({ className = '' }
   <div aria-hidden className={`deco-chevron h-[10px] opacity-50 ${className}`} />
 );
 
-// ─── Scrolling marquee ticker ───
-export const Marquee: React.FC<{ text: string }> = ({ text }) => (
-  <div className="bg-wedding-gold text-wedding-ink overflow-hidden py-3 pb-[9px] border-y border-wedding-ink">
-    <div className="flex w-max animate-marquee font-sans font-semibold text-[11px] tracking-[.34em] uppercase whitespace-nowrap">
-      <span className="pr-9">{text}</span>
-      <span className="pr-9">{text}</span>
+// ─── Static brass band under the hero: the dates, once ───
+export const BrassBand: React.FC<{ text: string }> = ({ text }) => (
+  <div className="brass text-wedding-ink border-y border-wedding-ink py-[13px] pb-[10px] px-4">
+    <div className="flex items-center justify-center gap-4 font-sans font-semibold text-[11px] tracking-[.34em] uppercase whitespace-nowrap">
+      <span className="hidden sm:block h-px w-[60px] bg-wedding-ink/60" />
+      <span className="w-[6px] h-[6px] rotate-45 bg-wedding-ink" />
+      <span>{text}</span>
+      <span className="w-[6px] h-[6px] rotate-45 bg-wedding-ink" />
+      <span className="hidden sm:block h-px w-[60px] bg-wedding-ink/60" />
     </div>
   </div>
 );
@@ -95,6 +103,7 @@ export const Marquee: React.FC<{ text: string }> = ({ text }) => (
 // ─── Hero notched border + corner brackets ───
 export const HeroFrame: React.FC = () => (
   <div className="absolute inset-[14px] border border-wedding-gold/75 pointer-events-none animate-frameIn" aria-hidden>
+    <span className="absolute inset-[5px] border border-wedding-gold/35" />
     <span className="absolute -left-px -top-px w-[26px] h-[26px] bg-wedding-gold" style={{ clipPath: 'polygon(0 0,100% 0,100% 34%,66% 34%,66% 66%,34% 66%,34% 100%,0 100%)' }} />
     <span className="absolute -right-px -top-px w-[26px] h-[26px] bg-wedding-gold" style={{ clipPath: 'polygon(0 0,100% 0,100% 100%,66% 100%,66% 66%,34% 66%,34% 34%,0 34%)' }} />
     <span className="absolute -left-px -bottom-px w-[26px] h-[26px] bg-wedding-gold" style={{ clipPath: 'polygon(0 0,34% 0,34% 34%,66% 34%,66% 66%,100% 66%,100% 100%,0 100%)' }} />
@@ -103,11 +112,66 @@ export const HeroFrame: React.FC = () => (
 );
 
 // ─── Small deco corner-notch badge (used for the P&R logo mark) ───
-export const LogoMark: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <span className={`grid place-items-center w-10 h-10 bg-wedding-gold deco-step-12 ${className}`}>
-    <span className="font-serif text-[15px] leading-none tracking-[.06em] text-wedding-ink pt-[2px]">P&amp;R</span>
+export const LogoMark: React.FC<{ className?: string; size?: number }> = ({ className = '', size = 48 }) => (
+  <span className={`inline-grid place-items-center rounded-full bg-wedding-ink/60 backdrop-blur-md ${className}`} style={{ width: size, height: size }}>
+    <MirrorEmblem size={size} />
   </span>
 );
+
+// ─── Kicker + title + rule, used at the top of every Home section ───
+export const SectionTitle: React.FC<{
+  kicker: string;
+  title: string;
+  desc?: string;
+  tone?: 'light' | 'dark';
+  align?: 'center' | 'left';
+  className?: string;
+  wide?: boolean;
+  ornament?: boolean;
+}> = ({ kicker, title, desc, tone = 'light', align = 'center', className = '', wide = false, ornament = true }) => {
+  const dark = tone === 'dark';
+  return (
+    <div className={`${align === 'center' ? 'text-center' : 'text-left'} ${className}`}>
+      {ornament && <RisingSun size={54} color={dark ? '#C8A75C' : '#0C0B0A'} className={align === 'center' ? 'mx-auto' : ''} />}
+      <p className={`${ornament ? 'mt-3' : 'mt-0'} mb-[14px] font-sans font-semibold text-[10px] tracking-[.42em] uppercase ${dark ? 'text-wedding-gold' : 'text-wedding-bronze'}`}>{kicker}</p>
+      <h2 className={`m-0 font-serif font-normal text-[clamp(34px,7.5vw,60px)] leading-[1.02] tracking-[.01em] ${dark ? 'text-wedding-cream' : 'text-wedding-ink'}`} style={{ textWrap: 'balance' as any }}>{title}</h2>
+      {desc && <p className={`mt-[18px] mb-0 ${align === 'center' ? 'mx-auto' : ''} ${wide ? 'max-w-[620px]' : 'max-w-[480px]'} font-italic italic text-[clamp(18px,2.2vw,21px)] leading-[1.5] ${dark ? 'text-wedding-cream/75' : 'text-wedding-ink/75'}`}>{desc}</p>}
+    </div>
+  );
+};
+
+// ─── The lobby floor as a divider band ───
+export const TileBand: React.FC<{ className?: string; size?: 'sm' | 'md' }> = ({ className = '', size = 'md' }) => (
+  <div aria-hidden className={`${size === 'sm' ? 'deco-tiles-sm h-[14px]' : 'deco-tiles h-[24px]'} border-y border-wedding-gold/70 ${className}`} />
+);
+
+// ─── Sub-page header: black marble, coffered ceiling, brass rays ───
+export const PageHeader: React.FC<{
+  kicker: string;
+  title: string;
+  desc?: string;
+  children?: React.ReactNode;
+  tall?: boolean;
+}> = ({ kicker, title, desc, children, tall = false }) => (
+  <div className={`relative overflow-hidden marble-black text-wedding-cream pt-28 px-6 ${tall ? 'pb-[150px]' : 'pb-16'} text-center`}>
+    <div className="absolute inset-0 deco-coffer opacity-[.28]" aria-hidden />
+    <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,167,92,.16), transparent 70%)' }} aria-hidden />
+    <RayFan className="absolute left-1/2 -translate-x-1/2 -top-[300px] w-[900px] h-[900px]" spread={360} opacity={.35} />
+    <div className="relative max-w-[720px] mx-auto animate-heroIn">
+      <RisingSun size={56} className="mx-auto" />
+      <p className="mt-4 mb-[14px] font-sans font-semibold text-[10px] tracking-[.42em] uppercase text-wedding-gold">{kicker}</p>
+      <h1 className="m-0 font-serif font-normal text-[clamp(38px,9vw,72px)] leading-[1] tracking-[.02em] text-wedding-cream" style={{ textWrap: 'balance' as any }}>{title}</h1>
+      {desc && <p className="mt-6 mx-auto mb-0 max-w-[560px] font-italic italic text-[clamp(18px,2.4vw,22px)] leading-[1.5] text-wedding-cream/75">{desc}</p>}
+    </div>
+    {children && <div className="relative mt-9">{children}</div>}
+  </div>
+);
+
+// ─── Buttons ───
+export const btnPrimary = 'inline-block min-w-[150px] pt-[17px] px-[26px] pb-[14px] brass font-sans font-semibold text-[11px] tracking-[.3em] uppercase no-underline cursor-pointer deco-chamfer-8 transition-colors text-center';
+export const btnGhostDark = 'inline-block min-w-[150px] pt-4 px-[26px] pb-[13px] border border-wedding-gold/70 text-wedding-goldLight font-sans font-semibold text-[11px] tracking-[.3em] uppercase no-underline cursor-pointer transition-all hover:bg-wedding-gold/10 hover:border-wedding-gold text-center';
+export const btnGhostLight = 'inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer transition-colors hover:bg-wedding-ink hover:text-wedding-goldLight text-center';
+export const linkArrow = 'inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer pt-[2px]';
 
 // ─── Live countdown to the first event ───
 export function useCountdown(targetISO: string) {

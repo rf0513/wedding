@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { LogoMark, useSectionNav, usePrefersReducedMotion } from './DecoUI';
 import { CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
+import { MirrorEmblem } from './Ornaments';
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,7 +34,6 @@ const Navbar: React.FC = () => {
   type MenuItem = { name: string; href: string; go: () => void; children?: { label: string; name: string; href: string; go: () => void }[] };
   const menuItems: (MenuItem & { num: string })[] = ([
     { name: t('nav_home'), href: '#/', go: goHome },
-    { name: t('nav_events'), href: '#/schedule', go: () => { goSection('programme'); setMenuOpen(false); } },
     {
       name: t('nav_celebrations'),
       href: '#/celebrations',
@@ -44,11 +44,11 @@ const Navbar: React.FC = () => {
     { name: t('nav_attire'), href: '#/attire', go: () => goView('/attire') },
     { name: t('nav_travel'), href: '#/travel', go: () => goView('/travel') },
     { name: t('nav_qna'), href: '#/qna', go: () => goView('/qna') },
-    { name: t('nav_registry'), href: '#/registry', go: () => { goSection('registry'); setMenuOpen(false); } },
     { name: t('nav_rsvp'), href: '#/rsvp', go: () => { goSection('rsvp'); setMenuOpen(false); } },
+    { name: t('nav_registry'), href: '#/registry', go: () => { goSection('registry'); setMenuOpen(false); } },
   ] as MenuItem[]).map((m, i) => ({ ...m, num: pad(i + 1) }));
 
-  const btnClasses = "h-10 px-[14px] border border-wedding-gold/55 bg-wedding-ink/75 backdrop-blur-md text-wedding-goldLight font-sans font-semibold text-[11px] tracking-[.28em] uppercase cursor-pointer pt-[3px] transition-colors hover:border-wedding-gold hover:bg-wedding-pine";
+  const btnClasses = "h-10 px-[14px] border border-wedding-gold/60 bg-wedding-ink/70 backdrop-blur-md text-wedding-goldLight font-sans font-semibold text-[11px] tracking-[.28em] uppercase cursor-pointer pt-[3px] transition-colors hover:border-wedding-goldLight hover:bg-wedding-ink/90 deco-chamfer-8";
 
   return (
     <>
@@ -78,8 +78,9 @@ const Navbar: React.FC = () => {
       </header>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-[55] bg-wedding-ink overflow-y-auto">
+        <div className="fixed inset-0 z-[55] marble-black overflow-y-auto">
           {/* Opaque ink ground — never rely on backdrop-filter for legibility. */}
+          <span aria-hidden className="pointer-events-none absolute inset-0 deco-coffer opacity-[.18]" />
           <span
             aria-hidden
             className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-[280px] w-[720px] h-[720px] deco-sunburst-header"
@@ -125,8 +126,9 @@ const Navbar: React.FC = () => {
             ))}
           </nav>
           <div className="mt-6 flex-none flex justify-between items-center pt-6 border-t border-wedding-gold/[.18]">
-            <span className="font-sans font-light text-[11px] tracking-[.3em] uppercase text-wedding-cream/55">Mumbai · 2027</span>
-            <span className="font-sans font-semibold text-[11px] tracking-[.3em] text-wedding-gold">#PR27</span>
+            <span className="font-sans font-light text-[11px] tracking-[.3em] uppercase text-wedding-cream/55">{t('hero_dates')}</span>
+            <MirrorEmblem size={40} />
+            <span className="font-sans font-light text-[11px] tracking-[.3em] uppercase text-wedding-cream/55">Mumbai</span>
           </div>
           </div>
         </div>

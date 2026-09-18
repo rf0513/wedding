@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { usePrefersReducedMotion } from './DecoUI';
+import { RisingSun } from './Ornaments';
 
 /**
  * Opening curtain — plays once per browser session on first load of the Home page.
@@ -111,7 +112,8 @@ const Curtain: React.FC = () => {
       {/* gold stepped outline */}
       <div className="absolute inset-0 bg-wedding-gold" style={{ clipPath: zigguratEdge(side, 0) }} />
       {/* ink body */}
-      <div className="absolute inset-0 bg-wedding-ink" style={{ clipPath: zigguratEdge(side, 3) }}>
+      <div className="absolute inset-0 marble-black" style={{ clipPath: zigguratEdge(side, 3) }}>
+        <div className="absolute inset-0 deco-coffer opacity-[.2]" />
         {/* inner hairline rule + chevron band echoing HeroFrame / ChevronBand */}
         <div className={`absolute top-[14px] bottom-[14px] ${side === 'left' ? 'left-[14px] right-[78px]' : 'right-[14px] left-[78px]'} border border-wedding-gold/45`} />
         <div className={`deco-chevron absolute top-[26px] bottom-[26px] w-[10px] opacity-40 ${side === 'left' ? 'left-[26px]' : 'right-[26px]'}`} />
@@ -146,12 +148,13 @@ const Curtain: React.FC = () => {
         }}
       >
         <div>
+          <RisingSun size={60} className="mx-auto mb-5" />
           <p className="m-0 mb-4 font-sans font-semibold text-[10px] tracking-[.42em] uppercase text-wedding-gold" style={{ animation: reduced ? 'none' : `curtainLetter .6s ease both` }}>
             {t('the_wedding_of')}
           </p>
           <h1 className="m-0 font-serif font-normal text-wedding-cream text-[clamp(40px,11vw,104px)] leading-[1] tracking-[.06em] uppercase" aria-label="Pavitra & Ramon">
             <span className="block">{letters('Pavitra', 0)}</span>
-            <span className="block text-[.42em] leading-[1.5] text-wedding-gold tracking-[.1em]">{letters('&', 8)}</span>
+            <span className="block font-italic italic normal-case text-[.46em] leading-[1.4] brass-text tracking-[.04em]">{letters('&', 8)}</span>
             <span className="block">{letters('Ramon', 10)}</span>
           </h1>
           <div className="flex items-center justify-center gap-[14px] mt-6">

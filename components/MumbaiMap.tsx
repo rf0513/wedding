@@ -17,7 +17,7 @@ import {
 
 export type MapPin = { id: string; title: string; query: string };
 
-const GOLD = '#C8A951', GOLD_LIGHT = '#E3C77A', INK = '#0E1512', PINE = '#16221D', CREAM = '#F3EEE1';
+const GOLD = '#C8A75C', GOLD_LIGHT = '#E2C88A', INK = '#0C0B0A', PINE = '#1B1A18', CREAM = '#F2EFE9';
 
 const MumbaiMap: React.FC<{ pins: MapPin[]; activeId: string; onSelect: (id: string) => void }> = ({ pins, activeId, onSelect }) => {
   const { t } = useLanguage();
@@ -177,7 +177,7 @@ const MumbaiMap: React.FC<{ pins: MapPin[]; activeId: string; onSelect: (id: str
               fontSize={active ? 10 : primary ? 9.4 : 8.8}
               fontWeight={active || primary ? 600 : 400}
               letterSpacing="1.1"
-              fill={active ? GOLD_LIGHT : primary ? CREAM : 'rgba(243,238,225,.78)'}
+              fill={active ? GOLD_LIGHT : primary ? CREAM : 'rgba(242,239,233,.78)'}
               stroke={INK}
               strokeWidth="3"
               paintOrder="stroke"

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140">
+  <!-- The backlit coffered ceiling: a brass grid with a diamond in each coffer -->
+  <rect width="140" height="140" fill="none"/>
+  <path d="M0 0.5H140M0.5 0V140" stroke="#C8A75C" stroke-opacity="0.55" stroke-width="1"/>
+  <rect x="14" y="14" width="112" height="112" fill="none" stroke="#C8A75C" stroke-opacity="0.22" stroke-width="0.8"/>
+  <path d="M70 52L88 70L70 88L52 70Z" fill="none" stroke="#C8A75C" stroke-opacity="0.45" stroke-width="0.8"/>
+  <path d="M70 62L78 70L70 78L62 70Z" fill="#C8A75C" fill-opacity="0.35"/>
+  <path d="M14 14L52 52M126 14L88 52M14 126L52 88M126 126L88 88" stroke="#C8A75C" stroke-opacity="0.16" stroke-width="0.6"/>
+</svg>

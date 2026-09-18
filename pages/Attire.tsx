@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ATTIRE_GUIDE_EN, ATTIRE_GUIDE_ES, CELEBRATIONS_EN, CELEBRATIONS_ES } from '../constants';
-import { Reveal, StepFrame, Sunburst, ChevronBand } from '../components/DecoUI';
+import { Reveal, StepFrame, TileBand, PageHeader, btnGhostLight, linkArrow } from '../components/DecoUI';
+import { Lotus } from '../components/Ornaments';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -23,16 +24,9 @@ const Attire: React.FC = () => {
   const menAttire = attire.filter((a) => a.gender === 'Men');
 
   return (
-    <main className="bg-wedding-cream text-wedding-ink pb-20">
-      <div className="relative overflow-hidden bg-wedding-ink text-wedding-cream pt-28 px-6 pb-14 text-center">
-        <Sunburst variant="header" />
-        <div className="relative max-w-[640px] mx-auto">
-          <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">{t('guide_no')} 1 · {t('traditions_subtitle')}</p>
-          <h1 className="m-0 font-serif font-normal text-[clamp(36px,9vw,64px)] leading-[1.02]" style={{ textWrap: 'balance' as any }}>{t('attire_title')}</h1>
-          <p className="mt-5 mx-auto mb-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-cream/75">{t('attire_desc')}</p>
-        </div>
-      </div>
-      <ChevronBand />
+    <main className="marble-white text-wedding-ink pb-20">
+      <PageHeader kicker={`${t('guide_no')} 1 · ${t('traditions_subtitle')}`} title={t('attire_title')} desc={t('attire_desc')} />
+      <TileBand />
 
       <div className="max-w-[760px] mx-auto px-6 flex flex-col gap-20 pt-14">
         {/* At a glance */}
@@ -71,7 +65,7 @@ const Attire: React.FC = () => {
               <div className="hide-scrollbar flex sm:grid gap-[18px] overflow-x-auto sm:overflow-visible -mx-6 px-6 sm:mx-0 sm:px-0 pb-3" style={{ scrollSnapType: 'x mandatory', gridTemplateColumns: `repeat(${Math.min(items.length, 4)}, minmax(0,1fr))` }}>
                 {items.map((a: any) => (
                   <div key={a.id} className="flex-none w-[220px] sm:w-auto" style={{ scrollSnapAlign: 'start' }}>
-                    <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={8}>
+                    <StepFrame size={14} borderWidth={2} innerBg="#F2EFE9" innerPadding={8}>
                       <img src={a.imageUrl} alt={a.name} loading="lazy" className="block w-full aspect-[3/4] object-cover object-top" style={{ filter: 'saturate(.9)' }} />
                     </StepFrame>
                     <h3 className="mt-[14px] mb-0.5 font-serif font-normal text-[20px] leading-[1.1]">{a.name}</h3>
@@ -116,12 +110,16 @@ const Attire: React.FC = () => {
         </Reveal>
 
         <div>
-          <div className="border border-wedding-gold py-7 px-[22px] text-center">
+          <div className="inlay marble-white py-10 px-[22px] text-center">
+            <Lotus size={64} className="mx-auto mb-4" />
             <h3 className="m-0 mb-2 font-serif font-normal text-2xl leading-[1.15]">{t('traditions_q_title')}</h3>
             <p className="m-0 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/80">{t('traditions_q_desc')}</p>
+            <a href="#/qna" onClick={(e) => { e.preventDefault(); navigate('/qna'); window.scrollTo(0, 0); }} className={`${linkArrow} mt-6 text-wedding-bronze hover:text-wedding-ink`}>
+              {t('traditions_q_link')}<span className="inline-block w-[22px] h-px bg-current" />
+            </a>
           </div>
           <div className="mt-12 text-center">
-            <a onClick={goHome} className="inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-ink hover:text-wedding-goldLight">
+            <a onClick={goHome} className={btnGhostLight}>
               ← {t('rsvp_back_home')}
             </a>
           </div>

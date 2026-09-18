@@ -7,7 +7,8 @@ import {
   ATTIRE_GUIDE_EN, ATTIRE_GUIDE_ES,
   HOTEL_QUERY,
 } from '../constants';
-import { Reveal, StepFrame, Sunburst, ChevronBand } from '../components/DecoUI';
+import { Reveal, StepFrame, TileBand, PageHeader, btnGhostLight, linkArrow } from '../components/DecoUI';
+import { RisingSun } from '../components/Ornaments';
 import DaySwitcher from '../components/DaySwitcher';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
@@ -16,7 +17,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 /** Section heading: roman numeral rail + kicker + title. */
 const SectionHead: React.FC<{ n: number; kicker: string; title: string; dark?: boolean }> = ({ n, kicker, title, dark = false }) => (
   <div className="grid grid-cols-[56px_minmax(0,1fr)] sm:grid-cols-[64px_minmax(0,1fr)] gap-x-3 items-end mb-8">
-    <span className="font-serif text-[40px] sm:text-[44px] leading-[.85] text-wedding-gold" aria-hidden>{ROMAN[n - 1]}</span>
+    <span className={`font-serif text-[40px] sm:text-[44px] leading-[.85] ${dark ? 'brass-text' : 'text-wedding-gold'}`} aria-hidden>{ROMAN[n - 1]}</span>
     <div>
       <p className={`m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase ${dark ? 'text-wedding-gold' : 'text-wedding-bronze'}`}>{kicker}</p>
       <h2 className={`m-0 font-serif font-normal text-[clamp(28px,6.5vw,40px)] leading-[1.05] ${dark ? 'text-wedding-cream' : 'text-wedding-ink'}`} style={{ textWrap: 'balance' as any }}>{title}</h2>
@@ -56,39 +57,34 @@ const Celebration: React.FC = () => {
   const prose = `${body} max-w-[600px]`;
 
   return (
-    <main className="bg-wedding-cream text-wedding-ink pb-20">
+    <main className="marble-white text-wedding-ink pb-20">
       {/* ═══ HEADER ═══ */}
-      <div className="relative overflow-hidden bg-wedding-ink text-wedding-cream pt-28 px-6 pb-[150px] text-center">
-        <Sunburst variant="header" />
-        <div className="relative max-w-[680px] mx-auto animate-heroIn">
-          <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">
-            {t('day_label')} {pad(cel.day)} · {cel.weekday} · {cel.dateLabel}
-          </p>
-          <h1 className="m-0 font-serif font-normal text-[clamp(40px,10vw,76px)] leading-[1] tracking-[.02em]" style={{ textWrap: 'balance' as any }}>{cel.title}</h1>
-          <div className="flex items-center justify-center gap-[14px] mt-5">
-            <span className="h-px w-[34px] bg-wedding-gold" />
-            <p className="m-0 font-serif text-[clamp(16px,4vw,20px)] leading-[1.3] text-wedding-goldLight">{cel.subtitle}</p>
-            <span className="h-px w-[34px] bg-wedding-gold" />
-          </div>
-          <p className="mt-5 mx-auto mb-0 max-w-[520px] font-sans font-light text-[15px] leading-[1.65] text-wedding-cream/75">{cel.tagline}</p>
+      <PageHeader
+        kicker={`${t('day_label')} ${pad(cel.day)} · ${cel.weekday} · ${cel.dateLabel}`}
+        title={cel.title}
+        desc={cel.tagline}
+        tall
+      >
+        <div className="flex items-center justify-center gap-[14px] -mt-3 mb-8">
+          <span className="h-px w-[34px] bg-wedding-gold" />
+          <p className="m-0 font-serif text-[clamp(16px,4vw,20px)] leading-[1.3] tracking-[.06em] uppercase text-wedding-goldLight">{cel.subtitle}</p>
+          <span className="h-px w-[34px] bg-wedding-gold" />
         </div>
-        <div className="relative mt-9">
-          <DaySwitcher activeId={cel.id} onSelect={goDay} />
-        </div>
-      </div>
-      <ChevronBand />
+        <DaySwitcher activeId={cel.id} onSelect={goDay} />
+      </PageHeader>
+      <TileBand />
 
       <div className="max-w-[760px] mx-auto px-6">
         {/* ═══ HERO IMAGE (overlaps the header) ═══ */}
         <Reveal className="-mt-[150px] relative z-[2]">
-          <StepFrame size={20} borderWidth={3} innerBg="#0E1512" innerPadding={12}>
+          <StepFrame size={20} borderWidth={3} innerBg="#0C0B0A" innerPadding={12}>
             <img src={cel.heroImage} alt={cel.title} className="block w-full aspect-[4/3] sm:aspect-[16/10] object-cover" style={{ filter: 'saturate(.9)' }} />
           </StepFrame>
         </Reveal>
 
         {/* ═══ AT A GLANCE ═══ */}
         <Reveal className="mt-10">
-          <div className="grid border border-wedding-ink" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(170px,1fr))' }}>
+          <div className="grid border border-wedding-ink bg-wedding-cream/60" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(170px,1fr))' }}>
             <div className="pt-[20px] px-5 pb-[18px] border-b border-wedding-ink/35 -mb-px">
               <p className={`m-0 mb-2 ${label}`}>{t('lbl_when')}</p>
               <div className="font-serif text-[26px] leading-[1.1]">{ev.time}</div>
@@ -114,10 +110,23 @@ const Celebration: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-x-7 gap-y-3 mt-4">
-            <a href={directionsHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze no-underline pt-[2px] hover:text-wedding-ink">
-              {t('cel_directions')} ↗
-            </a>
+          <div className="mt-5 grid sm:grid-cols-[minmax(0,1fr)_auto] gap-x-10 gap-y-4 items-start">
+            <ul className="m-0 p-0 list-none">
+              {cel.notes.map((n, i) => (
+                <li key={i} className="grid grid-cols-[18px_minmax(0,1fr)] gap-x-3 py-[5px]">
+                  <span className="mt-[8px] block w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
+                  <span className="font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/85">{n}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col items-start gap-3 sm:items-end sm:text-right pt-1">
+              <a href={directionsHref} target="_blank" rel="noopener noreferrer" className={`${linkArrow} text-wedding-bronze hover:text-wedding-ink`}>
+                {t('cel_directions')} ↗
+              </a>
+              <a href="#/travel" onClick={(e) => { e.preventDefault(); navigate('/travel'); window.scrollTo(0, 0); }} className={`${linkArrow} text-wedding-bronze hover:text-wedding-ink`}>
+                {t('see_map')}
+              </a>
+            </div>
           </div>
         </Reveal>
 
@@ -139,7 +148,7 @@ const Celebration: React.FC = () => {
             {cel.moments.map((m, i) => (
               <li key={i} className="relative grid grid-cols-[24px_minmax(0,1fr)] gap-x-5 py-[18px]">
                 <span className="relative z-[1] mt-[6px] w-[24px] h-[24px] grid place-items-center bg-wedding-cream">
-                  <span className="block w-[14px] h-[14px] rotate-45 border border-wedding-gold" style={{ background: i === 0 || i === cel.moments.length - 1 ? '#C8A951' : '#F3EEE1' }} />
+                  <span className="block w-[14px] h-[14px] rotate-45 border border-wedding-gold" style={{ background: i === 0 || i === cel.moments.length - 1 ? '#C8A75C' : '#F2EFE9' }} />
                 </span>
                 <div>
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -213,7 +222,7 @@ const Celebration: React.FC = () => {
               <div className="hide-scrollbar flex sm:grid gap-[18px] overflow-x-auto sm:overflow-visible -mx-6 px-6 sm:mx-0 sm:px-0 pb-3" style={{ scrollSnapType: 'x mandatory', gridTemplateColumns: `repeat(${Math.min(inspo.length, 4)}, minmax(0,1fr))` }}>
                 {inspo.map((a) => (
                   <div key={a.id} className="flex-none w-[220px] sm:w-auto" style={{ scrollSnapAlign: 'start' }}>
-                    <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={8}>
+                    <StepFrame size={14} borderWidth={2} innerBg="#F2EFE9" innerPadding={8}>
                       <img src={a.imageUrl} alt={a.name} loading="lazy" className="block w-full aspect-[3/4] object-cover object-top" style={{ filter: 'saturate(.9)' }} />
                     </StepFrame>
                     <h4 className="mt-[14px] mb-0.5 font-serif font-normal text-[20px] leading-[1.1]">{a.name}</h4>
@@ -242,48 +251,10 @@ const Celebration: React.FC = () => {
           </dl>
         </Reveal>
 
-        {/* ═══ VI · GETTING THERE (dark panel) ═══ */}
+        {/* ═══ VI · INSIDER TIPS ═══ */}
         <Reveal as="section" className="mt-[72px]">
-          <StepFrame size={20} borderWidth={2} innerBg="#0E1512" innerPadding={0}>
-            <div className="pt-8 px-6 sm:px-8 pb-8 text-wedding-cream">
-              <SectionHead n={6} kicker={t('cel_logistics_kicker')} title={t('cel_logistics_title')} dark />
-              <div className="grid gap-px bg-wedding-gold/35 border border-wedding-gold/35" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
-                <div className="bg-wedding-ink pt-5 px-5 pb-[18px]">
-                  <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('lbl_shuttle')}</p>
-                  <div className="font-serif text-[34px] leading-none text-wedding-goldLight">{ev.shuttleTime}</div>
-                  <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.45] text-wedding-cream/70">{t('events_shuttle').replace(/ at$| a las$/, '')} · {cel.weekday}</p>
-                </div>
-                <div className="bg-wedding-ink pt-5 px-5 pb-[18px]">
-                  <p className="m-0 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('lbl_venue')}</p>
-                  <div className="font-serif text-[22px] leading-[1.15]">{ev.location}</div>
-                  <p className="mt-2 mb-0 font-sans font-light text-[13px] leading-[1.45] text-wedding-cream/70">{ev.address}<span className="block">{ev.time}{endTime ? ` – ${endTime}` : ''}</span></p>
-                </div>
-              </div>
-              <p className="mt-7 mb-2 font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-gold">{t('cel_notes_title')}</p>
-              <ul className="m-0 p-0 list-none">
-                {cel.notes.map((n, i) => (
-                  <li key={i} className="grid grid-cols-[18px_minmax(0,1fr)] gap-x-3 py-[7px] border-t border-wedding-gold/20">
-                    <span className="mt-[8px] block w-[7px] h-[7px] rotate-45 bg-wedding-gold" />
-                    <span className="font-sans font-light text-[15px] leading-[1.6] text-wedding-cream/85">{n}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap items-center gap-x-7 gap-y-4 mt-7">
-                <a href={directionsHref} target="_blank" rel="noopener noreferrer" className="pt-4 px-[22px] pb-[13px] bg-wedding-gold text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline deco-chamfer-8 hover:bg-wedding-goldLight">
-                  {t('cel_directions')} ↗
-                </a>
-                <a href="#/travel" onClick={(e) => { e.preventDefault(); navigate('/travel'); window.scrollTo(0, 0); }} className="font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-goldLight no-underline cursor-pointer pt-[2px] hover:text-wedding-cream">
-                  {t('see_map')}
-                </a>
-              </div>
-            </div>
-          </StepFrame>
-        </Reveal>
-
-        {/* ═══ VII · INSIDER TIPS ═══ */}
-        <Reveal as="section" className="mt-[72px]">
-          <SectionHead n={7} kicker={t('cel_tips_kicker')} title={t('cel_tips_title')} />
-          <div className="border border-wedding-gold">
+          <SectionHead n={6} kicker={t('cel_tips_kicker')} title={t('cel_tips_title')} />
+          <div className="border border-wedding-gold bg-wedding-cream/60">
             {cel.tips.map((tip, i) => (
               <div key={i} className={`grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 py-[18px] px-5 ${i > 0 ? 'border-t border-wedding-gold/50' : ''}`}>
                 <span className="font-serif text-[26px] leading-[1] text-wedding-gold min-w-[30px]">{ROMAN[i]}</span>
@@ -294,7 +265,7 @@ const Celebration: React.FC = () => {
         </Reveal>
 
         {/* ═══ PREV / NEXT ═══ */}
-        <div className="mt-[72px] grid grid-cols-2 border border-wedding-ink">
+        <div className="mt-[72px] grid grid-cols-2 border border-wedding-ink bg-wedding-cream/60">
           {prev ? (
             <a href={`#/celebrations/${prev.id}`} onClick={(e) => { e.preventDefault(); goDay(prev.id); }} className="group block py-5 px-5 no-underline cursor-pointer text-wedding-ink hover:bg-wedding-ink hover:text-wedding-cream transition-colors">
               <p className="m-0 mb-1 font-sans font-semibold text-[9px] tracking-[.3em] uppercase text-wedding-bronze group-hover:text-wedding-gold">← {t('day_label')} {pad(prev.day)}</p>
@@ -320,7 +291,7 @@ const Celebration: React.FC = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} className="inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-ink hover:text-wedding-goldLight">
+          <a href="#/" onClick={(e) => { e.preventDefault(); goHome(); }} className={btnGhostLight}>
             ← {t('rsvp_back_home')}
           </a>
         </div>

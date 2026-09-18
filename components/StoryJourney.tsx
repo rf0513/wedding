@@ -166,8 +166,8 @@ const StoryJourney: React.FC<{ events: StoryEvent[] }> = ({ events }) => {
           </mask>
         </defs>
         {/* faint full route underneath, so the reader can see where the line is headed */}
-        <path d={route.d} fill="none" stroke="#C8A951" strokeOpacity={0.18} strokeWidth={1.5} strokeDasharray="5 6" strokeLinejoin="round" />
-        <path d={route.d} fill="none" stroke="#C8A951" strokeWidth={1.75} strokeDasharray="5 6" strokeLinejoin="round" mask="url(#journey-reveal)" />
+        <path d={route.d} fill="none" stroke="#C8A75C" strokeOpacity={0.18} strokeWidth={1.5} strokeDasharray="5 6" strokeLinejoin="round" />
+        <path d={route.d} fill="none" stroke="#C8A75C" strokeWidth={1.75} strokeDasharray="5 6" strokeLinejoin="round" mask="url(#journey-reveal)" />
       </svg>
 
       <ol className="relative m-0 p-0 list-none flex flex-col gap-12">
@@ -186,7 +186,7 @@ const StoryJourney: React.FC<{ events: StoryEvent[] }> = ({ events }) => {
                       className="block w-[46px] h-[46px] rounded-full transition-opacity duration-700"
                       style={{
                         opacity: on ? 1 : 0.35,
-                        backgroundImage: 'repeating-conic-gradient(from 0deg,#C8A951 0 2deg,transparent 2deg 12deg)',
+                        backgroundImage: 'repeating-conic-gradient(from 0deg,#C8A75C 0 2deg,transparent 2deg 12deg)',
                         WebkitMaskImage: 'radial-gradient(circle,#000 26%,transparent 70%)',
                         maskImage: 'radial-gradient(circle,#000 26%,transparent 70%)',
                       }}
@@ -194,7 +194,7 @@ const StoryJourney: React.FC<{ events: StoryEvent[] }> = ({ events }) => {
                   ) : (
                     // Station: stepped diamond, fills gold as the line arrives
                     <span ref={setRef(row.id)} className="block w-[26px] h-[26px] rotate-45 deco-step-12 bg-wedding-gold p-[1.5px]">
-                      <span className="block w-full h-full deco-step-12 transition-colors duration-700" style={{ background: on ? '#C8A951' : '#F3EEE1' }} />
+                      <span className="block w-full h-full deco-step-12 transition-colors duration-700" style={{ background: on ? '#C8A75C' : '#F2EFE9' }} />
                     </span>
                   )}
                 </div>
@@ -213,7 +213,7 @@ const StoryJourney: React.FC<{ events: StoryEvent[] }> = ({ events }) => {
                 <div className="grid gap-4 items-start" style={{ gridTemplateColumns: `${RAIL_W}px minmax(0,1fr)` }}>
                   {/* Numbered node on the route */}
                   <span ref={setRef(row.id)} className="block w-[46px] h-[46px] deco-step-12 bg-wedding-gold p-[1.5px]">
-                    <span className="grid place-items-center w-full h-full deco-step-12 transition-colors duration-700" style={{ background: on ? '#C8A951' : '#F3EEE1' }}>
+                    <span className="grid place-items-center w-full h-full deco-step-12 transition-colors duration-700" style={{ background: on ? '#C8A75C' : '#F2EFE9' }}>
                       <span className="font-serif text-[20px] leading-none text-wedding-ink pt-[3px]">{ROMAN[index]}</span>
                     </span>
                   </span>
@@ -227,7 +227,7 @@ const StoryJourney: React.FC<{ events: StoryEvent[] }> = ({ events }) => {
                 </div>
                 {/* Photo sits beside the rail; alternate the right inset for rhythm */}
                 <div style={{ marginLeft: RAIL_W + 16, marginRight: index % 2 ? 40 : 0 }}>
-                  <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={10}>
+                  <StepFrame size={14} borderWidth={2} innerBg="#F2EFE9" innerPadding={10}>
                     <img src={ev.img} alt={ev.title} className="block w-full aspect-[4/3] object-cover" style={{ filter: 'saturate(.85) contrast(1.05)' }} />
                   </StepFrame>
                 </div>
