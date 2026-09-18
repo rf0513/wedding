@@ -18,7 +18,7 @@ import { usePrefersReducedMotion } from './DecoUI';
 const HOLD_MS = 4500;   // time each photo is held
 const FADE_MS = 1600;   // crossfade duration
 
-const DUOTONE = 'grayscale(1) sepia(.35) hue-rotate(95deg) saturate(1.6) brightness(.82) contrast(1.12)';
+const DUOTONE = 'grayscale(1) sepia(.5) hue-rotate(-8deg) saturate(1.15) brightness(.78) contrast(1.15)';
 
 const HeroSequence: React.FC<{ alt?: string }> = ({ alt = 'Pavitra and Ramon' }) => {
   const reduced = usePrefersReducedMotion();

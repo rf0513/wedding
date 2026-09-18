@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <!-- The lobby floor: black and white marble triangles forming a diamond lattice -->
+  <rect width="48" height="48" fill="#F2EFE9"/>
+  <path fill="#0C0B0A" d="M0 0H24L0 24ZM24 0H48V24ZM0 48V24L24 48ZM48 48H24L48 24Z"/>
+</svg>

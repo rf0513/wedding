@@ -9,7 +9,7 @@ import {
   SURVIVAL_TIPS_EN, SURVIVAL_TIPS_ES,
   HOTEL_QUERY,
 } from '../constants';
-import { Reveal, StepFrame, Sunburst, ChevronBand, scrollToId } from '../components/DecoUI';
+import { Reveal, StepFrame, TileBand, PageHeader, btnGhostLight, scrollToId } from '../components/DecoUI';
 import MumbaiMap from '../components/MumbaiMap';
 import { ROUTES } from '../components/mumbaiGeo';
 
@@ -52,19 +52,12 @@ const Travel: React.FC = () => {
   const goHome = () => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   return (
-    <main className="bg-wedding-cream text-wedding-ink pb-20">
-      <div className="relative overflow-hidden bg-wedding-ink text-wedding-cream pt-28 px-6 pb-14 text-center">
-        <Sunburst variant="header" />
-        <div className="relative max-w-[640px] mx-auto">
-          <p className="m-0 mb-[14px] font-sans font-semibold text-[10px] tracking-[.4em] uppercase text-wedding-gold">{t('guide_no')} 2 · {t('travel_welcome')}</p>
-          <h1 className="m-0 font-serif font-normal text-[clamp(36px,9vw,64px)] leading-[1.02]" style={{ textWrap: 'balance' as any }}>{t('travel_title')}</h1>
-          <p className="mt-5 mx-auto mb-0 font-sans font-light text-[15px] leading-[1.65] text-wedding-cream/75">{t('travel_desc')}</p>
-        </div>
-      </div>
-      <ChevronBand />
+    <main className="marble-white text-wedding-ink pb-20">
+      <PageHeader kicker={`${t('guide_no')} 2 · ${t('travel_welcome')}`} title={t('travel_title')} desc={t('travel_desc')} />
+      <TileBand />
 
       <div className="max-w-[760px] mx-auto px-6">
-        <div className="grid border border-wedding-ink mt-10" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
+        <div className="grid border border-wedding-ink bg-wedding-cream/60 mt-10" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
           <div className="pt-[22px] px-5 pb-[18px] border-b border-wedding-ink -mb-px">
             <p className="m-0 mb-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{t('travel_airport')}</p>
             <div className="font-sans font-light text-[44px] leading-none tracking-[.06em]">BOM</div>
@@ -83,7 +76,7 @@ const Travel: React.FC = () => {
           <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))' }}>
             {sightseeing.map((it) => (
               <a key={it.id} href={it.link} target="_blank" rel="noopener noreferrer" className="block no-underline text-wedding-ink">
-                <StepFrame size={14} borderWidth={2} innerBg="#F3EEE1" innerPadding={8}>
+                <StepFrame size={14} borderWidth={2} innerBg="#F2EFE9" innerPadding={8}>
                   <img src={it.img} alt={it.title} className="block w-full aspect-[3/2] object-cover" style={{ filter: 'saturate(.85)' }} />
                 </StepFrame>
                 <h3 className="mt-4 mb-2 font-serif font-normal text-[22px] leading-[1.15]">{it.title}</h3>
@@ -92,7 +85,7 @@ const Travel: React.FC = () => {
               </a>
             ))}
           </div>
-          <div className="mt-10 border border-wedding-ink py-[26px] px-[22px] text-center">
+          <div className="mt-10 inlay marble-white py-9 px-[22px] text-center">
             <h3 className="m-0 mb-2 font-serif font-normal text-2xl leading-[1.15]">{t('travel_tour_title')}</h3>
             <p className="m-0 mb-[18px] font-sans font-light text-sm leading-[1.6] text-wedding-ink/75">{t('travel_tour_desc')}</p>
             <a href="https://www.tripadvisor.com/AttractionProductReview-g304554-d11482147-Private_Full_Day_Mumbai_City_Tour_with_Elephanta_Caves_Excursion-Mumbai_Maharashtr.html" target="_blank" rel="noopener noreferrer" className="inline-block py-[15px] px-6 bg-wedding-ink text-wedding-goldLight font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline deco-chamfer-8 hover:text-wedding-cream">
@@ -123,7 +116,7 @@ const Travel: React.FC = () => {
         <section className="mt-[72px]">
           <h2 className="m-0 mb-2 font-serif font-normal text-[clamp(30px,7vw,44px)] leading-[1.05]">{t('travel_food')}</h2>
           <p className="m-0 mb-[18px] font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/75">{t('travel_food_desc')}</p>
-          <div className="border border-wedding-gold py-[14px] px-4 flex gap-[14px] items-baseline mb-2">
+          <div className="border border-wedding-gold bg-wedding-cream/60 py-[14px] px-4 flex gap-[14px] items-baseline mb-2">
             <span className="font-sans font-semibold text-[10px] leading-[1.4] tracking-[.3em] uppercase text-wedding-bronze whitespace-nowrap">{t('travel_res_title')}</span>
             <span className="font-sans font-light text-[13px] leading-[1.5] text-wedding-ink/80">{t('travel_res_desc')}</span>
           </div>
@@ -148,7 +141,7 @@ const Travel: React.FC = () => {
 
         {/* Map */}
         <section id="travel-map" className="mt-[72px]">
-          <StepFrame size={20} borderWidth={2} innerBg="#0E1512" innerPadding={0}>
+          <StepFrame size={20} borderWidth={2} innerBg="#0C0B0A" innerPadding={0}>
             <div className="pt-[30px] px-[22px] pb-[18px] text-center">
               <h2 className="m-0 mb-2 font-serif font-normal text-[28px] leading-[1.1] text-wedding-cream">{t('travel_map_title')}</h2>
               <p className="m-0 font-sans font-light text-xs leading-[1.5] tracking-[.12em] uppercase text-wedding-cream/60">{t('travel_map_subtitle')}</p>
@@ -161,7 +154,7 @@ const Travel: React.FC = () => {
                     key={loc.id}
                     onClick={() => setActiveLocId(loc.id)}
                     className="flex-none py-3 px-[14px] pb-[9px] font-sans font-semibold text-[10px] tracking-[.2em] uppercase cursor-pointer whitespace-nowrap transition-all border"
-                    style={{ borderColor: isActive ? '#C8A951' : 'rgba(200,169,81,.35)', background: isActive ? '#C8A951' : 'transparent', color: isActive ? '#0E1512' : '#E3C77A' }}
+                    style={{ borderColor: isActive ? '#C8A75C' : 'rgba(200,167,92,.35)', background: isActive ? 'linear-gradient(180deg,#E2C88A 0%,#C8A75C 48%,#B08F49 100%)' : 'transparent', color: isActive ? '#0C0B0A' : '#E2C88A' }}
                   >
                     {loc.title}
                   </button>
@@ -225,7 +218,7 @@ const Travel: React.FC = () => {
           <p className="m-0 mb-7 font-sans font-light text-[15px] leading-[1.6] text-wedding-ink/75">{t('travel_survival_subtitle')}</p>
           <div className="grid gap-px bg-wedding-ink border border-wedding-ink" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))' }}>
             {tips.map((tip, i) => (
-              <div key={tip.id} className="bg-wedding-cream pt-[22px] px-5 pb-5">
+              <div key={tip.id} className="bg-wedding-cream pt-[22px] px-5 pb-5" style={{ gridColumn: i === tips.length - 1 && tips.length % 2 ? '1 / -1' : undefined }}>
                 <p className="m-0 mb-[10px] font-sans font-semibold text-[10px] tracking-[.3em] uppercase text-wedding-bronze">{pad(i + 1)} · {tip.title}</p>
                 <p className="m-0 font-sans font-light text-sm leading-[1.6] text-wedding-ink/85" dangerouslySetInnerHTML={{ __html: tip.html }} />
               </div>
@@ -234,7 +227,7 @@ const Travel: React.FC = () => {
         </section>
 
         <div className="mt-16 text-center">
-          <a onClick={goHome} className="inline-block py-[15px] px-6 border border-wedding-ink text-wedding-ink font-sans font-semibold text-[10px] tracking-[.3em] uppercase no-underline cursor-pointer hover:bg-wedding-ink hover:text-wedding-goldLight">
+          <a onClick={goHome} className={btnGhostLight}>
             ← {t('rsvp_back_home')}
           </a>
         </div>

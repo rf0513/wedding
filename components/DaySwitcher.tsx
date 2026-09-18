@@ -32,9 +32,9 @@ const DaySwitcher: React.FC<{ activeId: string; onSelect: (id: string) => void }
             aria-current={active ? 'page' : undefined}
             className="flex-none text-left py-[10px] px-[14px] border transition-all cursor-pointer"
             style={{
-              borderColor: active ? '#C8A951' : 'rgba(200,169,81,.35)',
-              background: active ? '#C8A951' : 'rgba(14,21,18,.55)',
-              color: active ? '#0E1512' : '#E3C77A',
+              borderColor: active ? '#C8A75C' : 'rgba(200,167,92,.35)',
+              background: active ? 'linear-gradient(180deg,#E2C88A 0%,#C8A75C 48%,#B08F49 100%)' : 'rgba(12,11,10,.55)',
+              color: active ? '#0C0B0A' : '#E2C88A',
             }}
           >
             <span className="block font-sans font-semibold text-[9px] tracking-[.3em] uppercase opacity-80">{t('day_label')} {pad(d.day)}</span>
