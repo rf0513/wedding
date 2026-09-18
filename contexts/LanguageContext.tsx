@@ -52,6 +52,7 @@ const translations = {
     journey_place_2: "Rocky Mountains, CO",
     journey_place_3: "Bay Area, CA",
     journey_place_4: "San Francisco, CA",
+    journey_place_5: "Mumbai, India",
 
     // Events / Programme
     events_subtitle: "At a glance",
@@ -239,6 +240,7 @@ const translations = {
     journey_place_2: "Montañas Rocosas, CO",
     journey_place_3: "Área de la Bahía, CA",
     journey_place_4: "San Francisco, CA",
+    journey_place_5: "Mumbai, India",
 
     // Events / Programme
     events_subtitle: "De un vistazo",

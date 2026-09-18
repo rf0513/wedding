@@ -18,6 +18,13 @@ import storyRockies from './assets/photos/rockies.webp';
 import storyMackinac from './assets/photos/mackinac.webp';
 import siddhivinayakImg from './assets/photos/siddhivinayak.webp';
 import yellowKurtaImg from './assets/photos/yellow-kurta.webp';
+// Mumbai engagement ceremony
+import engagementPortrait1280 from './assets/photos/engagement-portrait-1280.webp';
+import engagementPortrait1920 from './assets/photos/engagement-portrait-1920.webp';
+import engagementCeremony from './assets/photos/engagement-ceremony.webp';
+import mehendiHands from './assets/photos/mehendi-hands.webp';
+import haldiThali from './assets/photos/haldi-thali.webp';
+import pujaKalash from './assets/photos/puja-kalash.webp';
 
 // ─── HERO PHOTO SEQUENCE ───
 // The Home hero slowly crossfades through these photos (in order, looping), with the
@@ -36,6 +43,7 @@ export const HERO_IMAGES: { src: string; srcSet?: string; objectPosition?: strin
   { src: heroHands1920, srcSet: `${heroHands1280} 1280w, ${heroHands1920} 1920w`, objectPosition: 'center 45%' },
   { src: heroProposal1920, srcSet: `${heroProposal1280} 1280w, ${heroProposal1920} 1920w`, objectPosition: 'center 60%' },
   { src: heroBoat, objectPosition: 'center 35%' },
+  { src: engagementPortrait1920, srcSet: `${engagementPortrait1280} 1280w, ${engagementPortrait1920} 1920w`, objectPosition: 'center 32%' },
   // ➜ drop additional hero photos here
 ];
 
@@ -78,6 +86,8 @@ export const STORY_EVENTS_EN: StoryEvent[] = [
   { id: '2', date: 'May 2022', title: 'Rocky Mountains', desc: 'They began dating after a spontanous trip to Rocky Mountains National Park in Colorado over Memorial Day.', img: storyRockies },
   { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: storyMackinac },
   { id: '4', date: 'Oct 12, 2025', title: 'The Proposal', desc: "Sunset at Slacker's Hill. The Golden Gate Bridge, the San Francisco city skyline, and the hidden photographer as our witnesses.", img: heroProposal1920 },
+  // ⚠ ADD DATE — replace the placeholder below with the real date of the ceremony.
+  { id: '5', date: 'ADD DATE', title: 'The Engagement', desc: 'Back in Mumbai, both families together, for the puja that made it official: henna, a copper kalash, and the first of the ceremonies.', img: engagementCeremony },
 ];
 
 export const STORY_EVENTS_ES: StoryEvent[] = [
@@ -85,9 +95,11 @@ export const STORY_EVENTS_ES: StoryEvent[] = [
   { id: '2', date: 'May 2022', title: 'Montañas Rocosas', desc: 'Comenzaron a salir después de un viaje espontáneo al Parque Nacional de las Montañas Rocosas en Colorado durante el Día de los Caídos.', img: storyRockies },
   { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: storyMackinac },
   { id: '4', date: 'Oct 12, 2025', title: 'La Propuesta', desc: "Atardecer en Slacker's Hill. El puente Golden Gate, el horizonte de la ciudad de San Francisco y el fotógrafo oculto como nuestros testigos.", img: heroProposal1920 },
+  // ⚠ AÑADIR FECHA — igual que en inglés.
+  { id: '5', date: 'ADD DATE', title: 'El Compromiso', desc: 'De vuelta en Mumbai, con las dos familias juntas, la puja que lo hizo oficial: henna, un kalash de cobre y la primera de las ceremonias.', img: engagementCeremony },
 ];
 
-export const STORY_MAIN_IMAGE = 'https://lh3.googleusercontent.com/pw/AP1GczO1xDfNPI3ZJkGHdniIfQKvv9U2hBSBAwRjD-UdjmTpXE3SEsZnammzDWAutk-kbAJ0LK-1tpDHGVloUvvu50pd7gcqAzuMgRpqYtlgfWVVQsYzRgN2_nP1WvdfZCjhKwRixb2bXITrTqZ8hJv0K6rLJA=w1307-h872-s-no-gm?authuser=0';
+export const STORY_MAIN_IMAGE = engagementPortrait1920;  // was a Google Photos share link, which rotates
 
 // ─── REGISTRY ───
 export const REGISTRY_ITEMS_EN: RegistryItem[] = [
@@ -124,7 +136,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     id: 'mehendi', eventId: '1', day: 1, weekday: 'Tuesday', dateLabel: '2 February 2027', dateShort: '2 Feb',
     title: 'Mehendi', subtitle: 'The Henna Afternoon', marathiTitle: 'Mehendi',
     tagline: 'Where the week begins: henna, music, and a slow golden afternoon.',
-    heroImage: pexels(28496968), accent: '#C2185B',
+    heroImage: mehendiHands, accent: '#C2185B',
     intro: 'Every Indian wedding opens with a breath, not a bang. The Mehendi is ours: a relaxed, sun-drenched afternoon where artists trace intricate henna designs onto Pavitra\'s hands and feet while everyone gathers around with chai, snacks, and music. Come one, come all — this one is not just for the ladies. It is the moment the week officially begins, and the best chance to settle in, meet everyone, and get your own hands decorated.',
     significance: 'Mehendi (henna) is one of the oldest wedding traditions in South Asia. The paste, made from crushed henna leaves, cools the skin and calms a bride\'s nerves before her big days. Folklore adds a twist: the darker the stain, the deeper the love she will receive from her husband and in-laws. Somewhere in Pavitra\'s design, Ramon\'s name will be hidden, and tradition says he has to find it.',
     moments: [
@@ -178,7 +190,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     id: 'haldi', eventId: '2', day: 2, weekday: 'Wednesday', dateLabel: '3 February 2027', dateShort: '3 Feb',
     title: 'Haldi', subtitle: 'The Turmeric Ceremony', marathiTitle: 'Halad Chadavne',
     tagline: 'Yellow everywhere. Drums, laughter, turmeric, and the happiest mess of the week.',
-    heroImage: pexels(33508493), accent: '#E6A100',
+    heroImage: haldiThali, accent: '#E6A100',
     intro: 'If the Mehendi is the calm, the Haldi is the storm, a bright, loud, joyful one. Family and friends take turns smearing a golden turmeric paste on Pavitra and Ramon to bless them, and it does not take long before the paste finds its way onto everyone else. Expect drums, dancing, flying flower petals, and the most photogenic chaos you will ever be part of.',
     significance: 'Haldi (turmeric) is sacred in Hindu tradition: it purifies, protects against the evil eye, and gives the skin a natural glow before the wedding. In Maharashtra the ritual is called Halad Chadavne. Applying it is a blessing, so when someone offers you the paste, it is an invitation to bless the couple too. The yellow also stands for new beginnings, which is why the whole day is dressed in it.',
     moments: [
@@ -286,7 +298,7 @@ export const CELEBRATIONS_EN: Celebration[] = [
     id: 'wedding', eventId: '4', day: 4, weekday: 'Friday', dateLabel: '5 February 2027', dateShort: '5 Feb',
     title: 'Wedding & Reception', subtitle: 'The Maharashtrian Wedding', marathiTitle: 'Lagna',
     tagline: 'Sacred fire, seven steps, and a grand reception to send us off.',
-    heroImage: pexels(30171219), accent: '#B71C1C',
+    heroImage: pujaKalash, accent: '#B71C1C',
     intro: 'The day it all leads to. In a traditional Maharashtrian ceremony, Pavitra and Ramon are married before the sacred fire, with Sanskrit chants, a silk curtain, and a shower of rice from every guest in the room. Then the mood flips: a grand reception dinner where you finally get to hug the newlyweds, raise a glass, and celebrate late into the night.',
     significance: 'Rooted in Vedic tradition, a Hindu wedding treats marriage as a sacred bond, Vivah, witnessed by Agni, the fire. The heart of the ceremony is the Saptapadi: seven steps around the fire, each one a vow of respect, prosperity, and lifelong friendship. Maharashtrian weddings add their own beauty: the Antarpat, a silk curtain held between the couple until the auspicious moment; the Mangalashtak, eight verses of blessing chanted as the curtain falls; and the Mundavalya, strings of pearls tied across the forehead of both bride and groom.',
     moments: [
@@ -345,7 +357,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     id: 'mehendi', eventId: '1', day: 1, weekday: 'Martes', dateLabel: '2 de febrero de 2027', dateShort: '2 Feb',
     title: 'Mehendi', subtitle: 'La Tarde de la Henna', marathiTitle: 'Mehendi',
     tagline: 'Donde empieza la semana: henna, música y una tarde dorada sin prisa.',
-    heroImage: pexels(28496968), accent: '#C2185B',
+    heroImage: mehendiHands, accent: '#C2185B',
     intro: 'Toda boda india empieza con una respiración, no con una explosión. El Mehendi es la nuestra: una tarde relajada y soleada en la que artistas dibujan intrincados diseños de henna en las manos y los pies de Pavitra mientras todos se reúnen con chai, bocadillos y música. Vengan todos: este día no es solo para las mujeres. Es el momento en que la semana empieza oficialmente y la mejor ocasión para aclimatarse, conocer a todos y decorarte las manos.',
     significance: 'El Mehendi (henna) es una de las tradiciones nupciales más antiguas del sur de Asia. La pasta, hecha de hojas de henna molidas, refresca la piel y calma los nervios de la novia antes de sus grandes días. El folclore añade un giro: cuanto más oscura la mancha, más profundo será el amor que recibirá de su esposo y su familia política. En algún lugar del diseño de Pavitra estará escondido el nombre de Ramón, y la tradición dice que él tiene que encontrarlo.',
     moments: [
@@ -399,7 +411,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     id: 'haldi', eventId: '2', day: 2, weekday: 'Miércoles', dateLabel: '3 de febrero de 2027', dateShort: '3 Feb',
     title: 'Haldi', subtitle: 'La Ceremonia de la Cúrcuma', marathiTitle: 'Halad Chadavne',
     tagline: 'Amarillo por todas partes. Tambores, risas, cúrcuma y el desorden más feliz de la semana.',
-    heroImage: pexels(33508493), accent: '#E6A100',
+    heroImage: haldiThali, accent: '#E6A100',
     intro: 'Si el Mehendi es la calma, el Haldi es la tormenta: brillante, ruidosa y alegre. Familiares y amigos se turnan para untar una pasta dorada de cúrcuma sobre Pavitra y Ramón como bendición, y no pasa mucho tiempo antes de que la pasta llegue a todos los demás. Espera tambores, baile, pétalos de flores volando y el caos más fotogénico del que hayas sido parte.',
     significance: 'El Haldi (cúrcuma) es sagrado en la tradición hindú: purifica, protege del mal de ojo y da a la piel un brillo natural antes de la boda. En Maharashtra el ritual se llama Halad Chadavne. Aplicarlo es una bendición, así que cuando alguien te ofrezca la pasta, es una invitación a bendecir también a la pareja. El amarillo simboliza además los nuevos comienzos, y por eso todo el día se viste de ese color.',
     moments: [
@@ -507,7 +519,7 @@ export const CELEBRATIONS_ES: Celebration[] = [
     id: 'wedding', eventId: '4', day: 4, weekday: 'Viernes', dateLabel: '5 de febrero de 2027', dateShort: '5 Feb',
     title: 'Boda y Recepción', subtitle: 'La Boda Maharashtriana', marathiTitle: 'Lagna',
     tagline: 'Fuego sagrado, siete pasos y una gran recepción para despedirnos.',
-    heroImage: pexels(30171219), accent: '#B71C1C',
+    heroImage: pujaKalash, accent: '#B71C1C',
     intro: 'El día al que todo conduce. En una ceremonia tradicional maharashtriana, Pavitra y Ramón se casan ante el fuego sagrado, con cantos en sánscrito, una cortina de seda y una lluvia de arroz de cada invitado en la sala. Luego cambia el ambiente: una gran cena de recepción donde por fin podrás abrazar a los recién casados, brindar y celebrar hasta tarde.',
     significance: 'Arraigada en la tradición védica, una boda hindú entiende el matrimonio como un vínculo sagrado, Vivah, con Agni, el fuego, como testigo. El corazón de la ceremonia es el Saptapadi: siete pasos alrededor del fuego, cada uno un voto de respeto, prosperidad y amistad de por vida. Las bodas maharashtrianas añaden su propia belleza: el Antarpat, una cortina de seda sostenida entre la pareja hasta el momento auspicioso; el Mangalashtak, ocho versos de bendición cantados mientras cae la cortina; y el Mundavalya, hilos de perlas atados sobre la frente de la novia y el novio.',
     moments: [

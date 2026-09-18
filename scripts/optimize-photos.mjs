@@ -43,6 +43,13 @@ const PHOTOS = [
   { file: 'mackinac.jpeg', name: 'mackinac', widths: [1520] },
   { file: 'siddhivinayak-temple-mumbai.jpg', name: 'siddhivinayak', widths: [800] },
   { file: 'yellow-kurta.png', name: 'yellow-kurta', widths: [640] },
+  // Mumbai engagement ceremony. The first joins the hero rotation, so it gets the
+  // two hero tiers; the rest are used at up to 760px CSS and only need 1520.
+  { file: 'engagement-portrait.jpg', name: 'engagement-portrait', widths: [1280, 1920] },
+  { file: 'engagement-ceremony.jpg', name: 'engagement-ceremony', widths: [1520] },
+  { file: 'mehendi-hands.jpg', name: 'mehendi-hands', widths: [1520] },
+  { file: 'haldi-thali.jpg', name: 'haldi-thali', widths: [1520] },
+  { file: 'puja-kalash.jpg', name: 'puja-kalash', widths: [1520] },
 ];
 
 await mkdir(OUT, { recursive: true });
