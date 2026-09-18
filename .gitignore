@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Working stills from scripts/optimize-video.mjs --contact-sheet
+.contact-sheet

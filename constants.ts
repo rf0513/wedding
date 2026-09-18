@@ -86,8 +86,7 @@ export const STORY_EVENTS_EN: StoryEvent[] = [
   { id: '2', date: 'May 2022', title: 'Rocky Mountains', desc: 'They began dating after a spontanous trip to Rocky Mountains National Park in Colorado over Memorial Day.', img: storyRockies },
   { id: '3', date: 'Dec 2023', title: 'Bay Area', desc: 'Pavi relocated for a new job, and Ramon was not very far behind to begin their California chapter.', img: storyMackinac },
   { id: '4', date: 'Oct 12, 2025', title: 'The Proposal', desc: "Sunset at Slacker's Hill. The Golden Gate Bridge, the San Francisco city skyline, and the hidden photographer as our witnesses.", img: heroProposal1920 },
-  // ⚠ ADD DATE — replace the placeholder below with the real date of the ceremony.
-  { id: '5', date: 'ADD DATE', title: 'The Engagement', desc: 'Back in Mumbai, both families together, for the puja that made it official: henna, a copper kalash, and the first of the ceremonies.', img: engagementCeremony },
+  { id: '5', date: 'Sep 12, 2026', title: 'The Engagement', desc: 'Back in Mumbai, both families together, for the puja that made it official: henna, a copper kalash, and the first of the ceremonies.', img: engagementCeremony },
 ];
 
 export const STORY_EVENTS_ES: StoryEvent[] = [
@@ -95,8 +94,7 @@ export const STORY_EVENTS_ES: StoryEvent[] = [
   { id: '2', date: 'May 2022', title: 'Montañas Rocosas', desc: 'Comenzaron a salir después de un viaje espontáneo al Parque Nacional de las Montañas Rocosas en Colorado durante el Día de los Caídos.', img: storyRockies },
   { id: '3', date: 'Dec 2023', title: 'Área de la Bahía', desc: 'Pavi se mudó por un nuevo trabajo, y Ramón no se quedó muy atrás para comenzar su capítulo en California.', img: storyMackinac },
   { id: '4', date: 'Oct 12, 2025', title: 'La Propuesta', desc: "Atardecer en Slacker's Hill. El puente Golden Gate, el horizonte de la ciudad de San Francisco y el fotógrafo oculto como nuestros testigos.", img: heroProposal1920 },
-  // ⚠ AÑADIR FECHA — igual que en inglés.
-  { id: '5', date: 'ADD DATE', title: 'El Compromiso', desc: 'De vuelta en Mumbai, con las dos familias juntas, la puja que lo hizo oficial: henna, un kalash de cobre y la primera de las ceremonias.', img: engagementCeremony },
+  { id: '5', date: 'Sep 12, 2026', title: 'El Compromiso', desc: 'De vuelta en Mumbai, con las dos familias juntas, la puja que lo hizo oficial: henna, un kalash de cobre y la primera de las ceremonias.', img: engagementCeremony },
 ];
 
 export const STORY_MAIN_IMAGE = engagementPortrait1920;  // was a Google Photos share link, which rotates
